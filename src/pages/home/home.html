@@ -1,0 +1,15 @@
+<ion-content>
+  <!--
+ <ion-header>
+  <ion-navbar>
+    <ion-title>
+      Ionic Blank
+    </ion-title>
+  </ion-navbar>
+</ion-header>
+-->
+  <ion-spinner name="bubbles" *ngIf="!election.ready"></ion-spinner>
+  <ion-slides *ngIf="election.ready">
+    <ion-slide *ngFor="let item of electionContestNames">{{item}}</ion-slide>
+  </ion-slides>
+</ion-content>
