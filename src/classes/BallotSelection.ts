@@ -2,7 +2,7 @@ import { Candidate } from './Candidate';
 import { Contest } from './Contest';
 
 export class BallotSelection {
-    readonly CANDIDATEQUERY ='.CandidateIds[*]';
+    readonly CANDIDATEQUERY = '.CandidateIds[*]';
     readonly SEQUENCEORDERQUERY = '.SequenceOrder';
     public jsonObj: String = "";
     private jsonQuery = require('json-query');

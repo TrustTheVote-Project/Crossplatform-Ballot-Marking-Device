@@ -10,7 +10,7 @@ export class Contest {
     public contestName: string;
     private jsonObj: Object;
     private parent: Election;
-    private ballotSelections: BallotSelection[] = new Array();
+    public ballotSelections: BallotSelection[] = new Array();
     private jsonQuery = require('json-query');
 
 
