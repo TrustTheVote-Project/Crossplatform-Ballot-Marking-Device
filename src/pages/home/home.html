@@ -1,15 +1,24 @@
 <ion-content>
-  <!--
- <ion-header>
-  <ion-navbar>
-    <ion-title>
-      Ionic Blank
-    </ion-title>
-  </ion-navbar>
-</ion-header>
--->
-  <ion-spinner name="bubbles" *ngIf="!election.ready"></ion-spinner>
+  <div *ngIf="!election.ready">
+    <ion-spinner name="bubbles"></ion-spinner>
+
+  </div>
+
   <ion-slides *ngIf="election.ready">
-    <ion-slide *ngFor="let item of electionContestNames">{{item}}</ion-slide>
+    <ion-slide *ngFor="let item of election.contests">
+      {{item.contestName}}
+      <div *ngFor="let ballotSelection of item.ballotSelections">
+        <div *ngFor="let candidateName of ballotSelection.candidates">
+          <ion-list no-line>
+            <ion-row no-line>
+              <ion-item no-line item-start>
+                <ion-label no-line>{{candidateName.personName}} {{candidateName.partyAbbreviation}}</ion-label>
+                <ion-checkbox></ion-checkbox>
+              </ion-item>
+            </ion-row>
+          </ion-list>
+        </div>
+      </div>
+    </ion-slide>
   </ion-slides>
 </ion-content>
