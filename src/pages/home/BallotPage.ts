@@ -4,8 +4,6 @@ import { Slides } from 'ionic-angular';
 
 import 'rxjs/add/operator/map';
 
-import { Election } from "../../classes/Election";
-
 @Component({
     selector: 'page-ballot',
     templateUrl: 'BallotPage.html'

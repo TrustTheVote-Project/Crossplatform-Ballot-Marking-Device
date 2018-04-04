@@ -1,12 +1,11 @@
 import { Http } from '@angular/http';
 import 'rxjs/add/operator/map';
-import { parseString } from 'xml2js';
+//import { parseString } from 'xml2js';
 import { Parser } from 'xml2js';
-import { BallotSelection } from './BallotSelection';
+//import { BallotSelection } from './BallotSelection';
 import { Contest } from '../classes/Contest';
-import { NavController, Platform } from 'ionic-angular';
-import { BallotPage } from '../pages/home/BallotPage';
-import { promisify } from 'util';
+//import { NavController, Platform } from 'ionic-angular';
+import { HomePage } from '../pages/home/home';
 
 
 
@@ -20,15 +19,17 @@ export class Election {
     private contestNames: string[] = new Array();
     private candidateNames: string[] = new Array();
     public ready: boolean = false;
+    private parent: HomePage;
 
     public edfFile: string;
 
-    constructor(_http: Http, aString: string) {
+    constructor(_http: Http, aString: string, parent: HomePage) {
+        this.parent = parent;
         this.myhttp = _http;
         if (null != aString) {
             this.edfFile = aString;
             try {
-                let jsonData;
+                //let jsonData;
                 let xmlData;
                 let myParser = new Parser({ "attrkey": "@", "charkey": "#", "mergeAttrs": true });
                 this.myhttp.get(this.edfFile).map(res => res.text()).subscribe(data => {
@@ -70,7 +71,10 @@ export class Election {
     setReady(value: boolean) {
         this.ready = value;
     }
+    getParent(): Object {
+        return this.parent;
 
+    };
 
     /*
         getballotSelections(): ballotSelection[] {
@@ -94,10 +98,10 @@ export class Election {
 
     setContests() {
         console.log(JSON.stringify(this.jsonObj));
-        var aBallotSelection: BallotSelection
+        //var aBallotSelection: BallotSelection
         var values = this.jsonQuery(this.CONTESTQUERY, { data: this.jsonObj }).value;
         values.forEach(element => {
-            var aContest = new Contest(element, this);
+            var aContest = new Contest(this.parent.getModalController(), element, this);
             this.contests.push(aContest);
         });
     }
