@@ -1,8 +1,8 @@
 {
   "name": "ttvBMD",
   "version": "0.0.1",
-  "author": "Ionic Framework",
-  "homepage": "http://ionicframework.com/",
+  "author": "Bret Schuhmacher",
+  "homepage": "http://www.osetfoundation.org/",
   "private": true,
   "scripts": {
     "clean": "ionic-app-scripts clean",
@@ -57,7 +57,7 @@
     "@types/xml2js": "^0.4.2",
     "typescript": "2.4.2"
   },
-  "description": "An Ionic project",
+  "description": "Cross platform Ballot Marking Device that reads NIST 1500-100 XML Election Definition files",
   "cordova": {
     "plugins": {
       "ionic-plugin-keyboard": {},
