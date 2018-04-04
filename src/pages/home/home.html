@@ -7,13 +7,16 @@
   <ion-slides *ngIf="election.ready">
     <ion-slide *ngFor="let item of election.contests">
       {{item.contestName}}
+      <br>select: {{item.getVotesAllowed()}}
+      <br> {{item.statusMessage}}
       <div *ngFor="let ballotSelection of item.ballotSelections">
         <div *ngFor="let candidateName of ballotSelection.candidates">
           <ion-list no-line>
             <ion-row no-line>
               <ion-item no-line item-start>
                 <ion-label no-line>{{candidateName.personName}} {{candidateName.partyAbbreviation}}</ion-label>
-                <ion-checkbox></ion-checkbox>
+                <!-- <ion-checkbox (ionChange)="item.ionChangeUpdateCheckbox($event)" (click)="item.updateCheckbox($event)"></ion-checkbox> -->
+                <ion-checkbox (ionChange)="item.ionChangeUpdateCheckbox($event)"></ion-checkbox>
               </ion-item>
             </ion-row>
           </ion-list>
