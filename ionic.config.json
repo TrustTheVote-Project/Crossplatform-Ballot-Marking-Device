@@ -1,6 +1,6 @@
 {
   "name": "ttvBMD",
-  "app_id": "",
+  "app_id": "73acb891",
   "type": "ionic-angular",
   "integrations": {
     "cordova": {}
