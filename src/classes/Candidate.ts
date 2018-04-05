@@ -1,5 +1,3 @@
-//import { jsonQuery } from 'json-query';
-//import { Contest } from './Contest';
 import { BallotSelection } from './BallotSelection';
 
 export class Candidate {
