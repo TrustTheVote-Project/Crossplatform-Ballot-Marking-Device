@@ -40,22 +40,11 @@ export class HomePage implements OnInit {
   openXML() {
     console.log("inside openXML");
     this.election = new Election(this.myhttp, '/assets/data/results-06037-2017-03-07.xml', this);
+    //alternate data files... need to be able to select which to use
+    //from the device... TO-DO...later
     //this.election = new Election(this.myhttp, '/assets/data/results-06037-2016-11-08.xml');
-
     //this.election = new Election(this.myhttp, '/assets/data/LA_County_Reference.xml');
-
-    //    this.election.setReady(true);
   }
-
-  /*
-    setElectionNames() {
-      //this.electionContestNames = this.election.getContestNames();
-      this.electionContestNames = getContestNames();
-      this.electionContestNames.forEach(element => {
-        console.log("electionContestName: " + element);
-      });
-    }
-    */
 
   getJSONFromXML() {
     console.log("inside getJSONFromXML");

@@ -13,7 +13,7 @@
         <div *ngFor="let candidateName of ballotSelection.candidates">
           <ion-list no-line>
             <ion-row no-line>
-              <ion-item no-line item-start>
+              <ion-item text-wrap no-line item-start>
                 <ion-label no-line>{{candidateName.personName}} {{candidateName.partyAbbreviation}}</ion-label>
                 <!-- <ion-checkbox (ionChange)="item.ionChangeUpdateCheckbox($event)" (click)="item.updateCheckbox($event)"></ion-checkbox> -->
                 <ion-checkbox (ionChange)="item.ionChangeUpdateCheckbox($event)"></ion-checkbox>

@@ -1,13 +1,8 @@
 import { Http } from '@angular/http';
 import 'rxjs/add/operator/map';
-//import { parseString } from 'xml2js';
 import { Parser } from 'xml2js';
-//import { BallotSelection } from './BallotSelection';
 import { Contest } from '../classes/Contest';
-//import { NavController, Platform } from 'ionic-angular';
 import { HomePage } from '../pages/home/home';
-
-
 
 export class Election {
     readonly CONTESTQUERY = 'ElectionReport.Election.ContestCollection.Contest';
