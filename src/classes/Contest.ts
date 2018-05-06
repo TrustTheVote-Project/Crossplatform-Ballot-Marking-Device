@@ -18,10 +18,12 @@ export class Contest {
     private votesAllowed: number = 0;
     private currentlySelected: number = 0;
     public statusMessage: string = "";
+    private contestIndex: number = 0;
 
 
-    constructor(public modalCtrl: ModalController, aString: string, parent: Election) {
+    constructor(public modalCtrl: ModalController, aString: string, parent: Election, contestIndex: number) {
         this.parent = parent;
+        this.contestIndex = contestIndex;
         if (null != aString) {
             try {
                 var values = this.jsonQuery(this.NAMEQUERY, { data: aString }).value;
@@ -85,6 +87,10 @@ export class Contest {
 
     };
 
+    ionChangeIgnoreCheckbox(cbox: Checkbox) {
+        //always want true in the vote review page - don't allow deselection there!
+        cbox.checked = true;
+    }
 
     ionChangeUpdateCheckbox(cbox: Checkbox) {
         if (cbox.checked) {
@@ -105,9 +111,9 @@ export class Contest {
             cbox.checked = false;
             //pop up modal dialog telling user to deselect something - they're already at max
             var modal = this.modalCtrl.create('ModalPopupPage', popupContent);
+
             modal.present();
         }
-
     }
 
     canSelectMoreCandidates(): boolean {
@@ -116,5 +122,9 @@ export class Contest {
         } else {
             return (true);
         }
+    }
+    oneVoteClicked(event: Event) {
+        console.log("got here!");
+
     }
 }

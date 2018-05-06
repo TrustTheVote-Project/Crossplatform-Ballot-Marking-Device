@@ -15,6 +15,7 @@ export class Election {
     private candidateNames: string[] = new Array();
     public ready: boolean = false;
     private parent: HomePage;
+    private contestIndex: number = 0;
 
     public edfFile: string;
 
@@ -85,7 +86,10 @@ export class Election {
         return this.contests;
     }
 
+    getAndIncrementContestIndex(): number {
+        return (this.contestIndex++);
 
+    }
 
     getJsonObj(): string {
         return this.jsonObj;
@@ -96,7 +100,7 @@ export class Election {
         //var aBallotSelection: BallotSelection
         var values = this.jsonQuery(this.CONTESTQUERY, { data: this.jsonObj }).value;
         values.forEach(element => {
-            var aContest = new Contest(this.parent.getModalController(), element, this);
+            var aContest = new Contest(this.parent.getModalController(), element, this, this.getAndIncrementContestIndex());
             this.contests.push(aContest);
         });
     }
@@ -128,6 +132,26 @@ export class Election {
         });
     }
 
+    printOneContest(element: Contest) {
+        //    this.contests.forEach(element => {
+        //element is a Contest...
+        console.log("Contest name: " + element.getContestName());
+        //for each Contest, get the Contestants...
+        element.getBallotSelections().forEach(ballotselection => {
+            var candidateName;
+            candidateName = ballotselection.getCandidatesString().trim();
+            if (candidateName !== undefined && candidateName != "undefined") {
+                console.log(candidateName);
+                this.candidateNames.push(candidateName);
+            }
+
+        });
+        //   });
+    }
+
+    getContestByIndex(index: number): Contest {
+        return (this.contests[index]);
+    }
 }
 
 function delay(ms: number) {
