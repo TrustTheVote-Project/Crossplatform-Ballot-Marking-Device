@@ -1,9 +1,9 @@
 <ion-header *ngIf="election.ready">
-  <!-- <ion-navbar> -->
-  <ion-buttons end>
-    <button ion-button outline (click)=voteReview($event)>Review your votes</button>
-  </ion-buttons>
-  <!--</ion-navbar>-->
+  <ion-navbar>
+    <ion-buttons end>
+      <button ion-button outline (click)=voteReview($event)>Review your votes</button>
+    </ion-buttons>
+  </ion-navbar>
 </ion-header>
 
 <ion-content>
@@ -17,9 +17,15 @@
 
     <ion-slides>
       <ion-slide *ngFor="let item of election.contests">
-        {{item.contestName}}
-        <br>select: {{item.getVotesAllowed()}}
-        <br> {{item.statusMessage}}
+        <br>
+        <br>
+        <br> {{item.contestName}}
+        <br>
+        <ion-label>Vote for {{item.getVotesAllowed()}}</ion-label>
+        <br>
+        <div text-center>{{item.statusMessage}}</div>
+        <br>
+        <br>
         <ion-list no-line>
           <div *ngFor="let ballotSelection of item.ballotSelections">
             <div *ngFor="let candidateName of ballotSelection.candidates">
@@ -35,5 +41,21 @@
         </ion-list>
       </ion-slide>
     </ion-slides>
+    <ion-footer>
+      <ion-toolbar>
+        <ion-buttons start>
+          <button ion-button icon-left outline (click)=previous($event)>
+            <ion-icon name="arrow-round-back"></ion-icon>
+            Previous
+          </button>
+        </ion-buttons>
+
+        <ion-buttons end>
+          <button ion-button icon-right outline (click)=next($event)>Next
+            <ion-icon name="arrow-round-forward"> </ion-icon>
+          </button>
+        </ion-buttons>
+      </ion-toolbar>
+    </ion-footer>
   </div>
 </ion-content>

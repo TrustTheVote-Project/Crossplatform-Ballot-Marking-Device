@@ -65,7 +65,7 @@ export class HomePage implements OnInit {
     var voteReviewModal = this.modalCtrl.create('VoteReviewPage', voteReviewPopupContent);
     voteReviewModal.onDidDismiss(data => {
       console.log(data);
-      let oneContestPopupContent = { "contest" : this.election.getContestByIndex(data.index) };
+      let oneContestPopupContent = { "contest": this.election.getContestByIndex(data.index) };
       console.log("vote-review: popupContent is " + this.election.getContestByIndex(data.index));
       var oneContestModal = this.modalCtrl.create('PresentOneContestPage', oneContestPopupContent);
       console.log("vote-review - just created PresentOneContest modal");

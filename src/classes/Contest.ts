@@ -33,8 +33,8 @@ export class Contest {
                 });
                 this.setBallotSelections(aString);
                 this.setVotesAllowed(aString);
-                this.statusMessage = "You can select " + (this.votesAllowed - this.currentlySelected)
-                    + " more candidate(s)."
+                this.statusMessage = "You can choose " + (this.votesAllowed - this.currentlySelected)
+                    + " more."
             } catch (e) {
                 console.log("Error:", e);
             }
@@ -99,10 +99,10 @@ export class Contest {
             this.currentlySelected--;
         }
         if (this.currentlySelected == this.votesAllowed) {
-            this.statusMessage = "You have selected the maximum number of candidates."
+            this.statusMessage = "";
         } else if (this.votesAllowed > this.currentlySelected) {
-            this.statusMessage = "You can select " + (this.votesAllowed - this.currentlySelected)
-                + " more candidate(s)."
+            this.statusMessage = "You can choose " + (this.votesAllowed - this.currentlySelected)
+                + " more."
         } else {
             this.statusMessage = "You have selected too many candidates - please deselect "
                 + "the candidate you do not want, then select the candidate you do want."
