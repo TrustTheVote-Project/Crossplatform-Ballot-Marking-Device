@@ -1,0 +1,7 @@
+{
+  "name": "ttvBMD2",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular"
+}
