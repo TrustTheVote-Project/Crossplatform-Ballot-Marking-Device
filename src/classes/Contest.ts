@@ -95,13 +95,18 @@ export class Contest {
         cbox.checked = true;
     }
 
-    ionChangeUpdateCheckbox(cbox: Checkbox) {
-        if (cbox.checked) {
+    ionChangeUpdateCheckbox(cbox) {
+       console.log('in updatecheckbox, cbox is:'+cbox.currentTarget.checked);
+        if (cbox.currentTarget.checked) {
+       console.log('cbox checked');
             this.currentlySelected++;
         } else {
+       console.log('cbox was UNchecked');
             this.currentlySelected--;
         }
-        if (this.currentlySelected === this.votesAllowed) {
+       console.log('currently selected: ' + this.currentlySelected + ', votesAllowed: ' +
+                   this.votesAllowed);
+        if (this.currentlySelected == this.votesAllowed) {
             this.statusMessage = '';
         } else if (this.votesAllowed > this.currentlySelected) {
             this.statusMessage = 'You can choose ' + (this.votesAllowed - this.currentlySelected)
@@ -111,7 +116,7 @@ export class Contest {
                 + 'the candidate you do not want, then select the candidate you do want.'
             let popupContent = { title: 'Too many selections', content: this.statusMessage };
             //deselect what the user just did
-            cbox.checked = false;
+            cbox.currentTarget.checked = false;
             //pop up modal dialog telling user to deselect something - they're already at max
             //let modal = this.modalCtrl.create('ModalPopupPage', popupContent);
 

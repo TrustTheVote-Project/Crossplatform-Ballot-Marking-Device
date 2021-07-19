@@ -1,9 +1,9 @@
 <ion-header *ngIf="election.ready">
-  <ion-navbar>
+  <ion-toolbar>
     <ion-buttons end>
       <button ion-button outline (click)=voteReview($event)>Review your votes</button>
     </ion-buttons>
-  </ion-navbar>
+  </ion-toolbar>
 </ion-header>
 
 <ion-content>
@@ -35,8 +35,10 @@
               <ion-row no-line>
                 <ion-item text-wrap no-line item-start>
                   <ion-label no-line>{{candidateName.personName}} {{candidateName.partyAbbreviation}}</ion-label>
-                  <!-- <ion-checkbox (ionChange)="item.ionChangeUpdateCheckbox($event)" (click)="item.updateCheckbox($event)"></ion-checkbox> -->
-                  <ion-checkbox slot="start" [(ngModel)]="ballotSelection.selected" (ionChange)="item.ionChangeUpdateCheckbox($event)"></ion-checkbox>
+                  <!--<ion-checkbox slot="start"
+                     [(ngModel)]="ballotSelection.selected"
+                     (ionChange)="item.ionChangeUpdateCheckbox($event)"></ion-checkbox>-->
+                  <ion-checkbox slot="start" (ionChange)="item.ionChangeUpdateCheckbox($event)"></ion-checkbox>
                 </ion-item>
               </ion-row>
             </div>
@@ -50,15 +52,18 @@
         <ion-buttons >
            <div>
           <ion-button slot="start" outline (click)=previous($event)>
-            <ion-icon name="arrow-round-back"></ion-icon>
-            Previous
+             <ion-icon slot="start" name="arrow-undo-outline"></ion-icon>
+             Previous
           </ion-button>
-          <ion-button slot="end" outline (click)=next($event)>Next
-            <ion-icon name="arrow-round-forward"> </ion-icon>
+          <ion-button slot="end" outline (click)=next($event)>
+             Next
+             <ion-icon slot="end" name="arrow-redo-outline"></ion-icon>
           </ion-button>
            </div>
         </ion-buttons>
       </ion-toolbar>
     </ion-footer>
   </div>
+  <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+<script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
 </ion-content>
