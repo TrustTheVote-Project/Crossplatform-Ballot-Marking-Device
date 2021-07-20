@@ -1,5 +1,5 @@
 {
-	"appId": "io.ionic.starter",
+	"appId": "org.osetfoundation.ttvbmd",
 	"appName": "ttvBMD2",
 	"webDir": "www",
 	"bundledWebRuntime": false
