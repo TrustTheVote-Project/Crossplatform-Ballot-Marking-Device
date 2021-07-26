@@ -29,3 +29,10 @@ npm-debug.log*
 /platforms
 /plugins
 /www
+CertificateSigningRequest.certSigningRequest
+Certificates.p12
+TTVBMD__Development_Provisioning_Profile.mobileprovision
+ios_dev.key
+ios_development.cer
+ios_development.cer.pem
+keyBackup/*

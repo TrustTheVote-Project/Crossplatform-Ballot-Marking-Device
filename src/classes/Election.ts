@@ -3,10 +3,13 @@ import { map } from 'rxjs/operators';
 import { Parser } from 'xml2js';
 import { Contest } from '../classes/Contest';
 import { HomePage } from '../app/home/home.page';
+import { ModalController } from '@ionic/angular';
+import { Injectable } from '@angular/core';
 
 
 declare const require: any;
 
+@Injectable()
 export class Election {
     readonly CONTESTQUERY = 'ElectionReport.Election.ContestCollection.Contest';
     public xml = '';
@@ -23,7 +26,7 @@ export class Election {
     private contestIndex = 0;
 
 
-    constructor(_http: HttpClient, aString: string, parent: HomePage) {
+    constructor( _http: HttpClient, aString: string, parent: HomePage) {
         this.parent = parent;
         this.myhttp = _http;
         if (null != aString) {
@@ -45,14 +48,14 @@ export class Election {
             responseType: 'text'
           })
           .subscribe((data) => {
-                   console.log( 'data read is ' + data.toString());
+                   //console.log( 'data read is ' + data.toString());
                     //this.xml = data.toString();
 
                     xmlData = data.toString();
 
                     myParser.parseString(xmlData, (err, jsonData) => {
                         this.jsonObj = jsonData;
-                   console.log( 'json parsed data is ' + this.jsonObj);
+                   //console.log( 'json parsed data is ' + this.jsonObj);
 
                         this.setContests();
                         this.printContestNames();
@@ -67,16 +70,9 @@ export class Election {
         }
     }
 
-    async foo() {
-        await delay(3000);
-        this.setContests();
-        await delay(3000);
-        this.printContestNames();
-        await delay(3000);
-        this.getContestNames();
-        await delay(3000);
-        this.setReady(true);
-    }
+   getContestNamesCount(): number {
+      return(this.contestNames.length);
+   }
 
     isReady(): boolean {
         return (this.ready);
@@ -92,7 +88,7 @@ export class Election {
 
     /*
         getballotSelections(): ballotSelection[] {
-            console.log("entering getballotSelections");
+            //console.log("entering getballotSelections");
         }
         */
 
@@ -114,11 +110,11 @@ export class Election {
     }
 
     setContests() {
-        console.log(JSON.stringify(this.jsonObj));
+        //console.log(JSON.stringify(this.jsonObj));
         //var aBallotSelection: BallotSelection
         let values = this.jsonQuery(this.CONTESTQUERY, { data: this.jsonObj }).value;
         values.forEach(element => {
-            let aContest = new Contest( element, this, this.getAndIncrementContestIndex());
+            let aContest = new Contest( this.parent, element, this, this.getAndIncrementContestIndex());
             //let aContest = new Contest(this.parent.getModalController(), element, this, this.getAndIncrementContestIndex());
             this.contests.push(aContest);
         });
@@ -137,13 +133,13 @@ export class Election {
     printContestNames() {
         this.contests.forEach(element => {
             //element is a Contest...
-            console.log('Contest name: ' + element.getContestName());
+            //console.log('Contest name: ' + element.getContestName());
             //for each Contest, get the Contestants...
             element.getBallotSelections().forEach(ballotselection => {
                 let candidateName;
                 candidateName = ballotselection.getCandidatesString().trim();
                 if (candidateName !== undefined && candidateName !== 'undefined') {
-                    console.log(candidateName);
+                    //console.log(candidateName);
                     this.candidateNames.push(candidateName);
                 }
 
@@ -154,13 +150,13 @@ export class Election {
     printOneContest(element: Contest) {
         //    this.contests.forEach(element => {
         //element is a Contest...
-        console.log('Contest name: ' + element.getContestName());
+        //console.log('Contest name: ' + element.getContestName());
         //for each Contest, get the Contestants...
         element.getBallotSelections().forEach(ballotselection => {
             let candidateName;
             candidateName = ballotselection.getCandidatesString().trim();
             if (candidateName !== undefined && candidateName !== 'undefined') {
-                console.log(candidateName);
+                //console.log(candidateName);
                 this.candidateNames.push(candidateName);
             }
 

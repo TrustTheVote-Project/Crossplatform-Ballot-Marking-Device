@@ -11,6 +11,14 @@ const routes: Routes = [
     redirectTo: 'home',
     pathMatch: 'full'
   },
+  {
+    path: 'modal-popup',
+    loadChildren: () => import('./modal-popup/modal-popup.module').then( m => m.ModalPopupPageModule)
+  },
+  {
+    path: 'vote-review',
+    loadChildren: () => import('./vote-review/vote-review.module').then( m => m.VoteReviewPageModule)
+  },
 ];
 
 @NgModule({

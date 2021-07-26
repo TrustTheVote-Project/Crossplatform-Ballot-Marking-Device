@@ -1,4 +1,8 @@
 import { BallotSelection } from './BallotSelection';
+//import { ModalController } from '@ionic/angular';
+//import { HomePage } from '../app/home/home.page';
+
+
 declare var require: any;
 
 export class Candidate {
@@ -22,7 +26,7 @@ export class Candidate {
     private jsonQuery = require('json-query');
     private parent: BallotSelection;
 
-    constructor(aString: string, parent: BallotSelection) {
+    constructor( aString: string, parent: BallotSelection) {
         this.parent = parent;
         //jsonObj is the string of candidiateIds, <CandidateIds>can11288a can11288b</CandidateIds>
         this.jsonObj = aString;
