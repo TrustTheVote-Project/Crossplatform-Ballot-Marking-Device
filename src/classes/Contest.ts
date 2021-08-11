@@ -42,7 +42,7 @@ export class Contest {
             this.statusMessage1 = 'You can choose ';
             this.statusMessage2 = ''+(this.votesAllowed - this.currentlySelected);
             this.statusMessage3 =  ' more.';
-            this.getPage();
+            //this.getPage();
 
          } catch (e) {
             console.log('Error:', e);
@@ -80,7 +80,7 @@ export class Contest {
 
    getPage(): string {
 
-      console.log ('page number string: '+(this.contestIndex+1)+'/'+(this.parent.getContestNamesCount()+1));
+      //console.log ('page number string: '+(this.contestIndex+1)+'/'+(this.parent.getContestNamesCount()+1));
       return((this.contestIndex+1)+'/'+(this.parent.getContestNamesCount()+1));
    }
 

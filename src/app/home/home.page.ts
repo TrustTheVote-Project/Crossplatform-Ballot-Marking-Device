@@ -1,10 +1,11 @@
-import { OnInit, Component } from '@angular/core';
+import { OnInit, Component, ViewChild } from '@angular/core';
 import { Election } from '../../classes/Election';
 import { HttpClient } from '@angular/common/http';
 import {HttpClientModule} from '@angular/common/http';
 import { ModalPopupPage } from '../modal-popup/modal-popup.page';
 import { VoteReviewPage } from '../vote-review/vote-review.page';
 import { ModalController } from '@ionic/angular';
+import { IonSlides} from '@ionic/angular';
 
 imports: [
    HttpClient,
@@ -24,9 +25,19 @@ export class HomePage implements OnInit {
    public xml = '';
    myhttp: HttpClient;
    public electionContestNames: string[];
+   public currentContest: number;
    private election: Election;
    private modal: ModalController;
    private voteReviewPage: VoteReviewPage;
+
+
+   @ViewChild('mySlider')  slides: IonSlides;
+
+   sliderConfig = {
+        effect: 'cube',
+        autoHeight: true
+    };
+
 
    constructor(public modalController: ModalController, private http: HttpClient) {
       this.myhttp = http;
@@ -37,6 +48,7 @@ export class HomePage implements OnInit {
 
       this.initializeApp();
 
+      this.currentContest = 1;
    }
 
    initializeApp() {
@@ -107,5 +119,16 @@ export class HomePage implements OnInit {
          this.openIonModal(data);
          */
 
+   }
+
+   slideNext() {
+      this.slides.slideNext();
+      this.currentContest = (this.currentContest++ >= this.election.contests.length+1 ?
+      this.election.contests.length+1 : this.currentContest);
+   }
+   slidePrevious() {
+      this.slides.slidePrev();
+      this.currentContest--;
+      this.currentContest = (this.currentContest <= 0? 1 : this.currentContest);
    }
 }
