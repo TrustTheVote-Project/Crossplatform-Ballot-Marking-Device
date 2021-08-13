@@ -1,11 +1,13 @@
 import { OnInit, Component, ViewChild } from '@angular/core';
 import { Election } from '../../classes/Election';
 import { HttpClient } from '@angular/common/http';
-import {HttpClientModule} from '@angular/common/http';
+import { HttpClientModule } from '@angular/common/http';
 import { ModalPopupPage } from '../modal-popup/modal-popup.page';
 import { VoteReviewPage } from '../vote-review/vote-review.page';
 import { ModalController } from '@ionic/angular';
 import { IonSlides} from '@ionic/angular';
+import { SplashScreen } from '@capacitor/splash-screen';
+
 
 imports: [
    HttpClient,
@@ -39,7 +41,11 @@ export class HomePage implements OnInit {
     };
 
 
-   constructor(public modalController: ModalController, private http: HttpClient) {
+   constructor( public modalController: ModalController, private http: HttpClient) {
+      SplashScreen.show({
+  showDuration: 2000,
+  autoHide: true
+});
       this.myhttp = http;
       this.modal = modalController;
    }
