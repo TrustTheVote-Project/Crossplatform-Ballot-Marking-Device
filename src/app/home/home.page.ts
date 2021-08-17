@@ -36,16 +36,16 @@ export class HomePage implements OnInit {
    @ViewChild('mySlider')  slides: IonSlides;
 
    sliderConfig = {
-        effect: 'cube',
-        autoHeight: true
-    };
+      effect: 'cube',
+      autoHeight: true
+   };
 
 
    constructor( public modalController: ModalController, private http: HttpClient) {
       SplashScreen.show({
-  showDuration: 2000,
-  autoHide: true
-});
+         showDuration: 2000,
+         autoHide: true
+      });
       this.myhttp = http;
       this.modal = modalController;
    }
@@ -62,20 +62,16 @@ export class HomePage implements OnInit {
    }
 
    openXML() {
-      //console.log('inside openXML');
       this.election = new Election( this.myhttp, '/assets/data/results-06037-2017-03-07.xml', this);
-      console.log('just set the election variable');
       //alternate data files... need to be able to select which to use
       //from the device... TO-DO...later
       //this.election = new Election(this.myhttp, '/assets/data/results-06037-2016-11-08.xml');
    }
 
    getJSONFromXML() {
-      console.log('inside getJSONFromXML');
    }
 
    getContentFromJSON() {
-      console.log('inside getContentFromJSON');
    }
 
    getModal() {
@@ -84,38 +80,34 @@ export class HomePage implements OnInit {
    }
 
    async openIonModal(data: any) {
-      console.log('opening the modal');
-      //async openIonModal(title: string, body: string) {
       const modal = await this.modalController.create({
          component: ModalPopupPage,
          componentProps: {
-            "title": data.title,
-            "body" : data.body
+            title: data.title,
+            body : data.body
          }
       });
       return await modal.present();
-      console.log('did it show up?');
    }
 
-   voteReview() {
-      console.log('made it to voteReview');
-      console.log('about to print contest names');
-      this.election.printContestNames();
-      console.log('just printed contest names');
-      this.voteReviewPage = new VoteReviewPage(this.election, this.modal);
-      let voteReviewPopupContent = { title: 'Vote Reiew', body: 'election review goes here' };
-      let voteReviewModal = this.voteReviewPage.openIonModal({title: 'vote review modal', body:'vote review body'});
-      //            let voteReviewModal = this.modalCtrl.create('VoteReviewPage', voteReviewPopupContent);
+async   voteReview(): Promise<void> {
+      let voteReviewPopupContent = { election: this.election, title: 'Vote Review', body: 'election review goes here' };
+
+    const voteReviewModal = await this.modal.create({
+      component: VoteReviewPage,
+      componentProps: voteReviewPopupContent
+    });
+    return await voteReviewModal.present();
+
       /*
-         voteReviewModal.onDidDismiss().then((data) => {
+      this.voteReviewPage.onDidDismiss().then((data) => {
 
-         console.log('data in votereview was ' + data);
 
-         });
+      });
+      */
+      /*
          let oneContestPopupContent = { 'contest": this.election.getContestByIndex(data.index) };
-         console.log("vote-review: popupContent is " + this.election.getContestByIndex(data.index));
          var oneContestModal = this.modalCtrl.create('PresentOneContestPage', oneContestPopupContent);
-         console.log("vote-review - just created PresentOneContest modal");
          oneContestModal.present();
          });
          voteReviewModal.present();
@@ -130,7 +122,7 @@ export class HomePage implements OnInit {
    slideNext() {
       this.slides.slideNext();
       this.currentContest = (this.currentContest++ >= this.election.contests.length+1 ?
-      this.election.contests.length+1 : this.currentContest);
+                             this.election.contests.length+1 : this.currentContest);
    }
    slidePrevious() {
       this.slides.slidePrev();

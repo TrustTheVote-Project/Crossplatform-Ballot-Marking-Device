@@ -1,8 +1,8 @@
 <ion-header>
 
-   <ion-navbar>
+   <ion-nav>
       <ion-title>Vote Review</ion-title>
-   </ion-navbar>
+   </ion-nav>
 
 </ion-header>
 
@@ -14,9 +14,9 @@
             <div *ngFor="let candidateName of ballotSelection.candidates">
                <ion-row no-line>
                   <ion-item text-wrap no-line item-start *ngIf="ballotSelection.selected">
-                     <ion-label no-line>{{candidateName.personName}} {{candidateName.partyAbbreviation}}</ion-label>
                      <!-- <ion-checkbox (ionChange)="item.ionChangeUpdateCheckbox($event)" (click)="item.updateCheckbox($event)"></ion-checkbox> -->
                      <ion-checkbox (ionChange)="item.ionChangeIgnoreCheckbox($event)" (click)="oneVoteClicked(i)" checked=true></ion-checkbox>
+                     <ion-label no-line>{{candidateName.personName}} {{candidateName.partyAbbreviation}}</ion-label>
                   </ion-item>
                </ion-row>
             </div>

@@ -8,12 +8,12 @@ import { ModalController } from '@ionic/angular';
    styleUrls: ['vote-review.page.scss'],
    providers: [Election]
 })
+
 export class VoteReviewPage implements OnInit{
-   private election: Election;
+   @Input() public election: Election;
    private modal: ModalController;
 
-   constructor(election: Election, modalController: ModalController) {
-      this.election = election;
+   constructor(modalController: ModalController) {
       this.modal=modalController;
    }
 
@@ -24,31 +24,37 @@ export class VoteReviewPage implements OnInit{
       console.log('ionViewDidLoad VoteReviewPage');
    }
 
+   setElection(election: Election) {
+      this.election = election;
+      console.log('just set the election in vote-review.page.ts');
+   }
+
    async closeModal(index: number) {
       const close: string = "Modal Removed";
       await this.modal.dismiss(close);
    }
    async openIonModal(data: any) {
       console.log('opening the vote review modal');
-      //async openIonModal(title: string, body: string) {
       const modal = await this.modal.create({
          component: VoteReviewPage ,
          componentProps: {
-            "title": data.title,
-            "body" : data.body
+            election: data.election,
+            title: data.title,
+            body : data.body
          }
       });
-      return await modal.present();
+      //console.log('there are ' + data.election.getContestNamesCount() + ' contests');
+      console.log('data.title is ' + data.title);
       console.log('did it show up?');
+      return await modal.present();
    }
 
    oneVoteClicked(index: number) {
       console.log("vote-review - got here! You clicked element " + index);
-      //this.closeModal(index);
+      this.closeModal(index);
       console.log("vote-review - closed the vote review modal");
 
       console.log("vote-review - just presented the new modal dialog");
    }
 
 }
-

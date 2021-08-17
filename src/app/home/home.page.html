@@ -42,11 +42,9 @@
                      <div *ngFor="let candidateName of ballotSelection.candidates">
                         <ion-row no-line>
                            <ion-item text-wrap no-line item-start>
+                              <ion-checkbox 
+                                 [(ngModel)]="ballotSelection.selected" (ionChange)="item.ionChangeUpdateCheckbox($event)"></ion-checkbox>
                               <ion-label no-line>{{candidateName.personName}} {{candidateName.partyAbbreviation}}</ion-label>
-                              <!--<ion-checkbox slot="start"
-                                 [(ngModel)]="ballotSelection.selected"
-                                 (ionChange)="item.ionChangeUpdateCheckbox($event)"></ion-checkbox>-->
-                              <ion-checkbox slot="start" (ionChange)="item.ionChangeUpdateCheckbox($event)"></ion-checkbox>
                            </ion-item>
                         </ion-row>
                      </div>
