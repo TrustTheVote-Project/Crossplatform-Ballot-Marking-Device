@@ -1,5 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { ModalController } from '@ionic/angular';
+import { Contest } from '../../classes/Contest';
 
 @Component({
    selector: 'app-modal-popup',
@@ -9,20 +10,21 @@ import { ModalController } from '@ionic/angular';
 
 export class ModalPopupPage implements OnInit {
 
-   @Input() title: string;
-   @Input() body: string;
+   @Input() contest: Contest;
 
-   constructor(
-      private modalController: ModalController,
-   ) { }
+   public modal: ModalController;
+
+   constructor(public modalController: ModalController) {
+      this.modal = modalController;
+   }
 
    ngOnInit() {
       console.log('inside modal onInit');
    }
 
    async closeModal() {
-      const close: string = "Modal Removed";
-      await this.modalController.dismiss(close);
+      const close = 'one contest Modal Removed';
+      await this.modal.dismiss(close);
    }
 
 }

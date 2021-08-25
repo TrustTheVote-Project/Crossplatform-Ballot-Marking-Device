@@ -19,6 +19,10 @@ const routes: Routes = [
     path: 'vote-review',
     loadChildren: () => import('./vote-review/vote-review.module').then( m => m.VoteReviewPageModule)
   },
+  {
+    path: 'present-one-contest',
+    loadChildren: () => import('./present-one-contest/present-one-contest.module').then( m => m.PresentOneContestPageModule)
+  },
 ];
 
 @NgModule({

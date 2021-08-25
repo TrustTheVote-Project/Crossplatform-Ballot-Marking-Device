@@ -7,18 +7,16 @@ import { Election } from '../../classes/Election';
 import { VoteReviewPageRoutingModule } from './vote-review-routing.module';
 import { VoteReviewPage } from './vote-review.page';
 
-
 @Component({
    selector: 'page-vote-review',
    templateUrl: 'vote-review.page.html',
 })
 
-
 @NgModule({
    imports: [
       CommonModule,
       IonicModule ,
-      VoteReviewPageRoutingModule  
+      VoteReviewPageRoutingModule
    ],
      declarations: [VoteReviewPage]
 })

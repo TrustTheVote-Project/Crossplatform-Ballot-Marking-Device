@@ -9,6 +9,7 @@ import { IonSlides} from '@ionic/angular';
 import { SplashScreen } from '@capacitor/splash-screen';
 
 
+
 imports: [
    HttpClient,
    HttpClientModule
@@ -90,33 +91,27 @@ export class HomePage implements OnInit {
       return await modal.present();
    }
 
-async   voteReview(): Promise<void> {
+   async   voteReview(): Promise<void> {
       let voteReviewPopupContent = { election: this.election, title: 'Vote Review', body: 'election review goes here' };
 
-    const voteReviewModal = await this.modal.create({
-      component: VoteReviewPage,
-      componentProps: voteReviewPopupContent
-    });
-    return await voteReviewModal.present();
+      const voteReviewModal = await this.modal.create({
+         component: VoteReviewPage,
+         componentProps: voteReviewPopupContent
+      });
+      //return await voteReviewModal.present();
+      await voteReviewModal.present();
 
-      /*
-      this.voteReviewPage.onDidDismiss().then((data) => {
+      voteReviewModal.onDidDismiss().then((data) => {
 
+   //      this.oneVoteReview(data);
 
       });
-      */
-      /*
-         let oneContestPopupContent = { 'contest": this.election.getContestByIndex(data.index) };
-         var oneContestModal = this.modalCtrl.create('PresentOneContestPage', oneContestPopupContent);
-         oneContestModal.present();
-         });
-         voteReviewModal.present();
-         let data = {
-         "title": 'Vote Review',
-         "body": 'the body'};
-         this.openIonModal(data);
-         */
+   }
 
+
+
+   oneVoteClicked(contestNum: number) {
+      console.log('contest ' + contestNum + ' selected in oneVoteClicked');
    }
 
    slideNext() {

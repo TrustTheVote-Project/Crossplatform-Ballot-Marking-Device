@@ -1,6 +1,8 @@
 import { Component , OnInit, Input} from '@angular/core';
 import { Election } from '../../classes/Election';
 import { ModalController } from '@ionic/angular';
+import { ModalPopupPage } from '../modal-popup/modal-popup.page';
+import { PresentOneContestPage } from '../present-one-contest/present-one-contest.page';
 
 @Component({
    selector: 'page-vote-review',
@@ -11,10 +13,12 @@ import { ModalController } from '@ionic/angular';
 
 export class VoteReviewPage implements OnInit{
    @Input() public election: Election;
-   private modal: ModalController;
+   public modal: ModalController;
+   public oneVoteModal: ModalController;
 
-   constructor(modalController: ModalController) {
-      this.modal=modalController;
+   constructor(public modalController: ModalController) {
+      this.modal = modalController;
+      this.oneVoteModal  = modalController;
    }
 
    ngOnInit() {
@@ -49,9 +53,21 @@ export class VoteReviewPage implements OnInit{
       return await modal.present();
    }
 
+   async oneVoteReview(contestNum: number): Promise<void> {
+      this.closeModal(contestNum);
+      let oneContestPopupContent = { contest: this.election.getContestByIndex(contestNum)  };
+
+      const oneContestModal = await this.oneVoteModal.create({
+         component: PresentOneContestPage,
+         componentProps:  oneContestPopupContent
+      });
+
+      await oneContestModal.present();
+   }
+
    oneVoteClicked(index: number) {
       console.log("vote-review - got here! You clicked element " + index);
-      this.closeModal(index);
+//      this.closeModal(index);
       console.log("vote-review - closed the vote review modal");
 
       console.log("vote-review - just presented the new modal dialog");
