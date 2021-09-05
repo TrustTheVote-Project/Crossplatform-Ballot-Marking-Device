@@ -92,7 +92,7 @@ export class HomePage implements OnInit {
    }
 
    async   voteReview(): Promise<void> {
-      let voteReviewPopupContent = { election: this.election, title: 'Vote Review', body: 'election review goes here' };
+      let voteReviewPopupContent = { scrollToContest: 0, home: this, election: this.election, title: 'Vote Review', body: 'election review goes here' };
 
       const voteReviewModal = await this.modal.create({
          component: VoteReviewPage,
@@ -103,11 +103,28 @@ export class HomePage implements OnInit {
 
       voteReviewModal.onDidDismiss().then((data) => {
 
-   //      this.oneVoteReview(data);
+         //      this.oneVoteReview(data);
 
       });
    }
 
+   public async voteReviewSpecificContest(contestNum: number): Promise<void> {
+      console.log('home.page::voteReviewSpecificContest - should center on contest ' + contestNum);
+      let voteReviewPopupContent = { scrollToContest: contestNum, home: this, election: this.election, title: 'Vote Review', body: 'election review goes here' };
+
+      const voteReviewModal = await this.modal.create({
+         component: VoteReviewPage,
+         componentProps: voteReviewPopupContent
+      });
+      //return await voteReviewModal.present();
+      await voteReviewModal.present();
+
+      voteReviewModal.onDidDismiss().then((data) => {
+
+         //      this.oneVoteReview(data);
+
+      });
+   }
 
 
    oneVoteClicked(contestNum: number) {
@@ -124,4 +141,5 @@ export class HomePage implements OnInit {
       this.currentContest--;
       this.currentContest = (this.currentContest <= 0? 1 : this.currentContest);
    }
+
 }

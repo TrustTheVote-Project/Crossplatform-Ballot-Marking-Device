@@ -104,19 +104,24 @@ export class Contest {
 
    ionChangeIgnoreCheckbox(cbox: Checkbox) {
       //always want true in the vote review page - don't allow deselection there!
+      console.log('Contest.ts: inside ionChangeIgnoreCheckbox, rechecking the checkbox');
       cbox.checked = true;
    }
 
+   ionChangeUpdateCheckboxAlt(cbox) {
+      console.log('Contest.ts: in updatecheckbox-ALT, cbox is:'+cbox.currentTarget.checked + ' currentlySelected is ' + this.currentlySelected);
+   }
+
    ionChangeUpdateCheckbox(cbox) {
-      console.log('in updatecheckbox, cbox is:'+cbox.currentTarget.checked);
+      console.log('Contest.ts: in updatecheckbox, cbox is:'+cbox.currentTarget.checked + ' currentlySelected is ' + this.currentlySelected);
       if (cbox.currentTarget.checked) {
-         console.log('cbox checked');
+         console.log('Contest.ts: cbox checked');
          this.currentlySelected++;
       } else {
-         console.log('cbox was UNchecked');
+         console.log('Contest.ts: cbox was UNchecked');
          this.currentlySelected--;
       }
-      console.log('currently selected: ' + this.currentlySelected + ', votesAllowed: ' +
+      console.log('Contest.ts: currently selected: ' + this.currentlySelected + ', votesAllowed: ' +
                   this.votesAllowed);
 
       if (this.currentlySelected == this.votesAllowed) {

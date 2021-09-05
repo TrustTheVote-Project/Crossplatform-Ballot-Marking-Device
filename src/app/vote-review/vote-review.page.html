@@ -6,9 +6,9 @@
 
 </ion-header>
 
-<ion-content padding>
-   <ion-card *ngFor="let item of election.contests; let i=index"
-      (click)="oneVoteReview(i)">
+<ion-content (ionModalDidPresent)="whateverFunction()" padding>
+   <ion-card id=voteReviewContest#{{i}} *ngFor="let item of election.contests; let i=index"
+             (click)="oneVoteReview(i)">
       {{item.contestName}}
       <ion-list no-line>
          <div *ngFor="let ballotSelection of item.ballotSelections">
@@ -16,9 +16,9 @@
                <ion-row no-line>
                   <ion-item text-wrap no-line item-start *ngIf="ballotSelection.selected">
                      <!-- <ion-checkbox (ionChange)="item.ionChangeUpdateCheckbox($event)" (click)="item.updateCheckbox($event)"></ion-checkbox> -->
-                        <!-- (ionChange)="item.ionChangeIgnoreCheckbox($event)" -->
+                     <!-- (ionChange)="item.ionChangeIgnoreCheckbox($event)" -->
                      <ion-checkbox
-                        (click)="oneVoteReview(i)" checked=true></ion-checkbox>
+                        (click)="oneVoteReview(i)" checked=true disabled=true></ion-checkbox>
                      <ion-label no-line>{{candidateName.personName}} {{candidateName.partyAbbreviation}}</ion-label>
                   </ion-item>
                </ion-row>

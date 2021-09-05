@@ -1,6 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { ModalController } from '@ionic/angular';
 import { Contest } from '../../classes/Contest';
+import { HomePage } from '../home/home.page';
 
 
 @Component({
@@ -11,9 +12,12 @@ import { Contest } from '../../classes/Contest';
 
 export class PresentOneContestPage implements OnInit{
    @Input() public contest: Contest;
+   @Input() public home: HomePage;
+   @Input() public contestNum: number;
 
    constructor(public modalController: ModalController) {
       this.modalController = modalController;
+      console.log('present-one-contest:ctor - enter');
 
    }
 
@@ -23,6 +27,7 @@ export class PresentOneContestPage implements OnInit{
 
    closeModal() {
       this.modalController.dismiss();
+      this.home.voteReviewSpecificContest(this.contestNum);
 
    }
 

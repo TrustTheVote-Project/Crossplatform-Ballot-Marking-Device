@@ -19,7 +19,7 @@ export class ModalPopupPage implements OnInit {
    }
 
    ngOnInit() {
-      console.log('inside modal onInit');
+      console.log('inside modal-popup.page.ts onInit');
    }
 
    async closeModal() {
