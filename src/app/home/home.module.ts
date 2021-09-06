@@ -7,6 +7,13 @@ import { HomePage } from './home.page';
 //import { Election } from '../../classes/Election';
 
 import { HomePageRoutingModule } from './home-routing.module';
+import { HttpClientModule, HttpClient } from '@angular/common/http';
+import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
+import { TranslateHttpLoader } from '@ngx-translate/http-loader';
+
+export function HttpLoaderFactory(http: HttpClient) {
+   return new TranslateHttpLoader(http, "./assets/i18n/", ".json");
+}
 
 
 @NgModule({
@@ -14,7 +21,14 @@ import { HomePageRoutingModule } from './home-routing.module';
       CommonModule,
       FormsModule,
       IonicModule,
-      HomePageRoutingModule
+      HomePageRoutingModule,
+      TranslateModule.forChild({
+      loader: {
+        provide: TranslateLoader,
+        useFactory: HttpLoaderFactory,
+        deps: [HttpClient]
+      }
+    }),
    ],
    declarations: [HomePage]
 })

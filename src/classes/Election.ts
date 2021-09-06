@@ -115,7 +115,6 @@ export class Election {
         let values = this.jsonQuery(this.CONTESTQUERY, { data: this.jsonObj }).value;
         values.forEach(element => {
             let aContest = new Contest( this.parent, element, this, this.getAndIncrementContestIndex());
-            //let aContest = new Contest(this.parent.getModalController(), element, this, this.getAndIncrementContestIndex());
             this.contests.push(aContest);
         });
     }

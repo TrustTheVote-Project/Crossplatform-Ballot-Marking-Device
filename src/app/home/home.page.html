@@ -1,13 +1,13 @@
 <ion-header *ngIf="election.ready">
    <ion-toolbar>
       <div class='center-button'>
-         <ion-button outline (click)=settings($event)>
-            <ion-icon name="cog-outline"></ion-icon>Settings</ion-button>
-         <ion-button outline (click)=help($event)>
+         <ion-button outline (click)=settings($event) translate>
+            <ion-icon name="cog-outline"></ion-icon>SETTINGS</ion-button>
+         <ion-button outline (click)=help($event) translate>
             <ion-icon name="help-outline"></ion-icon>
-            Help
+            HELP
          </ion-button>
-         <ion-button outline (click)=voteReview($event)>Review your votes</ion-button>
+         <ion-button outline (click)=voteReview($event) translate>REVIEW_YOUR_VOTES</ion-button>
       </div>
    </ion-toolbar>
 </ion-header>
@@ -28,8 +28,9 @@
             <div >
                <ion-label >{{item.contestName}}</ion-label>
                <br>
-               <ion-label float=left slot="start">
-                  Vote for {{item.getVotesAllowed()}}
+               <ion-label float=left slot="start" translate>
+                  VOTE_FOR</ion-label>
+               <ion-label>{{item.getVotesAllowed()}}
                </ion-label>
                <br>
                <ion-label float=right slot="end">{{item.statusMessage1}}</ion-label>
@@ -43,7 +44,7 @@
                         <ion-row no-line>
                            <ion-item text-wrap no-line item-start>
                               <ion-checkbox 
-                                 [(ngModel)]="ballotSelection.selected" (ionChange)="item.ionChangeUpdateCheckbox($event)"></ion-checkbox>
+                                     [(ngModel)]="ballotSelection.selected" (ionChange)="item.ionChangeUpdateCheckbox($event)"></ion-checkbox>
                               <ion-label no-line>{{candidateName.personName}} {{candidateName.partyAbbreviation}}</ion-label>
                            </ion-item>
                         </ion-row>
@@ -57,17 +58,13 @@
          <ion-toolbar>
             <div class="center-button">
                <div>
-                  <ion-button slot="start" outline (click)=slidePrevious()>
+                  <ion-button slot="start" outline (click)=slidePrevious() translate>PREVIOUS
                      <ion-icon slot="start" name="arrow-undo-outline"></ion-icon>
-                     Previous
                   </ion-button>
-                  <!-- <ion-item> -->
+
                   <ion-label style=" padding: 20px;">{{currentContest}}/{{election.contests.length+1}}</ion-label>
-                  <!-- <ion-label>/{{item.getPage()}}</ion-label> -->
-                  <!-- </ion-item> -->
-                  <!--<ion-label>X/Y</ion-label>-->
-                  <ion-button slot="end" outline (click)=slideNext()>
-                     Next
+                  <ion-button slot="end" outline (click)=slideNext() translate>
+                     NEXT
                      <ion-icon slot="end" name="arrow-redo-outline"></ion-icon>
                   </ion-button>
                </div>

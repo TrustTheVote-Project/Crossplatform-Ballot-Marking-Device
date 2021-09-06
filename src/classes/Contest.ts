@@ -5,6 +5,7 @@ import { Component } from '@angular/core';
 import { Checkbox } from '@ionic/core/dist/types/components/checkbox/checkbox';
 import { ModalController } from '@ionic/angular';
 import { HomePage } from '../app/home/home.page';
+import { TranslateService } from '@ngx-translate/core';
 
 declare let require: any;
 
@@ -16,6 +17,7 @@ export class Contest {
    public constestId: string;
    public contestName: string;
    public ballotSelections: BallotSelection[] = new Array();
+   public popupTitle: string= '';
    public statusMessage1: string = '';
    public statusMessage2: string = '';
    public statusMessage3: string = '';
@@ -39,11 +41,14 @@ export class Contest {
             });
             this.setBallotSelections(aString);
             this.setVotesAllowed(aString);
-            this.statusMessage1 = 'You can choose ';
-            this.statusMessage2 = ''+(this.votesAllowed - this.currentlySelected);
-            this.statusMessage3 =  ' more.';
-            //this.getPage();
+            this.home.getTranslator().get('YOU_CAN_CHOOSE').subscribe((res: string) => {
+               this.statusMessage1 = res;
+            });
 
+            this.statusMessage2 = ''+(this.votesAllowed - this.currentlySelected);
+            this.home.getTranslator().get('MORE').subscribe((res: string) => {
+               this.statusMessage3 = res;
+            });
          } catch (e) {
             console.log('Error:', e);
          }
@@ -114,6 +119,8 @@ export class Contest {
 
    ionChangeUpdateCheckbox(cbox) {
       console.log('Contest.ts: in updatecheckbox, cbox is:'+cbox.currentTarget.checked + ' currentlySelected is ' + this.currentlySelected);
+      let title:string;
+
       if (cbox.currentTarget.checked) {
          console.log('Contest.ts: cbox checked');
          this.currentlySelected++;
@@ -129,13 +136,23 @@ export class Contest {
          this.statusMessage2 = '';
          this.statusMessage3 = '';
       } else if (this.votesAllowed > this.currentlySelected) {
-         this.statusMessage1 = 'You can choose ';
+         this.home.getTranslator().get('YOU_CAN_CHOOSE').subscribe((res: string) => {
+            this.statusMessage1 = res;
+         });
          this.statusMessage2 = ''+(this.votesAllowed - this.currentlySelected);
-         this.statusMessage3 =  ' more.';
+         this.home.getTranslator().get('MORE').subscribe((res: string) => {
+            this.statusMessage3 = res;
+         });
       } else {
-         this.statusMessage1 = 'You have selected too many candidates - please deselect '
-         + 'the candidate you do not want, then select the candidate you do want.'
-         let popupContent = { title: 'Too many selections', body: this.statusMessage1 };
+
+         this.home.getTranslator().get('SELECTED_TOO_MANY').subscribe((res: string) => {
+            this.statusMessage1 = res;
+         });
+
+         this.home.getTranslator().get('TOO_MANY_TITLE').subscribe((res: string) => {
+            this.popupTitle = res;
+         });
+         let popupContent = { title: this.popupTitle, body: this.statusMessage1 };
          //deselect what the user just did
          cbox.currentTarget.checked = false;
          //pop up modal dialog telling user to deselect something - they're already at max

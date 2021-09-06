@@ -6,7 +6,7 @@
 
 </ion-header>
 
-<ion-content (ionModalDidPresent)="whateverFunction()" padding>
+<ion-content padding>
    <ion-card id=voteReviewContest#{{i}} *ngFor="let item of election.contests; let i=index"
              (click)="oneVoteReview(i)">
       {{item.contestName}}
@@ -34,7 +34,7 @@
       </ion-item>
    </ion-card>
    <div class='center-button'>
-      <ion-button (click)="closeModal()">Close</ion-button>
+      <ion-button (click)="closeModal()" translate>CLOSE</ion-button>
    </div>
 
 </ion-content>
