@@ -86,7 +86,7 @@ export class Contest {
    getPage(): string {
 
       //console.log ('page number string: '+(this.contestIndex+1)+'/'+(this.parent.getContestNamesCount()+1));
-      return((this.contestIndex+1)+'/'+(this.parent.getContestNamesCount()+1));
+      return((this.contestIndex+1)+'/'+(this.parent.getContestNamesCount()));
    }
 
    getCurrentlySelected(): number {

@@ -74,10 +74,12 @@ export class HomePage implements OnInit {
                }
 
                openXML() {
-                  this.election = new Election( this.myhttp, '/assets/data/results-06037-2017-03-07.xml', this);
                   //alternate data files... need to be able to select which to use
                   //from the device... TO-DO...later
-                  //this.election = new Election(this.myhttp, '/assets/data/results-06037-2016-11-08.xml');
+                  //this.election = new Election( this.myhttp, '/assets/data/64K_1Contest.xml', this);
+                  this.election = new Election( this.myhttp, '/assets/data/results-06037-2017-03-07.xml', this);
+                  //this.election = new Election( this.myhttp, '/assets/data/LA_County_Reference.xml', this);
+                  ////this.election = new Election(this.myhttp, '/assets/data/results-06037-2016-11-08.xml');
                }
 
                getJSONFromXML() {
@@ -208,4 +210,23 @@ export class HomePage implements OnInit {
                }
                getTranslator() {
                   return this._translate}
+
+                  logScrollStart() {
+
+                     console.log("home.page.ts:logScrollStart - in logScrollStart");
+
+                  }
+
+                  logScrolling(event:Event) {
+                     console.log("home.page.ts:logScrolling - in logScrolling");
+
+
+                  }
+
+                  logScrollEnd() {
+                     console.log("home.page.ts:logScrollEnd - in logScrollEnd");
+
+
+                  }
+
 }

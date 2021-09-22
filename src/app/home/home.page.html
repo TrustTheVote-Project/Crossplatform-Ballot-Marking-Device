@@ -12,7 +12,10 @@
    </ion-toolbar>
 </ion-header>
 
-<ion-content>
+<ion-content [scrollEvents]="true"
+                     (ionScrollStart)="logScrollStart()"
+                     (ionScroll)="logScrolling($event)"
+                     (ionScrollEnd)="logScrollEnd()">
    <div *ngIf="!election.ready">
       <ion-spinner name="bubbles"></ion-spinner>
       <ion-label>Loading...</ion-label>
@@ -38,6 +41,15 @@
                <ion-label slot="end">{{item.statusMessage3}}</ion-label>
                <br>
                <br>
+               <div class="center-button">
+                  <ion-item>
+                     <ion-button disabled=true color="warning" margin:auto>
+                        <ion-icon name="arrow-up"></ion-icon>
+                        Touch to see more names 
+                        <ion-icon name="arrow-up"></ion-icon>
+                     </ion-button>
+                  </ion-item>
+               </div>
                <ion-list no-line>
                   <div *ngFor="let ballotSelection of item.ballotSelections">
                      <div *ngFor="let candidateName of ballotSelection.candidates">
@@ -51,6 +63,15 @@
                      </div>
                   </div>
                </ion-list>
+               <div class="center-button">
+                  <ion-item>
+                     <ion-button disabled=true color="warning" margin:auto>
+                        <ion-icon name="arrow-down"></ion-icon>
+                        Touch to see more names
+                        <ion-icon name="arrow-down"></ion-icon>
+                     </ion-button>
+                  </ion-item>
+               </div>
             </div>
          </ion-slide>
       </ion-slides>
@@ -62,7 +83,7 @@
                      <ion-icon slot="start" name="arrow-undo-outline"></ion-icon>
                   </ion-button>
 
-                  <ion-label style=" padding: 20px;">{{currentContest}}/{{election.contests.length+1}}</ion-label>
+                  <ion-label style=" padding: 20px;">{{currentContest}}/{{election.contests.length}}</ion-label>
                   <ion-button slot="end" outline (click)=slideNext() translate>
                      NEXT
                      <ion-icon slot="end" name="arrow-redo-outline"></ion-icon>
