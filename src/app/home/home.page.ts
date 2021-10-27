@@ -1,14 +1,18 @@
 import { OnInit, Component, ViewChild } from '@angular/core';
 import { Election } from '../../classes/Election';
-import { HttpClient } from '@angular/common/http';
+//import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { HttpClientModule } from '@angular/common/http';
 import { ModalPopupPage } from '../modal-popup/modal-popup.page';
 import { VoteReviewPage } from '../vote-review/vote-review.page';
+import { SettingsPage } from '../settings/settings.page';
 import { ModalController } from '@ionic/angular';
 import { IonSlides} from '@ionic/angular';
 import { SplashScreen } from '@capacitor/splash-screen';
 //import { Globalization } from '@ionic-native/globalization/ngx';
 import { TranslateService } from '@ngx-translate/core';
+//import {listFiles} from 'list-files-in-dir';
+import { Filesystem, Directory } from '@capacitor/filesystem';
 
 
 
@@ -28,6 +32,7 @@ const xml2js = require('xml2js');
 
 export class HomePage implements OnInit {
    public xml = '';
+   public xmlFile = '/assets/data/64K_1Contest.xml';
    myhttp: HttpClient;
    public electionContestNames: string[];
    public currentContest: number;
@@ -39,6 +44,9 @@ export class HomePage implements OnInit {
    private election: Election;
    private modal: ModalController;
    private voteReviewPage: VoteReviewPage;
+   private settingsPage: SettingsPage;
+   private EDFiles: string[];
+   private jsonQuery = require('json-query');
 
 
    @ViewChild('mySlider')  slides: IonSlides;
@@ -70,14 +78,17 @@ export class HomePage implements OnInit {
 
                initializeApp() {
                   this.getDeviceLanguage();
+                  this.getEDFiles();
+                  console.log('EDFiles is :'+this.EDFiles);
                   this.openXML();
                }
 
                openXML() {
                   //alternate data files... need to be able to select which to use
+                  this.election = new Election( this.myhttp, this.xmlFile, this);
                   //from the device... TO-DO...later
                   //this.election = new Election( this.myhttp, '/assets/data/64K_1Contest.xml', this);
-                  this.election = new Election( this.myhttp, '/assets/data/results-06037-2017-03-07.xml', this);
+                  //                  this.election = new Election( this.myhttp, '/assets/data/results-06037-2017-03-07.xml', this);
                   //this.election = new Election( this.myhttp, '/assets/data/LA_County_Reference.xml', this);
                   ////this.election = new Election(this.myhttp, '/assets/data/results-06037-2016-11-08.xml');
                }
@@ -155,6 +166,22 @@ export class HomePage implements OnInit {
                   this.currentContest = (this.currentContest <= 0? 1 : this.currentContest);
                }
 
+               async   settings(): Promise<void> {
+                  let settingsPopupContent = {EDFiles: this.EDFiles, home: this };
+
+                  const settingsModal = await this.modal.create({
+                     component: SettingsPage,
+                     componentProps: settingsPopupContent
+                  });
+                  await settingsModal.present();
+
+                  settingsModal.onDidDismiss().then((data) => {
+
+                     //      this.oneVoteReview(data);
+
+                  });
+               }
+
                _initialiseTranslation(): void {
                   this._translate.get('TITLE').subscribe((res: string) => {
                      this.title = res;
@@ -226,6 +253,51 @@ export class HomePage implements OnInit {
                   logScrollEnd() {
                      console.log("home.page.ts:logScrollEnd - in logScrollEnd");
 
+
+                  }
+
+
+                  getEDFiles() {
+
+                     try {
+                        //let jsonData;
+                        let xmlFiles = '/assets/data/index.txt';
+
+                        this.myhttp.get(xmlFiles,
+                                        {
+                                           headers: new HttpHeaders()
+                                           .set('Content-Type', 'application/json ')
+                                           .append('Access-Control-Allow-Methods', 'GET')
+                                           .append('Access-Control-Allow-Origin', '*')
+                                           .append('Access-Control-Allow-Headers',
+                                                   'Access-Control-Allow-Headers, Access-Control-Allow-Origin, Access-Control-Request-Method'),
+                                                   responseType: 'text'
+                                        })
+                                        .subscribe((jsonData) => {
+                                           console.log( 'data read is ' + jsonData);
+                                           this.EDFiles = jsonData.split("\n");
+                                           return;
+                                           //                                           const values = this.jsonQuery('filenames[*]', { data: jsonData}).value;
+                                           //                                           values.forEach(element => {
+                                           //                                             this.EDFiles.push(element);
+                                           //                                           });
+                                        });
+                     } catch (e) {
+                        console.log('Error:', e);
+                     }
+
+                  }
+
+                  getEDF() {
+
+                     return (this.xmlFile);
+
+
+                  }
+
+                  setEDF(xmlFile: string) {
+                     this.xmlFile = xmlFile;
+                     this.openXML();
 
                   }
 

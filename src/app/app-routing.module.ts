@@ -23,6 +23,10 @@ const routes: Routes = [
     path: 'present-one-contest',
     loadChildren: () => import('./present-one-contest/present-one-contest.module').then( m => m.PresentOneContestPageModule)
   },
+  {
+    path: 'settings',
+    loadChildren: () => import('./settings/settings.module').then( m => m.SettingsPageModule)
+  },
 ];
 
 @NgModule({
