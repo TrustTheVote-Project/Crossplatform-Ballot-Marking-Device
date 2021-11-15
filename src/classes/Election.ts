@@ -1,174 +1,114 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { map } from 'rxjs/operators';
 import { Parser } from 'xml2js';
+import { Injectable } from '@angular/core';
+import * as jsonQuery from 'json-query';
+
 import { Contest } from '../classes/Contest';
 import { HomePage } from '../app/home/home.page';
-import { ModalController } from '@ionic/angular';
-import { Injectable } from '@angular/core';
-
-
-declare const require: any;
 
 @Injectable()
 export class Election {
-    readonly CONTESTQUERY = 'ElectionReport.Election.ContestCollection.Contest';
-    public xml = '';
-    public contests: Contest[] = new Array();
-    public myhttp: HttpClient;
-    public ready = false;
-    public edfFile: string;
+  readonly CONTESTQUERY = 'ElectionReport.Election.ContestCollection.Contest';
 
-    private jsonObj = '';
-    private jsonQuery = require('json-query');
-    private contestNames: string[] = new Array();
-    private candidateNames: string[] = new Array();
-    private parent: HomePage;
-    private contestIndex = 0;
+  public xml = '';
+  public contests: Contest[] = [];
+  public ready = false;
+  public edfFile: string;
+  public jsonObj: string = '';
 
+  private contestNames: string[];
+  private candidateNames: string[] = [];
+  private parent: HomePage;
+  private contestIndex = 0;
 
-    constructor( _http: HttpClient, aString: string, parent: HomePage) {
-        this.parent = parent;
-        this.myhttp = _http;
-        if (null != aString) {
-            this.edfFile = aString;
-            console.log('attempting to open ' + this.edfFile);
-            try {
-                //let jsonData;
-                let xmlData;
-                const myParser = new Parser({ attrkey: '@', charkey: '#', mergeAttrs: true });
+  // todo: what is "aString"? is there a more descriptive variable name which could be used here?
+  constructor(private readonly http: HttpClient, aString: string, parent: HomePage) {
+    this.parent = parent;
+    if (null != aString) {
+      this.edfFile = aString;
+      console.log('attempting to open ' + this.edfFile);
+      try {
+        let xmlData;
+        const myParser = new Parser({
+          attrkey: '@',
+          charkey: '#',
+          mergeAttrs: true,
+        });
 
-          this.myhttp.get(this.edfFile,
-          {
+        this.http
+          .get(this.edfFile, {
             headers: new HttpHeaders()
               .set('Content-Type', 'text/xml')
               .append('Access-Control-Allow-Methods', 'GET')
               .append('Access-Control-Allow-Origin', '*')
-              .append('Access-Control-Allow-Headers',
-                      'Access-Control-Allow-Headers, Access-Control-Allow-Origin, Access-Control-Request-Method'),
-            responseType: 'text'
+              .append(
+                'Access-Control-Allow-Headers',
+                'Access-Control-Allow-Headers, Access-Control-Allow-Origin, Access-Control-Request-Method'
+              ),
+            responseType: 'text',
           })
           .subscribe((data) => {
-                   //console.log( 'data read is ' + data.toString());
-                    //this.xml = data.toString();
+            //console.log( 'data read is ' + data.toString());
+            //this.xml = data.toString();
 
-                    xmlData = data.toString();
+            xmlData = data.toString();
 
-                    myParser.parseString(xmlData, (err, jsonData) => {
-                        this.jsonObj = jsonData;
-                   //console.log( 'json parsed data is ' + this.jsonObj);
+            myParser.parseString(xmlData, (err, jsonData) => {
+              // todo: should we call this something more descriptive that doesn't suggest it's a JSON object?
+              this.jsonObj = jsonData;
+              //console.log( 'json parsed data is ' + this.jsonObj);
 
-                        this.setContests();
-                        this.printContestNames();
-                        this.getContestNames();
-                        this.setReady(true);
+              this.contests = this.getContests();
+              console.log('🚀 ~ file: Election.ts ~ line 62 ~ Election ~ myParser.parseString ~ this.contests', this.contests);
+              this.candidateNames = this.getAllCandidateNames();
+              this.ready = true;
+
+              console.log(
+                '🚀 ~ file: Election.ts ~ line 100 ~ Election ~ contest.ballotSelections.forEach ~ this.candidateNames',
+                this.candidateNames
+              );
             });
           });
+      } catch (e) {
+        console.log('Error:', e);
+      }
+    }
+  }
 
-            } catch (e) {
-                console.log('Error:', e);
-            }
+  getContestNamesCount(): number {
+    return this.contestNames.length;
+  }
+
+  // todo: wouldn't this be of type HomePage? do we need this at all?
+  getParent(): object {
+    return this.parent;
+  }
+
+  getContests(): Contest[] {
+    // todo: what kind of data is "values"? is there a better name and type here?
+    const values = jsonQuery(this.CONTESTQUERY, {
+      data: this.jsonObj,
+    }).value;
+    // todo: what kind of data is "element"? is there a better name and type here?
+    return values.map((element) => new Contest(this.parent, element, this, this.contestIndex++));
+  }
+
+  getAllCandidateNames(): string[] {
+    let candidateNames: string[] = [];
+    this.contests.forEach((contest) => {
+      contest.ballotSelections.forEach((ballotSelection) => {
+        const candidateName = ballotSelection.getCandidatesString().trim();
+        // under what conditions would the candidate name be the _string_ undefined?
+        if (candidateName !== undefined && candidateName !== 'undefined') {
+          // why are we flattening to a single array of candidate names here?
+          candidateNames.push(candidateName);
         }
-    }
+      });
+    });
+    return candidateNames;
+  }
 
-   getContestNamesCount(): number {
-      return(this.contestNames.length);
-   }
-
-    isReady(): boolean {
-        return (this.ready);
-    }
-
-    setReady(value: boolean) {
-        this.ready = value;
-    }
-    getParent(): object {
-        return this.parent;
-
-    };
-
-    /*
-        getballotSelections(): ballotSelection[] {
-            //console.log("entering getballotSelections");
-        }
-        */
-
-    getBallotSelection(contest: Contest) {
-
-    }
-
-    getContests(): Contest[] {
-        return this.contests;
-    }
-
-    getAndIncrementContestIndex(): number {
-        return (this.contestIndex++);
-
-    }
-
-    getJsonObj(): string {
-        return this.jsonObj;
-    }
-
-    setContests() {
-        //console.log(JSON.stringify(this.jsonObj));
-        //var aBallotSelection: BallotSelection
-        let values = this.jsonQuery(this.CONTESTQUERY, { data: this.jsonObj }).value;
-        values.forEach(element => {
-            let aContest = new Contest( this.parent, element, this, this.getAndIncrementContestIndex());
-            this.contests.push(aContest);
-        });
-    }
-
-    getContestNames(): string[] {
-        console.log('entering getContestName()');
-        this.contests.forEach(element => {
-            this.contestNames.push(element.getContestName());
-            console.log("getContestName - name is '" +element.getContestName()+"'");
-        });
-        console.log('exiting getContestName() - contestNames has ' + this.contestNames.length + ' elements');
-        return this.contestNames;
-    }
-
-
-    printContestNames() {
-        this.contests.forEach(element => {
-            //element is a Contest...
-            //console.log('Contest name: ' + element.getContestName());
-            //for each Contest, get the Contestants...
-            element.getBallotSelections().forEach(ballotselection => {
-                let candidateName;
-                candidateName = ballotselection.getCandidatesString().trim();
-                if (candidateName !== undefined && candidateName !== 'undefined') {
-                    //console.log(candidateName);
-                    this.candidateNames.push(candidateName);
-                }
-
-            });
-        });
-    }
-
-    printOneContest(element: Contest) {
-        //    this.contests.forEach(element => {
-        //element is a Contest...
-        //console.log('Contest name: ' + element.getContestName());
-        //for each Contest, get the Contestants...
-        element.getBallotSelections().forEach(ballotselection => {
-            let candidateName;
-            candidateName = ballotselection.getCandidatesString().trim();
-            if (candidateName !== undefined && candidateName !== 'undefined') {
-                //console.log(candidateName);
-                this.candidateNames.push(candidateName);
-            }
-
-        });
-        //   });
-    }
-
-    getContestByIndex(index: number): Contest {
-        return (this.contests[index]);
-    }
-}
-
-function delay(ms: number) {
-    return new Promise(resolve => setTimeout(resolve, ms));
+  getContestByIndex(index: number): Contest {
+    return this.contests[index];
+  }
 }
