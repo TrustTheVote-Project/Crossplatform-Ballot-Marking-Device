@@ -36,3 +36,6 @@ ios_dev.key
 ios_development.cer
 ios_development.cer.pem
 keyBackup/*
+
+/cypress/videos
+/cypress/screenshots
