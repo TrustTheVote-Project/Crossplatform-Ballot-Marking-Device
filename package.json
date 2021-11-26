@@ -10,6 +10,8 @@
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
+    "format:write": "prettier . --write",
+    "format:check": "prettier . --check",
     "resources": "cordova-res ios && cordova-res android && node scripts/resources.js"
   },
   "private": true,
@@ -64,15 +66,20 @@
     "@capacitor/cli": "3.1.1",
     "@ionic/angular-toolkit": "^4.0.0",
     "@ionic/lab": "3.2.10",
+    "@nrwl/cypress": "^13.1.4",
+    "@nrwl/workspace": "^13.1.4",
     "@types/jasmine": "~3.6.0",
     "@types/jasminewd2": "~2.0.3",
     "@types/node": "^12.11.1",
     "@typescript-eslint/eslint-plugin": "4.16.1",
     "@typescript-eslint/parser": "4.16.1",
+    "cypress": "^8.7.0",
     "eslint": "^7.6.0",
     "eslint-plugin-import": "2.22.1",
     "eslint-plugin-jsdoc": "30.7.6",
     "eslint-plugin-prefer-arrow": "1.2.2",
+    "eslint-plugin-sonarjs": "^0.10.0",
+    "eslint-plugin-unused-imports": "^1.1.5",
     "jasmine-core": "~3.8.0",
     "jasmine-spec-reporter": "~5.0.0",
     "karma": "~6.3.2",
@@ -81,7 +88,8 @@
     "karma-coverage-istanbul-reporter": "~3.0.2",
     "karma-jasmine": "~4.0.0",
     "karma-jasmine-html-reporter": "^1.5.0",
-    "protractor": "~7.0.0",
+    "lint-staged": "^11.2.3",
+    "prettier": "^2.4.1",
     "ts-node": "~8.3.0",
     "typescript": "~4.2.4"
   },
@@ -90,5 +98,9 @@
     "fs": false,
     "os": false,
     "path": false
+  },
+  "lint-staged": {
+    "*.{js,ts}": "eslint --fix",
+    "*.{js,ts,css,scss,md}": "prettier --write"
   }
 }
