@@ -1,0 +1,4 @@
+# Ignore built/generated files
+android
+ios
+coverage
