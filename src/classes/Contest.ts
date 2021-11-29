@@ -26,6 +26,7 @@ export class Contest {
    private votesAllowed = 0;
    private currentlySelected = 0;
    private contestIndex = 0;
+   WRITEIN = 'writein';
 
 
    constructor(public home: HomePage, aString: string, parent: Election, contestIndex: number) {
@@ -66,6 +67,9 @@ export class Contest {
             var aBallotSelection = new BallotSelection(element, this);
             this.ballotSelections.push(aBallotSelection);
          });
+         //add a writein
+         var aBallotSelection = new BallotSelection(this.WRITEIN, this);
+         this.ballotSelections.push(aBallotSelection);
       } catch (e) {
          console.log('Error:', e);
       }
@@ -120,7 +124,7 @@ export class Contest {
    ionChangeUpdateCheckbox(cbox) {
       console.log('Contest.ts: in updatecheckbox, cbox is:'+cbox.currentTarget.checked + ' currentlySelected is ' + this.currentlySelected);
       let title:string;
-
+console.log(cbox.currentTarget);
       if (cbox.currentTarget.checked) {
          console.log('Contest.ts: cbox checked');
          this.currentlySelected++;
