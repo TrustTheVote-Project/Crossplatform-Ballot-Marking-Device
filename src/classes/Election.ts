@@ -97,7 +97,7 @@ export class Election {
     console.log('entering getContestName()');
     this.contests.forEach((element) => {
       this.contestNames.push(element.getContestName());
-      console.log('getContestName - name is \'' + element.getContestName() + '\'');
+      console.log(`getContestName - name is ${element.getContestName()}`);
     });
     console.log('exiting getContestName() - contestNames has ' + this.contestNames.length + ' elements');
     return this.contestNames;
