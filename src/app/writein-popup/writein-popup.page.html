@@ -1,14 +1,13 @@
 <ion-header>
   <ion-toolbar>
-     <ion-title>{{ title }}</ion-title>
+    <ion-title>{{ title }}</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-   <ion-item>
-  <ion-label position="stacked">Enter the write-in candidate's name below</ion-label>
-  <ion-input [(ngModel)]="writeinName" autocapitalize="words" placeholder="Enter a name" clearInput></ion-input>
-</ion-item>
-      <ion-button (click)="closeModal()" translate>CLOSE</ion-button>
-
+  <ion-item>
+    <ion-label position="stacked">Enter the write-in candidate's name below</ion-label>
+    <ion-input [(ngModel)]="writeinName" autocapitalize="words" placeholder="Enter a name" clearInput></ion-input>
+  </ion-item>
+  <ion-button (click)="closeModal()" translate>CLOSE</ion-button>
 </ion-content>

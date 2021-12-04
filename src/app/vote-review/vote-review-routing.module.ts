@@ -5,8 +5,8 @@ import { VoteReviewPage } from './vote-review.page';
 const routes: Routes = [
   {
     path: '',
-    component: VoteReviewPage
-  }
+    component: VoteReviewPage,
+  },
 ];
 
 @NgModule({

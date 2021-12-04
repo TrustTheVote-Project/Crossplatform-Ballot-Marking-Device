@@ -6,8 +6,8 @@ import { WriteinPopupPage } from './writein-popup.page';
 const routes: Routes = [
   {
     path: '',
-    component: WriteinPopupPage
-  }
+    component: WriteinPopupPage,
+  },
 ];
 
 @NgModule({

@@ -9,12 +9,7 @@ import { WriteinPopupPageRoutingModule } from './writein-popup-routing.module';
 import { WriteinPopupPage } from './writein-popup.page';
 
 @NgModule({
-  imports: [
-    CommonModule,
-    FormsModule,
-    IonicModule,
-    WriteinPopupPageRoutingModule
-  ],
-  declarations: [WriteinPopupPage]
+  imports: [CommonModule, FormsModule, IonicModule, WriteinPopupPageRoutingModule],
+  declarations: [WriteinPopupPage],
 })
 export class WriteinPopupPageModule {}

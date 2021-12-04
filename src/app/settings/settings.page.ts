@@ -3,35 +3,34 @@ import { ModalController, IonContent } from '@ionic/angular';
 import { HomePage } from '../home/home.page';
 
 @Component({
-   selector: 'app-settings',
-   templateUrl: './settings.page.html',
-   styleUrls: ['./settings.page.scss'],
+  selector: 'app-settings',
+  templateUrl: './settings.page.html',
+  styleUrls: ['./settings.page.scss'],
 })
 export class SettingsPage implements OnInit {
-   @Input() public home: HomePage;
+  @Input() public home: HomePage;
 
-   public EDFiles: string[];
-   public modal: ModalController;
-   public selectEDF: string;
+  public EDFiles: string[];
+  public modal: ModalController;
+  public selectEDF: string;
 
-   constructor(public modalController: ModalController) { 
+  constructor(public modalController: ModalController) {
+    this.modal = modalController;
+  }
+  ngOnInit() {
+    this.selectEDF = this.home.getEDF();
+  }
+  async closeModal(index: number) {
+    const close: string = 'Modal Removed';
+    await this.modal.dismiss(close);
 
-      this.modal = modalController;
-   }
-   ngOnInit() {
-      this.selectEDF = this.home.getEDF();
-   }
-   async closeModal(index: number) {
-      const close: string = "Modal Removed";
-      await this.modal.dismiss(close);
+    if ('/assets/data/' + this.selectEDF != this.home.getEDF()) {
+      console.log(this.home.getEDF() + ' does not equal ' + '/assets/data/' + this.selectEDF);
+      this.home.setEDF('/assets/data/' + this.selectEDF);
+    }
+  }
 
-      if ('/assets/data/'+this.selectEDF != this.home.getEDF()) {
-         console.log(this.home.getEDF() + ' does not equal ' + '/assets/data/'+this.selectEDF);
-         this.home.setEDF('/assets/data/'+this.selectEDF);
-      }
-   }
-
-   /*
+  /*
    compareWith(curVal: any, newVal: any) {
       console.log('current value is ' + curVal);
       console.log('new value is ' + newVal);
@@ -40,13 +39,11 @@ export class SettingsPage implements OnInit {
    }
    */
 
-   myChange(evt) {
-      console.log('got to myChange');
-      console.log('selected EDF is ' + this.selectEDF);
-      if (this.selectEDF != this.home.getEDF()) {
-//         console.log(this.home.getEDF() + ' does not equal ' + this.selectEDF);
-
-      }
-
-   }
+  myChange(evt) {
+    console.log('got to myChange');
+    console.log('selected EDF is ' + this.selectEDF);
+    if (this.selectEDF != this.home.getEDF()) {
+      //         console.log(this.home.getEDF() + ' does not equal ' + this.selectEDF);
+    }
+  }
 }

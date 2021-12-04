@@ -5,8 +5,8 @@ import { PresentOneContestPage } from './present-one-contest.page';
 const routes: Routes = [
   {
     path: '',
-    component: PresentOneContestPage
-  }
+    component: PresentOneContestPage,
+  },
 ];
 
 @NgModule({
