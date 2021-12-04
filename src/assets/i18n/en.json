@@ -9,5 +9,7 @@
    "REVIEW_YOUR_VOTES": "Review your votes",
    "PREVIOUS": "Previous",
    "NEXT": "Next",
-   "VOTE_FOR": "Vote for "
+   "VOTE_FOR": "Vote for ",
+   "WRITEIN_POPUP_BODY": "Please type in a write-in candidate's name",
+   "WRITEIN_TITLE": "Enter a Write-in Candidate"
 }
