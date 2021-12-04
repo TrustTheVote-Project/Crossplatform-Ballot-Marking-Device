@@ -6,8 +6,8 @@ import { ModalPopupPage } from './modal-popup.page';
 const routes: Routes = [
   {
     path: '',
-    component: ModalPopupPage
-  }
+    component: ModalPopupPage,
+  },
 ];
 
 @NgModule({

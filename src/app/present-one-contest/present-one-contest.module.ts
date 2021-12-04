@@ -8,18 +8,11 @@ import { PresentOneContestPageRoutingModule } from './present-one-contest-routin
 import { PresentOneContestPage } from './present-one-contest.page';
 
 @Component({
-   selector: 'page-present-one-contest',
-   templateUrl: 'present-one-contest.page.html',
+  selector: 'page-present-one-contest',
+  templateUrl: 'present-one-contest.page.html',
 })
-
 @NgModule({
-   imports: [
-      CommonModule,
-      IonicModule ,
-      FormsModule,
-      PresentOneContestPageRoutingModule
-   ],
-     declarations: [PresentOneContestPage]
+  imports: [CommonModule, IonicModule, FormsModule, PresentOneContestPageRoutingModule],
+  declarations: [PresentOneContestPage],
 })
-
 export class PresentOneContestPageModule {}

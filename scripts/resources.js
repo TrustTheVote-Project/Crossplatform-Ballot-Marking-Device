@@ -30,12 +30,12 @@ const IOS_ICONS = [
   { source: 'icon-76.png', target: 'AppIcon-76x76@1x.png' },
   { source: 'icon-76@2x.png', target: 'AppIcon-76x76@2x.png' },
   { source: 'icon-83.5@2x.png', target: 'AppIcon-83.5x83.5@2x.png' },
-  { source: 'icon-1024.png', target: 'AppIcon-512@2x.png' }
+  { source: 'icon-1024.png', target: 'AppIcon-512@2x.png' },
 ];
 const IOS_SPLASHES = [
   { source: 'Default-Portrait@~ipadpro.png', target: 'splash-2732x2732.png' },
   { source: 'Default-Portrait@~ipadpro.png', target: 'splash-2732x2732-1.png' },
-  { source: 'Default-Portrait@~ipadpro.png', target: 'splash-2732x2732-2.png' }
+  { source: 'Default-Portrait@~ipadpro.png', target: 'splash-2732x2732-2.png' },
 ];
 
 const ANDROID_ICONS = [
@@ -54,10 +54,10 @@ const ANDROID_ICONS = [
   { source: 'drawable-xxhdpi-icon.png', target: 'mipmap-xxhdpi/ic_launcher_foreground.png' },
   { source: 'drawable-xxxhdpi-icon.png', target: 'mipmap-xxxhdpi/ic_launcher.png' },
   { source: 'drawable-xxxhdpi-icon.png', target: 'mipmap-xxxhdpi/ic_launcher_round.png' },
-  { source: 'drawable-xxxhdpi-icon.png', target: 'mipmap-xxxhdpi/ic_launcher_foreground.png' }
+  { source: 'drawable-xxxhdpi-icon.png', target: 'mipmap-xxxhdpi/ic_launcher_foreground.png' },
 ];
 const ANDROID_SPLASHES = [
-  { source: 'drawable-land-mdpi-screen.png', target: 'drawable/splash.png' }, 
+  { source: 'drawable-land-mdpi-screen.png', target: 'drawable/splash.png' },
   { source: 'drawable-land-mdpi-screen.png', target: 'drawable-land-mdpi/splash.png' },
   { source: 'drawable-land-hdpi-screen.png', target: 'drawable-land-hdpi/splash.png' },
   { source: 'drawable-land-xhdpi-screen.png', target: 'drawable-land-xhdpi/splash.png' },
@@ -67,14 +67,14 @@ const ANDROID_SPLASHES = [
   { source: 'drawable-port-hdpi-screen.png', target: 'drawable-port-hdpi/splash.png' },
   { source: 'drawable-port-xhdpi-screen.png', target: 'drawable-port-xhdpi/splash.png' },
   { source: 'drawable-port-xxhdpi-screen.png', target: 'drawable-port-xxhdpi/splash.png' },
-  { source: 'drawable-port-xxxhdpi-screen.png', target: 'drawable-port-xxxhdpi/splash.png' }
+  { source: 'drawable-port-xxxhdpi-screen.png', target: 'drawable-port-xxxhdpi/splash.png' },
 ];
 
 function copyImages(sourcePath, targetPath, images) {
   for (const icon of images) {
     let source = sourcePath + icon.source;
     let target = targetPath + icon.target;
-    fs.copyFile(source, target, err => {
+    fs.copyFile(source, target, (err) => {
       if (err) throw err;
       console.log(`${source} >> ${target}`);
     });

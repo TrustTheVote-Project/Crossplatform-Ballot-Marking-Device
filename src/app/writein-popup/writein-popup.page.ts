@@ -7,17 +7,14 @@ import { ModalController, IonContent } from '@ionic/angular';
   styleUrls: ['./writein-popup.page.scss'],
 })
 export class WriteinPopupPage implements OnInit {
-   public modal: ModalController;
-   private writeinName: string;
+  public modal: ModalController;
+  private writeinName: string;
 
-  constructor() { 
+  constructor() {}
+
+  ngOnInit() {}
+
+  async closeModal() {
+    await this.modal.dismiss(this.writeinName);
   }
-
-  ngOnInit() {
-  }
-
-   async closeModal() {
-      await this.modal.dismiss(this.writeinName);
-   }
-
 }
