@@ -16,7 +16,7 @@
       interface="popover"
       placeholder="Select an EDF"
     >
-      <ng-container *ngFor="let item of EDFiles">
+      <ng-container *ngFor="let item of edFiles">
         <ion-select-option *ngIf="item.trim().length > 0" value="{{item}}">{{item}}</ion-select-option>
       </ng-container>
     </ion-select>

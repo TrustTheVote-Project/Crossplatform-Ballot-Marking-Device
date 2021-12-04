@@ -21,7 +21,7 @@
         </div>
       </div>
     </ion-list>
-    <ion-item color="warning" text-wrap *ngIf="item.getVotesLeft() == item.getVotesAllowed()">
+    <ion-item color="warning" text-wrap *ngIf="item.getVotesLeft() === item.getVotesAllowed()">
       You did not vote for anyone. If you want to vote, touch here.
     </ion-item>
     <ion-item color="warning" text-wrap *ngIf="item.getVotesLeft() > 0 && item.getCurrentlySelected() > 0">

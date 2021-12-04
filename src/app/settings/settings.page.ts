@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { ModalController, IonContent } from '@ionic/angular';
+import { ModalController } from '@ionic/angular';
 import { HomePage } from '../home/home.page';
 
 @Component({
@@ -10,39 +10,31 @@ import { HomePage } from '../home/home.page';
 export class SettingsPage implements OnInit {
   @Input() public home: HomePage;
 
-  public EDFiles: string[];
-  public modal: ModalController;
+  public edFiles: string[];
   public selectEDF: string;
 
-  constructor(public modalController: ModalController) {
-    this.modal = modalController;
-  }
+  constructor(public readonly modalController: ModalController) {}
+
   ngOnInit() {
     this.selectEDF = this.home.getEDF();
   }
-  async closeModal(index: number) {
-    const close: string = 'Modal Removed';
-    await this.modal.dismiss(close);
 
-    if ('/assets/data/' + this.selectEDF != this.home.getEDF()) {
-      console.log(this.home.getEDF() + ' does not equal ' + '/assets/data/' + this.selectEDF);
-      this.home.setEDF('/assets/data/' + this.selectEDF);
+  async closeModal() {
+    const close = 'Modal Removed';
+    await this.modalController.dismiss(close);
+
+    const filePath = `/assets/data/${this.selectEDF}`;
+    if (filePath !== this.home.getEDF()) {
+      console.log(this.home.getEDF() + ' does not equal ' + filePath);
+      this.home.setEDF(filePath);
     }
   }
 
-  /*
-   compareWith(curVal: any, newVal: any) {
-      console.log('current value is ' + curVal);
-      console.log('new value is ' + newVal);
-
-
-   }
-   */
-
-  myChange(evt) {
+  // todo: this doesn't actually do anything - can it be removed?
+  myChange() {
     console.log('got to myChange');
     console.log('selected EDF is ' + this.selectEDF);
-    if (this.selectEDF != this.home.getEDF()) {
+    if (this.selectEDF !== this.home.getEDF()) {
       //         console.log(this.home.getEDF() + ' does not equal ' + this.selectEDF);
     }
   }

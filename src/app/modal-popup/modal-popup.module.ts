@@ -1,19 +1,13 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-
-import { IonicModule } from '@ionic/angular';
-
-import { ModalPopupPageRoutingModule } from './modal-popup-routing.module';
-
-import { ModalPopupPage } from './modal-popup.page';
 import { HttpClientModule, HttpClient } from '@angular/common/http';
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
+import { IonicModule } from '@ionic/angular';
 
-export function HttpLoaderFactory(http: HttpClient) {
-  return new TranslateHttpLoader(http, './assets/i18n/', '.json');
-}
+import { ModalPopupPageRoutingModule } from './modal-popup-routing.module';
+import { ModalPopupPage } from './modal-popup.page';
 
 @NgModule({
   imports: [
@@ -25,7 +19,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     TranslateModule.forChild({
       loader: {
         provide: TranslateLoader,
-        useFactory: HttpLoaderFactory,
+        useFactory: (http: HttpClient) => new TranslateHttpLoader(http, './assets/i18n/', '.json'),
         deps: [HttpClient],
       },
     }),

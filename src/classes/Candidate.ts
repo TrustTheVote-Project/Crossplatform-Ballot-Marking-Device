@@ -1,19 +1,16 @@
-import { BallotSelection } from './BallotSelection';
-//import { ModalController } from '@ionic/angular';
-//import { HomePage } from '../app/home/home.page';
+import * as jsonQuery from 'json-query';
 
-declare var require: any;
+import { BallotSelection } from './BallotSelection';
 
 export class Candidate {
-  readonly PERSONQUERY = 'ElectionReport.PersonCollection[*].Person[*]';
-  readonly FULLNAMEQUERY = 'ElectionReport.PersonCollection.Person[objectId=?].FullName[0].Text[0].#';
-  readonly GENDERQUERY = 'ElectionReport.PersonCollection.Person[objectId=?].Gender[0]';
-  readonly ISINCUMBENTQUERY = 'ElectionReport.Election.CandidateCollection.Candidate[objectId=?].IsIncumbent[0]';
-  readonly PARTYIDQUERY = 'ElectionReport.Election.CandidateCollection.Candidate[objectId=?].PartyId[0]';
-  readonly PARTYABBREVIATIONQUERY = 'ElectionReport.PartyCollection.Party[objectId=?].Abbreviation[0]';
-  readonly PARTYNAMEQUERY = 'ElectionReport.PartyCollection.Party[objectId=?].Name[0].Text[0].#';
-
-  public jsonObj: String = '';
+  readonly personQuery = 'ElectionReport.PersonCollection[*].Person[*]';
+  readonly fullNameQuery = 'ElectionReport.PersonCollection.Person[objectId=?].FullName[0].Text[0].#';
+  readonly genderQuery = 'ElectionReport.PersonCollection.Person[objectId=?].Gender[0]';
+  readonly isIncumbentQuery = 'ElectionReport.Election.CandidateCollection.Candidate[objectId=?].IsIncumbent[0]';
+  readonly partyIdQuery = 'ElectionReport.Election.CandidateCollection.Candidate[objectId=?].PartyId[0]';
+  readonly partyAbbreviationQuery = 'ElectionReport.PartyCollection.Party[objectId=?].Abbreviation[0]';
+  readonly partyNameQuery = 'ElectionReport.PartyCollection.Party[objectId=?].Name[0].Text[0].#';
+  public jsonObj = '';
   public candidateId: string;
   public personName: string;
   public isIncumbent: boolean;
@@ -21,13 +18,15 @@ export class Candidate {
   public partyAbbreviation: string;
   public personId: string;
   public gender: string;
-  public WRITE_IN_CONST = "Touch here to write in a candidate's name";
-  private jsonQuery = require('json-query');
+  public writeInConst = `Touch here to write in a candidate's name`;
   private parent: BallotSelection;
   private writeInCandidate: boolean;
-  private WRITEIN = 'writein';
+  // todo: given that this same private variable is defined in multiple places, it should be hoisted to a
+  // shared scope and used everywhere it's needed. maybe an enum would be better here?
+  private writeIn = 'writein';
+
   constructor(aString: string, parent: BallotSelection) {
-    if (aString != this.WRITEIN) {
+    if (aString !== this.writeIn) {
       this.writeInCandidate = false;
       this.parent = parent;
       //jsonObj is the string of candidiateIds, <CandidateIds>can11288a can11288b</CandidateIds>
@@ -36,15 +35,13 @@ export class Candidate {
       this.getCandidateInfo(this.getParent().getParent().getParent().getJsonObj());
     } else {
       this.writeInCandidate = true;
-      this.personName = this.WRITE_IN_CONST;
+      this.personName = this.writeInConst;
     }
   }
 
-  getBallotSelection(index: number) {}
-
+  // todo: this doesn't appear to be used anywhere, can it be removed?
   getAllNames(): string[] {
-    var values = this.jsonQuery(this.PERSONQUERY, { data: this.jsonObj }).value;
-    return values;
+    return jsonQuery(this.personQuery, { data: this.jsonObj }).value;
   }
 
   getParent(): BallotSelection {
@@ -52,34 +49,36 @@ export class Candidate {
   }
 
   getCandidateInfo(aString: string) {
-    if (aString != this.WRITEIN) {
+    if (aString !== this.writeIn) {
       //find candidate info using the candidateId - grab the party name, candidate name, etc.
-
-      //jsonQuery(['people[country=?]', 'NZ'])
       this.getPersonId(this.candidateId);
-      //var candidate = "ElectionReport.PersonCollection.Person[objectId=" + this.personId + "]";
-      this.personName = this.jsonQuery([this.FULLNAMEQUERY, this.personId], { data: aString }).value;
-      this.gender = this.jsonQuery([this.GENDERQUERY, this.personId], { data: aString }).value;
-      this.isIncumbent = this.jsonQuery([this.ISINCUMBENTQUERY, this.candidateId], { data: aString }).value;
-      var partyId = this.jsonQuery([this.PARTYIDQUERY, this.candidateId], { data: aString }).value;
-      this.partyAbbreviation = this.jsonQuery([this.PARTYABBREVIATIONQUERY, partyId], { data: aString }).value;
-      this.partyName = this.jsonQuery([this.PARTYNAMEQUERY, partyId], { data: aString }).value;
+      this.personName = jsonQuery([this.fullNameQuery, this.personId], { data: aString }).value;
+      this.gender = jsonQuery([this.genderQuery, this.personId], { data: aString }).value;
+      this.isIncumbent = jsonQuery([this.isIncumbentQuery, this.candidateId], { data: aString }).value;
+      const partyId = jsonQuery([this.partyIdQuery, this.candidateId], { data: aString }).value;
+      this.partyAbbreviation = jsonQuery([this.partyAbbreviationQuery, partyId], { data: aString }).value;
+      this.partyName = jsonQuery([this.partyNameQuery, partyId], { data: aString }).value;
     } else {
-      this.personName = this.WRITEIN;
+      this.personName = this.writeIn;
     }
   }
+
   getPersonId(candidateId: string) {
     this.personId = 'per' + candidateId.substr(3);
   }
 
+  // todo: what's the difference between "candidate name" and "person name"? can we align on one and be consistent?
+  // also, this is a public variable, so it doesn't need a getter and setter
   setCandidateName(name) {
     this.personName = name;
     console.log('just set personName to ' + name);
   }
+
   getCandidateName(): string {
     return this.personName;
   }
 
+  // todo: this is a public variable, so it doesn't need a getter and setter
   getPartyAbbreviation(): string {
     return this.partyAbbreviation;
   }
