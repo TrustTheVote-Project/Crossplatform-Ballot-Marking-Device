@@ -1,7 +1,5 @@
 # MVP-App-TestHarness
 
-test
-
 - [Development workflow](#development-workflow)
 - [Standardization and Quality Checks](#standardization-and-quality-checks)
   - [Linting](#linting)
