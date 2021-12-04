@@ -1,40 +1,36 @@
-import { map } from 'rxjs/operators';
-import { BallotSelection } from './BallotSelection';
-import { Election } from './Election';
-import { Component } from '@angular/core';
 import { Checkbox } from '@ionic/core/dist/types/components/checkbox/checkbox';
-import { ModalController } from '@ionic/angular';
-import { HomePage } from '../app/home/home.page';
-import { TranslateService } from '@ngx-translate/core';
+import * as jsonQuery from 'json-query';
 
-declare let require: any;
+import { Election } from './Election';
+import { BallotSelection } from './BallotSelection';
+import { HomePage } from '../app/home/home.page';
 
 export class Contest {
-  readonly BALLOTSELECTIONQUERY = '.BallotSelection[*]';
-  readonly NAMEQUERY = '.Name[*]';
-  readonly VOTESALLOWEDQUERY = '.VotesAllowed[0]';
+  readonly ballotSelectionQuery = '.BallotSelection[*]';
+  readonly nameQuery = '.Name[*]';
+  readonly votesAllowedQuery = '.VotesAllowed[0]';
   public contestType: string;
   public constestId: string;
   public contestName: string;
   public ballotSelections: BallotSelection[] = new Array();
-  public popupTitle: string = '';
-  public statusMessage1: string = '';
-  public statusMessage2: string = '';
-  public statusMessage3: string = '';
+  public popupTitle = '';
+  public statusMessage1 = '';
+  public statusMessage2 = '';
+  public statusMessage3 = '';
   private parent: Election;
-  private jsonQuery = require('json-query');
   private votesAllowed = 0;
   private currentlySelected = 0;
   private contestIndex = 0;
-  WRITEIN = 'writein';
+  // todo: given that this same private variable is defined in multiple places, it should be hoisted to a
+  // shared scope and used everywhere it's needed. maybe an enum would be better here?
+  private writeIn = 'writein';
 
   constructor(public home: HomePage, aString: string, parent: Election, contestIndex: number) {
-    //constructor( aString: string, parent: Election, contestIndex: number) {
     this.parent = parent;
     this.contestIndex = contestIndex;
     if (null != aString) {
       try {
-        let values = this.jsonQuery(this.NAMEQUERY, { data: aString }).value;
+        const values = jsonQuery(this.nameQuery, { data: aString }).value;
         values.forEach((element) => {
           //e.g. "President and Vice President"
           this.contestName = element;
@@ -67,13 +63,12 @@ export class Contest {
 
   setBallotSelections(aString: string) {
     try {
-      let values = this.jsonQuery(this.BALLOTSELECTIONQUERY, { data: aString }).value;
+      const values = jsonQuery(this.ballotSelectionQuery, { data: aString }).value;
       values.forEach((element) => {
-        var aBallotSelection = new BallotSelection(element, this);
-        this.ballotSelections.push(aBallotSelection);
+        this.ballotSelections.push(new BallotSelection(element, this));
       });
       //add a writein
-      var aBallotSelection = new BallotSelection(this.WRITEIN, this);
+      const aBallotSelection = new BallotSelection(this.writeIn, this);
       this.ballotSelections.push(aBallotSelection);
     } catch (e) {
       console.log('Error:', e);
@@ -82,7 +77,7 @@ export class Contest {
 
   setVotesAllowed(aString: string) {
     try {
-      this.votesAllowed = this.jsonQuery(this.VOTESALLOWEDQUERY, { data: aString }).value;
+      this.votesAllowed = jsonQuery(this.votesAllowedQuery, { data: aString }).value;
     } catch (e) {
       console.log('Error:', e);
     }
@@ -93,7 +88,6 @@ export class Contest {
   }
 
   getPage(): string {
-    //console.log ('page number string: '+(this.contestIndex+1)+'/'+(this.parent.getContestNamesCount()+1));
     return this.contestIndex + 1 + '/' + this.parent.getContestNamesCount();
   }
 
@@ -127,8 +121,8 @@ export class Contest {
 
   ionChangeUpdateCheckbox(cbox) {
     console.log('Contest.ts: in updatecheckbox, cbox is:' + cbox.currentTarget.checked + ' currentlySelected is ' + this.currentlySelected);
-    let title: string;
     console.log(cbox.currentTarget);
+
     if (cbox.currentTarget.checked) {
       console.log('Contest.ts: cbox checked');
       this.currentlySelected++;
@@ -136,9 +130,10 @@ export class Contest {
       console.log('Contest.ts: cbox was UNchecked');
       this.currentlySelected--;
     }
+
     console.log('Contest.ts: currently selected: ' + this.currentlySelected + ', votesAllowed: ' + this.votesAllowed);
 
-    if (this.currentlySelected == this.votesAllowed) {
+    if (this.currentlySelected === this.votesAllowed) {
       this.statusMessage1 = '';
       this.statusMessage2 = '';
       this.statusMessage3 = '';
@@ -170,7 +165,7 @@ export class Contest {
         .subscribe((res: string) => {
           this.popupTitle = res;
         });
-      let popupContent = { title: this.popupTitle, body: this.statusMessage1 };
+      const popupContent = { title: this.popupTitle, body: this.statusMessage1 };
       //deselect what the user just did
       cbox.currentTarget.checked = false;
       //pop up modal dialog telling user to deselect something - they're already at max
@@ -179,14 +174,10 @@ export class Contest {
   }
 
   canSelectMoreCandidates(): boolean {
-    if (this.votesAllowed === this.currentlySelected) {
-      return false;
-    } else {
-      return true;
-    }
+    return this.votesAllowed !== this.currentlySelected;
   }
 
-  oneVoteClicked(event: Event) {
+  oneVoteClicked() {
     console.log('got here!');
   }
 }

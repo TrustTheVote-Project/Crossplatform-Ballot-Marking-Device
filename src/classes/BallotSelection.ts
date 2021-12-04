@@ -1,33 +1,35 @@
+import * as jsonQuery from 'json-query';
+
 import { Candidate } from './Candidate';
 import { Contest } from './Contest';
-declare var require: any;
 
 export class BallotSelection {
-  readonly CANDIDATEQUERY = '.CandidateIds[*]';
-  readonly SEQUENCEORDERQUERY = '.SequenceOrder';
-  public jsonObj: String = '';
+  readonly candidateQuery = '.CandidateIds[*]';
+  readonly sequenceOrderQuery = '.SequenceOrder';
+  public jsonObj = '';
   public sequenceOrder: number;
   public candidates: Candidate[] = new Array();
   private parent: Contest;
-  private jsonQuery = require('json-query');
-  private WRITEIN = 'writein';
+  // todo: given that this same private variable is defined in multiple places, it should be hoisted to a
+  // shared scope and used everywhere it's needed. maybe an enum would be better here?
+  private writeIn = 'writein';
 
   constructor(aString: string, parent: Contest) {
     this.parent = parent;
     this.jsonObj = aString;
-    this.sequenceOrder = this.jsonQuery(this.SEQUENCEORDERQUERY, { data: this.jsonObj }).value;
+    this.sequenceOrder = jsonQuery(this.sequenceOrderQuery, { data: this.jsonObj }).value;
     this.setCandidates(aString);
   }
 
-  //return the candidate(s) that are running in a contest - i.e. Hillary Clinton and Tim Kaine
+  /**
+   * @returns candidate(s) that are running in a contest - i.e. Hillary Clinton and Tim Kaine
+   */
   getCandidatesString(): string {
-    //let candidateString: string = new String();
     let partyString: string;
-    let myCandArray: string[] = new Array();
+    const myCandArray: string[] = new Array();
     this.candidates.forEach((element) => {
       //maybe array join("and") instead?
       myCandArray.push(element.getCandidateName());
-      //candidateString += element.getCandidateName() + " ";
       partyString = element.getPartyAbbreviation();
     });
     return myCandArray.join(' and ') + ' ' + partyString;
@@ -38,12 +40,12 @@ export class BallotSelection {
   }
 
   setCandidates(aString: string) {
-    if (aString != this.WRITEIN) {
-      var values = this.jsonQuery(this.CANDIDATEQUERY, { data: this.jsonObj }).value;
+    if (aString !== this.writeIn) {
+      const values = jsonQuery(this.candidateQuery, { data: this.jsonObj }).value;
       values.forEach((element) => {
-        var myCandidateValue: string[] = element.split(' ');
+        const myCandidateValue: string[] = element.split(' ');
         myCandidateValue.forEach((candidateElement) => {
-          var candidate = new Candidate(candidateElement, this);
+          const candidate = new Candidate(candidateElement, this);
           this.candidates.push(candidate);
         });
       });
@@ -53,7 +55,7 @@ export class BallotSelection {
   }
 
   addWriteInCandidate() {
-    var candidate = new Candidate(this.WRITEIN, this);
+    const candidate = new Candidate(this.writeIn, this);
     this.candidates.push(candidate);
   }
 
