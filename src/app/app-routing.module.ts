@@ -27,6 +27,10 @@ const routes: Routes = [
     path: 'settings',
     loadChildren: () => import('./settings/settings.module').then( m => m.SettingsPageModule)
   },
+  {
+    path: 'writein-popup',
+    loadChildren: () => import('./writein-popup/writein-popup.module').then( m => m.WriteinPopupPageModule)
+  },
 ];
 
 @NgModule({

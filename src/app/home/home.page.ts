@@ -13,7 +13,9 @@ import { SplashScreen } from '@capacitor/splash-screen';
 import { TranslateService } from '@ngx-translate/core';
 //import {listFiles} from 'list-files-in-dir';
 import { Filesystem, Directory } from '@capacitor/filesystem';
+import { Candidate } from '../../classes/Candidate';
 
+import { WriteinPopupPage } from '../writein-popup/writein-popup.page';
 
 
 imports: [
@@ -157,9 +159,11 @@ export class HomePage implements OnInit {
 
                slideNext() {
                   this.slides.slideNext();
-                  this.currentContest = (this.currentContest++ >= this.election.contests.length+1 ?
-                                         this.election.contests.length+1 : this.currentContest);
+                  this.currentContest++;;
+                  this.currentContest = (this.currentContest >= this.election.contests.length ?
+                                         this.election.contests.length : this.currentContest);
                }
+
                slidePrevious() {
                   this.slides.slidePrev();
                   this.currentContest--;
@@ -299,6 +303,41 @@ export class HomePage implements OnInit {
                      this.xmlFile = xmlFile;
                      this.openXML();
 
+                  }
+
+                  itemClicked(event: Event, candidate: Candidate) {
+
+                     console.log('got to itemClicked... checking whether ' + candidate.getCandidateName() + ' is a writein');
+                     if (candidate.isWriteIn()) {
+                        console.log('you clicked a write in');
+
+                        this.writeInPopup(candidate);
+                     }
+                  }
+
+                  async   writeInPopup(candidate: Candidate): Promise<void> {
+                     let name = candidate.getCandidateName() ==  candidate.WRITE_IN_CONST ? '' : candidate.getCandidateName(); 
+                     let writeinPopupContent = { title: 'Write-In Candidate', body: 'election review goes here', writeinName: candidate.getCandidateName() };
+
+                     const writeinPopupModal= await this.modal.create({
+                        component: WriteinPopupPage,
+                        componentProps: writeinPopupContent
+                     });
+
+                     await writeinPopupModal.present();
+
+                     writeinPopupModal.onDidDismiss().then((data) => {
+
+                        console.log('got this data '+data);
+                        if ((data.data).trim().length > 0) {
+                        candidate.setCandidateName(data.data);
+                        } else {
+                           candidate.setCandidateName(candidate.WRITE_IN_CONST);
+
+                           //deselect it
+                     }
+
+                     });
                   }
 
 }
