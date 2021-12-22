@@ -8,7 +8,7 @@ export class BallotSelection {
    readonly sequenceOrderQuery = '.SequenceOrder';
    public jsonObj = '';
    public sequenceOrder: number;
-   public selected: Boolean;
+   public selected: boolean;
    public candidates: Candidate[] = new Array();
    private parent: Contest;
    // todo: given that this same private variable is defined in multiple places, it should be hoisted to a
@@ -34,7 +34,7 @@ export class BallotSelection {
          myCandArray.push(element.getCandidateName());
          console.log('candidate ' + element.getCandidateName() + ' has id ' + element.candidateId + ' and personId ' + element.personId);
          partyString = element.getPartyAbbreviation();
-         if (partyString == undefined) {
+         if (partyString === undefined) {
             partyString = 'Unknown Party';
          }
       });
@@ -51,7 +51,7 @@ export class BallotSelection {
          candidateId = element.candidateId;
       });
       //      return myCandArray.join(' and ') + ' ' ;
-      if (candidateId == "undefined" || candidateId == undefined) {
+      if (candidateId === undefined) {
          candidateId = 'writeIn';
       }
       return (candidateId);

@@ -132,9 +132,6 @@ export class Contest {
    }
 
    ionChangeUpdateCheckbox(cbox) {
-      console.log('Contest.ts: in updatecheckbox, cbox is:' + cbox.currentTarget.checked + ' currentlySelected is ' + this.currentlySelected);
-      console.log(cbox.currentTarget);
-
       if (cbox.currentTarget.checked) {
          console.log('Contest.ts: cbox checked');
          this.currentlySelected++;
@@ -145,6 +142,7 @@ export class Contest {
 
       console.log('Contest.ts: currently selected: ' + this.currentlySelected + ', votesAllowed: ' + this.votesAllowed);
 
+      // eslint-ignore-next-line
       if (this.currentlySelected == this.votesAllowed) {
          this.statusMessage1 = '';
          this.statusMessage2 = '';

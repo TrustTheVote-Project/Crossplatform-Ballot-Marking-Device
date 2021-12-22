@@ -113,8 +113,8 @@ export class Election {
          //element is a Contest...
          //console.log('Contest name: ' + element.getContestName());
          //for each Contest, get the Contestants...
-         let emptyWriteIns = this.getEmptyWriteIns(element.getBallotSelections());
-         element.getBallotSelections().forEach((ballotselection, idx) => {
+         const emptyWriteIns = this.getEmptyWriteIns(element.getBallotSelections());
+         element.getBallotSelections().forEach((ballotselection, idx2) => {
             const candidateName = ballotselection.getCandidatesString().trim();
 
             if (candidateName !== undefined && candidateName !== 'undefined' && !candidateName.startsWith('Touch here')) {
@@ -122,7 +122,7 @@ export class Election {
                output += '{"name":"' + candidateName + '",';
                output += '"candidateID":"'+ballotselection.getCandidateId() +'",';
                output += '"selected":"'+ ballotselection.selected +'"}';
-               if (idx < element.getBallotSelections().length - 1 - emptyWriteIns) {
+               if (idx2 < element.getBallotSelections().length - 1 - emptyWriteIns) {
                   output += ',';
                }
             }
@@ -148,7 +148,7 @@ export class Election {
       return this.createCVR();
 
    }
-   getEmptyWriteIns(contestants) : number{
+   getEmptyWriteIns(contestants): number{
 
       let emptyWriteIns = 0;
       contestants.forEach((contestant) => {
