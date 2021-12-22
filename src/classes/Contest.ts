@@ -142,7 +142,7 @@ export class Contest {
 
       console.log('Contest.ts: currently selected: ' + this.currentlySelected + ', votesAllowed: ' + this.votesAllowed);
 
-      // eslint-ignore-next-line
+      // eslint-disable-next-line
       if (this.currentlySelected == this.votesAllowed) {
          this.statusMessage1 = '';
          this.statusMessage2 = '';

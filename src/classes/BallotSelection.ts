@@ -43,10 +43,10 @@ export class BallotSelection {
 
    getCandidateId(): string {
       let candidateId: string;
-      const myCandArray: string[] = new Array();
+      //const myCandArray: string[] = new Array();
       this.candidates.forEach((element) => {
          //maybe array join("and") instead?
-         myCandArray.push(element.candidateId);
+         //myCandArray.push(element.candidateId);
          console.log('candidate ' + element.getCandidateName() + ' has id ' + element.candidateId + ' and personId ' + element.personId);
          candidateId = element.candidateId;
       });
