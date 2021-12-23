@@ -8,6 +8,7 @@ export class BallotSelection {
   readonly sequenceOrderQuery = '.SequenceOrder';
   public jsonObj = '';
   public sequenceOrder: number;
+  public selected: boolean;
   public candidates: Candidate[] = new Array();
   private parent: Contest;
   // todo: given that this same private variable is defined in multiple places, it should be hoisted to a
@@ -19,6 +20,7 @@ export class BallotSelection {
     this.jsonObj = aString;
     this.sequenceOrder = jsonQuery(this.sequenceOrderQuery, { data: this.jsonObj }).value;
     this.setCandidates(aString);
+    this.selected = false;
   }
 
   /**
@@ -30,9 +32,29 @@ export class BallotSelection {
     this.candidates.forEach((element) => {
       //maybe array join("and") instead?
       myCandArray.push(element.getCandidateName());
+      console.log('candidate ' + element.getCandidateName() + ' has id ' + element.candidateId + ' and personId ' + element.personId);
       partyString = element.getPartyAbbreviation();
+      if (partyString === undefined) {
+        partyString = 'Unknown Party';
+      }
     });
     return myCandArray.join(' and ') + ' ' + partyString;
+  }
+
+  getCandidateId(): string {
+    let candidateId: string;
+    //const myCandArray: string[] = new Array();
+    this.candidates.forEach((element) => {
+      //maybe array join("and") instead?
+      //myCandArray.push(element.candidateId);
+      console.log('candidate ' + element.getCandidateName() + ' has id ' + element.candidateId + ' and personId ' + element.personId);
+      candidateId = element.candidateId;
+    });
+    //      return myCandArray.join(' and ') + ' ' ;
+    if (candidateId === undefined) {
+      candidateId = 'writeIn';
+    }
+    return candidateId;
   }
 
   getCandidates(): Candidate[] {
@@ -52,6 +74,7 @@ export class BallotSelection {
     } else {
       this.addWriteInCandidate();
     }
+    console.log('candidate list in ballotselection is: ' + this.candidates);
   }
 
   addWriteInCandidate() {

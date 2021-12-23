@@ -9,8 +9,9 @@ export class Contest {
   readonly ballotSelectionQuery = '.BallotSelection[*]';
   readonly nameQuery = '.Name[*]';
   readonly votesAllowedQuery = '.VotesAllowed[0]';
+  readonly contestIdQuery = '.objectId';
   public contestType: string;
-  public constestId: string;
+  public contestId: string;
   public contestName: string;
   public ballotSelections: BallotSelection[] = new Array();
   public popupTitle = '';
@@ -26,6 +27,7 @@ export class Contest {
   private writeIn = 'writein';
 
   constructor(public home: HomePage, aString: string, parent: Election, contestIndex: number) {
+    console.log('aString is:' + aString);
     this.parent = parent;
     this.contestIndex = contestIndex;
     if (null != aString) {
@@ -37,6 +39,7 @@ export class Contest {
         });
         this.setBallotSelections(aString);
         this.setVotesAllowed(aString);
+        this.setContestId(aString);
         this.home
           .getTranslator()
           .get('YOU_CAN_CHOOSE')
@@ -70,6 +73,14 @@ export class Contest {
       //add a writein
       const aBallotSelection = new BallotSelection(this.writeIn, this);
       this.ballotSelections.push(aBallotSelection);
+    } catch (e) {
+      console.log('Error:', e);
+    }
+  }
+
+  setContestId(aString: string) {
+    try {
+      this.contestId = jsonQuery(this.contestIdQuery, { data: aString }).value;
     } catch (e) {
       console.log('Error:', e);
     }
@@ -120,9 +131,6 @@ export class Contest {
   }
 
   ionChangeUpdateCheckbox(cbox) {
-    console.log('Contest.ts: in updatecheckbox, cbox is:' + cbox.currentTarget.checked + ' currentlySelected is ' + this.currentlySelected);
-    console.log(cbox.currentTarget);
-
     if (cbox.currentTarget.checked) {
       console.log('Contest.ts: cbox checked');
       this.currentlySelected++;
@@ -133,11 +141,13 @@ export class Contest {
 
     console.log('Contest.ts: currently selected: ' + this.currentlySelected + ', votesAllowed: ' + this.votesAllowed);
 
-    if (this.currentlySelected === this.votesAllowed) {
+    // eslint-disable-next-line
+    if (this.currentlySelected == this.votesAllowed) {
       this.statusMessage1 = '';
       this.statusMessage2 = '';
       this.statusMessage3 = '';
     } else if (this.votesAllowed > this.currentlySelected) {
+      console.log('Contest.ts - got here!!!!');
       this.home
         .getTranslator()
         .get('YOU_CAN_CHOOSE')

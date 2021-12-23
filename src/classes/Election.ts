@@ -45,7 +45,7 @@ export class Election {
             myParser.parseString(xmlData, (err, jsonData) => {
               this.jsonObj = jsonData;
               this.setContests();
-              this.printContestNames();
+              //                  this.printContestNames();
               this.getContestNames();
               this.setReady(true);
             });
@@ -103,21 +103,58 @@ export class Election {
     return this.contestNames;
   }
 
-  printContestNames() {
-    this.contests.forEach((element) => {
+  createCVR() {
+    let output = '';
+    output += '{ "election" : "big important election title here", "contests": [';
+    this.contests.forEach((element, idx) => {
+      output += '{"contest":"' + element.getContestName() + '",';
+      output += '"contestId":"' + element.contestId + '",';
+      output += '"contestants": [';
       //element is a Contest...
       //console.log('Contest name: ' + element.getContestName());
       //for each Contest, get the Contestants...
-      element.getBallotSelections().forEach((ballotselection) => {
+      const emptyWriteIns = this.getEmptyWriteIns(element.getBallotSelections());
+      element.getBallotSelections().forEach((ballotselection, idx2) => {
         const candidateName = ballotselection.getCandidatesString().trim();
-        if (candidateName !== undefined && candidateName !== 'undefined') {
+
+        if (candidateName !== undefined && candidateName !== 'undefined' && !candidateName.startsWith('Touch here')) {
           this.candidateNames.push(candidateName);
+          output += '{"name":"' + candidateName + '",';
+          output += '"candidateID":"' + ballotselection.getCandidateId() + '",';
+          output += '"selected":"' + ballotselection.selected + '"}';
+          if (idx2 < element.getBallotSelections().length - 1 - emptyWriteIns) {
+            output += ',';
+          }
         }
       });
+      output += ']}';
+      if (idx < this.contests.length - 1) {
+        output += ',';
+      } else {
+        output += ']';
+      }
     });
+    output += '}';
+    console.log(output);
   }
 
   getContestByIndex(index: number): Contest {
     return this.contests[index];
+  }
+
+  castBallot() {
+    console.log(this.createCVR());
+    return this.createCVR();
+  }
+  getEmptyWriteIns(contestants): number {
+    let emptyWriteIns = 0;
+    contestants.forEach((contestant) => {
+      const candidateName = contestant.getCandidatesString().trim();
+
+      if (candidateName.startsWith('Touch here')) {
+        emptyWriteIns++;
+      }
+    });
+    return emptyWriteIns;
   }
 }

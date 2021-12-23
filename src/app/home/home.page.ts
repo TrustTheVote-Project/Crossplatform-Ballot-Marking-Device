@@ -142,29 +142,12 @@ export class HomePage implements OnInit {
     settingsModal.onDidDismiss();
   }
 
-  initialiseTranslation(): void {
-    this.translate.get('TITLE').subscribe((res: string) => {
-      this.title = res;
-    });
-    this.translate.get('description').subscribe((res: string) => {
-      this.description = res;
-    });
-    this.translate.get('TITLE_2', { value: 'John' }).subscribe((res: string) => {
-      this.titleTwo = res;
-    });
-    // eslint-disable-next-line @typescript-eslint/naming-convention
-    this.translate.get('data.name', { name_value: 'Marissa Mayer' }).subscribe((res: string) => {
-      this.name = res;
-    });
-  }
-
   public changeLanguage(): void {
     this.translateLanguage();
   }
 
   translateLanguage(): void {
     this.translate.use(this.language);
-    this.initialiseTranslation();
   }
 
   initTranslate(language) {

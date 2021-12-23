@@ -69,6 +69,12 @@ export class VoteReviewPage implements OnInit {
     await this.modal.dismiss(close);
   }
 
+  async closeModalCastBallot() {
+    const close = 'Modal Removed';
+    await this.modal.dismiss(close);
+    this.election.castBallot();
+  }
+
   // todo: I don't think this is actually used anywhere, can it be removed?
   async openIonModal(data: any) {
     console.log('opening the vote review modal');
