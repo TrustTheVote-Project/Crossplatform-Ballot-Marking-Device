@@ -1,6 +1,7 @@
 # MVP-App-TestHarness
 
 - [Development workflow](#development-workflow)
+  - [What to do when your PR shows a failing status check](#what-to-do-when-your-pr-shows-a-failing-status-check)
 - [Standardization and Quality Checks](#standardization-and-quality-checks)
   - [Linting](#linting)
   - [Formatting](#formatting)
@@ -76,18 +77,18 @@ Coverage for lines (X%) does not meet global threshold (Y%)
 Coverage for functions (X%) does not meet global threshold (Y%)
 ```
 
-Why would these errors happen even if all tests are passing? Well, these thresholds will cause the overall test operation to fail if the converge drops below it. Thresholds confirm a certain level of quality and ensure the code is properly covered.
+Why would these errors happen even if all tests are passing? Well, these thresholds will cause the overall test operation to fail if the coverage drops below it. Thresholds confirm a certain level of quality and ensure the code is properly covered.
 
 If this happens to you, you have two options:
 
-1. You'll need to implement tests to cover the new code that you added
-2. If this is not possible, then you'll need to adjust the thresholds. To do this, adjust the numerical thresholds in the [`karma.conf.js`](./karma.conf.js) config file, which correspond to the percentages you see in your error message. Once you adjust the thresholds so that they're less than or equal to the coverage in your branch, then the test operation should pass.
+1. Implement tests to cover the new code that you added. This is the preferred option.
+2. If this is not possible, then you can adjust the thresholds. To do this, adjust the numerical thresholds in the [`karma.conf.js`](./karma.conf.js) config file, which correspond to the percentages you see in your error message. Once you adjust the thresholds so that they're less than or equal to the coverage in your branch, then the test operation should pass.
 
 Either way, you should then commit and push the fix, and confirm that the next run completes successfully.
 
 #### E2E testing issues
 
-Given that the UI tests are based on HTML selectors and expected text, it's possible that changing either of those may cause the e2e smoke tests to fail.
+Given that the UI tests are based on HTML selectors and expected text, it's possible that changing either of those may cause the E2E smoke tests to fail.
 
 You'll need reproduce the error locally using the instructions found here under the [E2E testing](#e2e-testing) section. Then implement, commit, and push a fix, and confirm that the next run completes successfully.
 
