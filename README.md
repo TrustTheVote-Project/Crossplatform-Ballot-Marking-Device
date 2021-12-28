@@ -5,7 +5,7 @@
   - [Linting](#linting)
   - [Formatting](#formatting)
   - [Unit testing](#unit-testing)
-  - [Integration testing](#integration-testing)
+  - [E2E testing](#e2e-testing)
 
 todo: write a basic description and some instructions for native building commands here
 
@@ -13,11 +13,83 @@ todo: write a basic description and some instructions for native building comman
 
 To ensure a standardized development workflow, all new changes should be added as Pull Requests. In order to be merged to the main branch, PRs must be:
 
-1. Passing all status checks (there are implemented using GitHub Actions)
+1. Passing all quality checks (there are implemented as a status check using GitHub Actions)
 2. Up to date with the main branch
 3. Approved by at least one other person
 
 When merging, the "squash and merge" strategy is used, which ensures all commits in the feature branch have been squashed to a single commit. This keeps the main branch's commit logs clean and readable.
+
+### What to do when your PR shows a failing status check
+
+In the event that your PR fails one or more quality gates, GitHub will show "Merging is blocked" on your PR, and you will see a red X next to the failing status check.
+
+In order to resolve the failing status check, you'll need to do the following:
+
+1. Determine the cause of the issue
+2. Reproduce it locally
+3. Implement, commit, and push a fix
+
+Once the fix is pushed, GitHub Actions will run again and will re-check your latest code. If everything is successful, it will pass and you're clear to merge as long as the other requirements are met. If it fails again, you'll need to go through the same actions above to see what other errors were found.
+
+So, how do you find out what the problem is? First, click on the "Details" button next to the failing status check. This will take you to the GitHub Actions page, and you'll see what quality gate failed.
+
+Below are some common examples:
+
+#### Formatting issues
+
+If formatting fails, you might see something like the following:
+
+```bash
+[warn] Code style issues found in the above file(s). Forgot to run Prettier?
+Error: Process completed with exit code 1.
+```
+
+You'll need reproduce the error locally using the instructions found here under the [Formatting](#formatting) section. Then implement, commit, and push a fix, and confirm that the next run completes successfully.
+
+#### Linting issues
+
+If linting fails, you might see something like the following:
+
+```bash
+Lint errors found in the listed files.
+
+...
+
+✖ X problems (X errors, 0 warnings)
+  Y errors and 0 warnings potentially fixable with the `--fix` option.
+```
+
+You'll need reproduce the error locally using the instructions found here under the [Linting](#linting) section. Then implement, commit, and push a fix, and confirm that the next run completes successfully.
+
+#### Unit testing issues
+
+There are several possible ways that testing could fail.
+
+Tests may not complete successfully. You'll know this is the case if not all tests succeed, which should be evident in the logs. You'll need to reproduce locally using the instructions found here under the [Unit testing](#unit-testing) section. Then implement, commit, and push a fix, and confirm that the next run completes successfully.
+
+Alternatively, test may all complete successfully, but may be below the coverage threshold. This may happen if you have added code, but did not add tests to cover that code. You'll know this is the case if you see one or more of the following in the logs:
+
+```bash
+Coverage for statements (X%) does not meet global threshold (Y%)
+Coverage for branches (X%) does not meet global threshold (Y%)
+Coverage for lines (X%) does not meet global threshold (Y%)
+Coverage for functions (X%) does not meet global threshold (Y%)
+```
+
+Why would these errors happen even if all tests are passing? Well, these thresholds will cause the overall test operation to fail if the converge drops below it. Thresholds confirm a certain level of quality and ensure the code is properly covered.
+
+If this happens to you, you have two options:
+
+1. You'll need to implement tests to cover the new code that you added
+2. If this is not possible, then you'll need to adjust the thresholds. To do this, adjust the numerical thresholds in the [`karma.conf.js`](./karma.conf.js) config file, which correspond to the percentages you see in your error message. Once you adjust the thresholds so that they're less than or equal to the coverage in your branch, then the test operation should pass.
+
+Either way, you should then commit and push the fix, and confirm that the next run completes successfully.
+
+#### E2E testing issues
+
+Given that the UI tests are based on HTML selectors and expected text, it's possible that changing either of those may cause the e2e smoke tests to fail.
+
+You'll need reproduce the error locally using the instructions found here under the [E2E testing](#e2e-testing) section. Then implement, commit, and push a fix, and confirm that the next run completes successfully.
 
 ## Standardization and Quality Checks
 
@@ -31,6 +103,12 @@ To run ESlint manually, execute the following:
 
 ```bash
 npm run lint
+```
+
+To attempt to fix some of these issues automatically (not all issues can be fixed this way; most will require manual interaction), execute the following:
+
+```bash
+npm run lint -- --fix
 ```
 
 ### Formatting
@@ -62,11 +140,11 @@ Unit tests will fail if any tests fail, or if code coverage drops below the enfo
 
 To view detailed coverage reports, run the unit tests and then load `./coverage/index.html` in a web browser. This will allow you to view specific coverage information for any file in the repo.
 
-### Integration testing
+### E2E testing
 
-This repo uses [Cypress](https://www.cypress.io/) for integration testing.
+This repo uses [Cypress](https://www.cypress.io/) for E2E testing.
 
-To run integration tests manually, execute the following:
+To run e2e tests manually, execute the following:
 
 ```bash
 npm run e2e
