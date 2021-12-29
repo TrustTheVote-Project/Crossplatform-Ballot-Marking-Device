@@ -26,7 +26,7 @@ export class HomePage implements OnInit {
   };
 
   public xml = '';
-  public xmlFile = '/assets/data/64K_1Contest.xml';
+  public xmlFile = '/assets/data/results-06037-2017-03-07.xml';
   public electionContestNames: string[];
   public currentContest: number;
   public title: string;
@@ -52,12 +52,19 @@ export class HomePage implements OnInit {
   }
 
   initializeApp() {
+    // todo: the next two methods are "getters" but... don't seem to return anything?
+    // it's difficult to understand what's going on here
     this.getDeviceLanguage();
     this.getEDFiles();
     console.log('EDFiles is :' + this.edFiles);
     this.openXML();
   }
 
+  // todo: the implementation of this function doesn't match its name
+  // furthermore, it's setting a scoped variable, which means it has a side effect.
+  // a better implmentation would be for it to return a new election, while the calling function
+  // can be responsible for setting it on the scope... but at that point,
+  // there's really no reason for a separate function for this anyway, right?
   openXML() {
     //alternate data files... need to be able to select which to use
     this.election = new Election(this.http, this.xmlFile, this);
@@ -132,6 +139,7 @@ export class HomePage implements OnInit {
     this.currentContest = this.currentContest <= 0 ? 1 : this.currentContest;
   }
 
+  // todo: can this method name be updated to use an action verb? i'm not sure what "settings" means here
   async settings(): Promise<void> {
     const settingsPopupContent = { edFiles: this.edFiles, home: this };
     const settingsModal = await this.modal.create({
@@ -142,6 +150,7 @@ export class HomePage implements OnInit {
     settingsModal.onDidDismiss();
   }
 
+  // todo: can this unnecessary wrapper function be removed?
   public changeLanguage(): void {
     this.translateLanguage();
   }
@@ -168,6 +177,7 @@ export class HomePage implements OnInit {
       this.initTranslate(navigator.language);
     }
   }
+
   getTranslator() {
     return this.translate;
   }
@@ -191,6 +201,8 @@ export class HomePage implements OnInit {
     try {
       const xmlFiles = '/assets/data/index.txt';
 
+      // todo: this operation is repeated in multiple classes. instead of implementing it several times,
+      // a better implementation would be to have a service which handles this operation for you
       this.http
         .get(xmlFiles, {
           headers: new HttpHeaders()
@@ -208,14 +220,17 @@ export class HomePage implements OnInit {
           this.edFiles = jsonData.split('\n');
         });
     } catch (e) {
+      // todo: under what circumstances would this fail? why are we ignoring any failures that would happen here?
       console.log('Error:', e);
     }
   }
 
+  // todo: this variable is public, why does it need a getter?
   getEDF() {
     return this.xmlFile;
   }
 
+  // todo: this isn't actually setting an EDF is it? it's opening some XML?
   setEDF(xmlFile: string) {
     this.xmlFile = xmlFile;
     this.openXML();
@@ -245,7 +260,10 @@ export class HomePage implements OnInit {
     await writeinPopupModal.present();
 
     writeinPopupModal.onDidDismiss().then((data) => {
+      // todo: what is data? can we use a better variable name here?
       console.log('got this data ' + data);
+      // todo: what is.... data.data? can we use a better variable name here?
+      // si'm not sure what any of this is
       if (data.data.trim().length > 0) {
         candidate.setCandidateName(data.data);
       } else {
