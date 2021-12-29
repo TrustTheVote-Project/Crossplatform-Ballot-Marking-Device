@@ -36,7 +36,6 @@ export class Contest {
   private writeIn = 'writein';
 
   constructor(public home: HomePage, aString: string, parent: Election, contestIndex: number) {
-    console.log('aString is:' + aString);
     this.parent = parent;
     // todo: you can to private readonly contestIndex in the function signature, which will automatically assign it to the scope
     this.contestIndex = contestIndex;
@@ -76,11 +75,6 @@ export class Contest {
     }
   }
 
-  // todo: this variable is public, why does it need a getter?
-  getContestName(): string {
-    return this.contestName;
-  }
-
   // todo: this method is problematic because
   // A) is has side effects, and
   // B) if you call it multiple times, you'll end up with twice the contests in your contest array than you expected
@@ -95,7 +89,6 @@ export class Contest {
       values.forEach((element) => {
         this.ballotSelections.push(new BallotSelection(element, this));
       });
-      //add a writein
       const aBallotSelection = new BallotSelection(this.writeIn, this);
       this.ballotSelections.push(aBallotSelection);
     } catch (e) {
@@ -127,7 +120,7 @@ export class Contest {
   }
 
   getPage(): string {
-    return `${this.contestIndex + 1}/${this.parent.getContestNamesCount()}`;
+    return `${this.contestIndex + 1}/${this.parent.getContestNames.length}`;
   }
 
   getCurrentlySelected(): number {
@@ -138,11 +131,6 @@ export class Contest {
     return this.votesAllowed - this.currentlySelected;
   }
 
-  // todo: this variable is public, why does it need a getter?
-  getBallotSelections(): BallotSelection[] {
-    return this.ballotSelections;
-  }
-
   getParent(): Election {
     return this.parent;
   }
@@ -150,27 +138,15 @@ export class Contest {
   ionChangeIgnoreCheckbox(cbox: Checkbox) {
     //always want true in the vote review page - don't allow deselection there!
     // todo: is the disallow logic mentioned above enforced anywhere?
-    console.log('Contest.ts: inside ionChangeIgnoreCheckbox, rechecking the checkbox');
     cbox.checked = true;
-  }
-
-  // todo: this just does a console.log - can it be removed?
-  ionChangeUpdateCheckboxAlt(cbox) {
-    console.log(
-      'Contest.ts: in updatecheckbox-ALT, cbox is:' + cbox.currentTarget.checked + ' currentlySelected is ' + this.currentlySelected
-    );
   }
 
   ionChangeUpdateCheckbox(cbox) {
     if (cbox.currentTarget.checked) {
-      console.log('Contest.ts: cbox checked');
       this.currentlySelected++;
     } else {
-      console.log('Contest.ts: cbox was UNchecked');
       this.currentlySelected--;
     }
-
-    console.log('Contest.ts: currently selected: ' + this.currentlySelected + ', votesAllowed: ' + this.votesAllowed);
 
     // todo: Bret mentioned this isn't working as he expects when using triple equals - should figure out why and fix it
     // eslint-disable-next-line
@@ -179,7 +155,6 @@ export class Contest {
       this.statusMessage2 = '';
       this.statusMessage3 = '';
     } else if (this.votesAllowed > this.currentlySelected) {
-      console.log('Contest.ts - got here!!!!');
       this.home
         .getTranslator()
         .get('YOU_CAN_CHOOSE')
@@ -208,19 +183,12 @@ export class Contest {
           this.popupTitle = res;
         });
       const popupContent = { title: this.popupTitle, body: this.statusMessage1 };
-      //deselect what the user just did
       cbox.currentTarget.checked = false;
-      //pop up modal dialog telling user to deselect something - they're already at max
       this.home.openIonModal(popupContent);
     }
   }
 
   canSelectMoreCandidates(): boolean {
     return this.votesAllowed !== this.currentlySelected;
-  }
-
-  // todo: this just does a console.log - can it be removed?
-  oneVoteClicked() {
-    console.log('got here!');
   }
 }

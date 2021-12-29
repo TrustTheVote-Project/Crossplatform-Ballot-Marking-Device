@@ -25,7 +25,6 @@ export class Election {
     if (null != aString) {
       // todo: what is aString? can we use a better variable name here?
       this.edfFile = aString;
-      console.log('attempting to open ' + this.edfFile);
       try {
         let xmlData;
         const myParser = new Parser({ attrkey: '@', charkey: '#', mergeAttrs: true });
@@ -47,9 +46,8 @@ export class Election {
             myParser.parseString(xmlData, (err, jsonData) => {
               this.jsonObj = jsonData;
               this.setContests();
-              //                  this.printContestNames();
               this.getContestNames();
-              this.setReady(true);
+              this.ready = true;
             });
           });
       } catch (e) {
@@ -59,35 +57,16 @@ export class Election {
     }
   }
 
-  // todo: we don't really need a method specifically to access the length property on contestNames
-  getContestNamesCount(): number {
-    return this.contestNames.length;
-  }
-
-  // todo: this variable is public, why does it need a getter?
-  isReady(): boolean {
-    return this.ready;
-  }
-
-  // todo: this variable is public, why does it need a setter?
-  setReady(value: boolean) {
-    this.ready = value;
-  }
-
-  // todo: use a better type. alternatively, if this isn't used anywhere, maybe it should be removed?
-  getParent(): any {
+  getParent(): HomePage {
     return this.parent;
-  }
-
-  // todo: this variable is public, why does it need a getter?
-  getContests(): Contest[] {
-    return this.contests;
   }
 
   getAndIncrementContestIndex(): number {
     return this.contestIndex++;
   }
 
+  // todo: the json object is... a string?
+  // can either the variable name or the type (or both?) be updated so that this makes some amount of sense?
   getJsonObj(): string {
     return this.jsonObj;
   }
@@ -101,7 +80,6 @@ export class Election {
   setContests() {
     // todo: what is values? can we use a better variable name here?
     const values = jsonQuery(this.contestQuery, { data: this.jsonObj }).value;
-    console.log('🚀 ~ file: Election.ts ~ line 104 ~ Election ~ setContests ~ values', values);
     // todo: what is element? can we use a better variable name here?
     values.forEach((element) => {
       // todo: what is aContest? do we even need to create a variable for this?
@@ -113,15 +91,12 @@ export class Election {
   // todo: this function is named "get" (which suggests a read operation), but is actively _modifying_ a scoped variable.
   // this is misleading and confusing, and either the name or implementation should be changed accordingly
   getContestNames(): string[] {
-    console.log('entering getContestName()');
     // todo: can this be named contest so that we know what it is?
     this.contests.forEach((element) => {
       // todo: contestNames is just an array of each contest's name property. we don't really need a separate scoped variable for that,
       // because we can just use map to access that array anytime we need it
-      this.contestNames.push(element.getContestName());
-      console.log(`getContestName - name is ${element.getContestName()}`);
+      this.contestNames.push(element.contestName);
     });
-    console.log('exiting getContestName() - contestNames has ' + this.contestNames.length + ' elements');
     // todo: why are we returning this scoped variable? it's not actually being assigned in the calling method,
     // and there's really no reason to do so anyway because it already exists on the scope
     return this.contestNames;
@@ -138,14 +113,11 @@ export class Election {
     let output = '';
     output += '{ "election" : "big important election title here", "contests": [';
     this.contests.forEach((element, idx) => {
-      output += '{"contest":"' + element.getContestName() + '",';
+      output += '{"contest":"' + element.contestName + '",';
       output += '"contestId":"' + element.contestId + '",';
       output += '"contestants": [';
-      //element is a Contest...
-      //console.log('Contest name: ' + element.getContestName());
-      //for each Contest, get the Contestants...
-      const emptyWriteIns = this.getEmptyWriteIns(element.getBallotSelections());
-      element.getBallotSelections().forEach((ballotselection, idx2) => {
+      const emptyWriteIns = this.getEmptyWriteIns(element.ballotSelections);
+      element.ballotSelections.forEach((ballotselection, idx2) => {
         const candidateName = ballotselection.getCandidatesString().trim();
 
         if (candidateName !== undefined && candidateName !== 'undefined' && !candidateName.startsWith('Touch here')) {
@@ -153,7 +125,7 @@ export class Election {
           output += '{"name":"' + candidateName + '",';
           output += '"candidateID":"' + ballotselection.getCandidateId() + '",';
           output += '"selected":"' + ballotselection.selected + '"}';
-          if (idx2 < element.getBallotSelections().length - 1 - emptyWriteIns) {
+          if (idx2 < element.ballotSelections.length - 1 - emptyWriteIns) {
             output += ',';
           }
         }
@@ -171,12 +143,6 @@ export class Election {
 
   getContestByIndex(index: number): Contest {
     return this.contests[index];
-  }
-
-  // can this unnecessary wrapper function be removed?
-  castBallot() {
-    console.log(this.createCVR());
-    return this.createCVR();
   }
 
   getEmptyWriteIns(contestants): number {

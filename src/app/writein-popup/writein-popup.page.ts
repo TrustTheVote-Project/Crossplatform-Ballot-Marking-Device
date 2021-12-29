@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { ModalController } from '@ionic/angular';
 
 @Component({
@@ -6,13 +6,11 @@ import { ModalController } from '@ionic/angular';
   templateUrl: './writein-popup.page.html',
   styleUrls: ['./writein-popup.page.scss'],
 })
-export class WriteinPopupPage implements OnInit {
+export class WriteinPopupPage {
   public modal: ModalController;
   private writeinName: string;
 
   constructor() {}
-
-  ngOnInit() {}
 
   async closeModal() {
     await this.modal.dismiss(this.writeinName);

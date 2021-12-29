@@ -49,11 +49,6 @@ export class Candidate {
     }
   }
 
-  // todo: this doesn't appear to be used anywhere, can it be removed?
-  getAllNames(): string[] {
-    return jsonQuery(this.personQuery, { data: this.jsonObj }).value;
-  }
-
   getParent(): BallotSelection {
     return this.parent;
   }
@@ -76,23 +71,6 @@ export class Candidate {
 
   getPersonId(candidateId: string) {
     this.personId = `per${candidateId.substr(3)}`;
-  }
-
-  // todo: what's the difference between "candidate name" and "person name"? can we align on one and be consistent?
-  // also, this is a public variable, so it doesn't need a getter and setter
-  setCandidateName(name) {
-    this.personName = name;
-    console.log('just set personName to ' + name);
-  }
-
-  // todo: this is a public variable, so it doesn't need a getter and setter
-  getCandidateName(): string {
-    return this.personName;
-  }
-
-  // todo: this is a public variable, so it doesn't need a getter and setter
-  getPartyAbbreviation(): string {
-    return this.partyAbbreviation;
   }
 
   isWriteIn(): boolean {

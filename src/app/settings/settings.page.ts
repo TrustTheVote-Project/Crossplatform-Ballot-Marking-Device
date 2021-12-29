@@ -16,26 +16,21 @@ export class SettingsPage implements OnInit {
   constructor(public readonly modalController: ModalController) {}
 
   ngOnInit() {
-    this.selectEDF = this.home.getEDF();
+    this.selectEDF = this.home.xmlFile;
   }
 
   async closeModal() {
-    const close = 'Modal Removed';
-    await this.modalController.dismiss(close);
+    await this.modalController.dismiss();
 
     const filePath = `/assets/data/${this.selectEDF}`;
-    if (filePath !== this.home.getEDF()) {
-      console.log(this.home.getEDF() + ' does not equal ' + filePath);
+    if (filePath !== this.home.xmlFile) {
       this.home.setEDF(filePath);
     }
   }
 
-  // todo: this doesn't actually do anything - can it be removed?
+  // todo: what is "myChange"? can this be updated to use a more descriptive, action-based method name?
   myChange() {
-    console.log('got to myChange');
-    console.log('selected EDF is ' + this.selectEDF);
-    if (this.selectEDF !== this.home.getEDF()) {
-      //         console.log(this.home.getEDF() + ' does not equal ' + this.selectEDF);
+    if (this.selectEDF !== this.home.xmlFile) {
     }
   }
 }

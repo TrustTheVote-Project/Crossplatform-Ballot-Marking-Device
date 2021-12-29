@@ -11,7 +11,7 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content [scrollEvents]="true" (ionScrollStart)="logScrollStart()" (ionScroll)="logScrolling($event)" (ionScrollEnd)="logScrollEnd()">
+<ion-content>
   <div *ngIf="!election.ready">
     <ion-spinner name="bubbles"></ion-spinner>
     <ion-label>Loading...</ion-label>

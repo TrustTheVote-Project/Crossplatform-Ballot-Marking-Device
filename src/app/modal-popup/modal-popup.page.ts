@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { ModalController } from '@ionic/angular';
 import { Contest } from '../../classes/Contest';
 
@@ -7,21 +7,12 @@ import { Contest } from '../../classes/Contest';
   templateUrl: './modal-popup.page.html',
   styleUrls: ['./modal-popup.page.scss'],
 })
-export class ModalPopupPage implements OnInit {
+export class ModalPopupPage {
   @Input() contest: Contest;
 
-  public modal: ModalController;
-
-  constructor(public modalController: ModalController) {
-    this.modal = modalController;
-  }
-
-  ngOnInit() {
-    console.log('inside modal-popup.page.ts onInit');
-  }
+  constructor(public modalController: ModalController) {}
 
   async closeModal() {
-    const close = 'one contest Modal Removed';
-    await this.modal.dismiss(close);
+    await this.modalController.dismiss();
   }
 }

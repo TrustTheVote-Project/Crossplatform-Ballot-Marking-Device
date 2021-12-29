@@ -35,14 +35,11 @@ export class BallotSelection {
     let partyString: string;
     const myCandArray: string[] = new Array();
     this.candidates.forEach((element) => {
-      //maybe array join("and") instead?
-      myCandArray.push(element.getCandidateName());
-      console.log('candidate ' + element.getCandidateName() + ' has id ' + element.candidateId + ' and personId ' + element.personId);
+      myCandArray.push(element.personName);
       // todo: the implementation here looks like it just assigns... the last element's party abbreviation to the partyString
       // why are the others ignored?
-      partyString = element.getPartyAbbreviation();
+      partyString = element.partyAbbreviation;
       if (partyString === undefined) {
-        // todo: you you be able to one-line this with the following: partyString = element.getPartyAbbreviation() || 'Unknown Party'
         partyString = 'Unknown Party';
       }
     });
@@ -51,16 +48,11 @@ export class BallotSelection {
 
   getCandidateId(): string {
     let candidateId: string;
-    //const myCandArray: string[] = new Array();
     // todo: what does this forEach do? it looks like it just assigns... the last element
     // (again, not sure what "element" is here) as the candidateId. why are the others ignored?
     this.candidates.forEach((element) => {
-      //maybe array join("and") instead?
-      //myCandArray.push(element.candidateId);
-      console.log('candidate ' + element.getCandidateName() + ' has id ' + element.candidateId + ' and personId ' + element.personId);
       candidateId = element.candidateId;
     });
-    //      return myCandArray.join(' and ') + ' ' ;
     if (candidateId === undefined) {
       candidateId = 'writeIn';
     }
@@ -91,7 +83,6 @@ export class BallotSelection {
     } else {
       this.addWriteInCandidate();
     }
-    console.log('candidate list in ballotselection is: ' + this.candidates);
   }
 
   addWriteInCandidate() {

@@ -35,7 +35,6 @@ export class HomePage implements OnInit {
   public name: string;
   public language: string;
   private election: Election;
-  private modal: ModalController;
   private edFiles: string[];
 
   constructor(public modalController: ModalController, private readonly http: HttpClient, private translate: TranslateService) {
@@ -43,7 +42,6 @@ export class HomePage implements OnInit {
       showDuration: 2000,
       autoHide: true,
     });
-    this.modal = modalController;
   }
 
   ngOnInit() {
@@ -56,7 +54,6 @@ export class HomePage implements OnInit {
     // it's difficult to understand what's going on here
     this.getDeviceLanguage();
     this.getEDFiles();
-    console.log('EDFiles is :' + this.edFiles);
     this.openXML();
   }
 
@@ -95,7 +92,7 @@ export class HomePage implements OnInit {
       body: 'election review goes here',
     };
 
-    const voteReviewModal = await this.modal.create({
+    const voteReviewModal = await this.modalController.create({
       component: VoteReviewPage,
       componentProps: voteReviewPopupContent,
     });
@@ -104,7 +101,6 @@ export class HomePage implements OnInit {
   }
 
   public async voteReviewSpecificContest(contestNum: number): Promise<void> {
-    console.log('home.page::voteReviewSpecificContest - should center on contest ' + contestNum);
     const voteReviewPopupContent = {
       scrollToContest: contestNum,
       home: this,
@@ -113,18 +109,13 @@ export class HomePage implements OnInit {
       body: 'election review goes here',
     };
 
-    const voteReviewModal = await this.modal.create({
+    const voteReviewModal = await this.modalController.create({
       component: VoteReviewPage,
       componentProps: voteReviewPopupContent,
     });
     await voteReviewModal.present();
 
     voteReviewModal.onDidDismiss();
-  }
-
-  // todo: this doesn't actually do anything - can it be removed?
-  oneVoteClicked(contestNum: number) {
-    console.log('contest ' + contestNum + ' selected in oneVoteClicked');
   }
 
   slideNext() {
@@ -142,7 +133,7 @@ export class HomePage implements OnInit {
   // todo: can this method name be updated to use an action verb? i'm not sure what "settings" means here
   async settings(): Promise<void> {
     const settingsPopupContent = { edFiles: this.edFiles, home: this };
-    const settingsModal = await this.modal.create({
+    const settingsModal = await this.modalController.create({
       component: SettingsPage,
       componentProps: settingsPopupContent,
     });
@@ -150,26 +141,14 @@ export class HomePage implements OnInit {
     settingsModal.onDidDismiss();
   }
 
-  // todo: can this unnecessary wrapper function be removed?
-  public changeLanguage(): void {
-    this.translateLanguage();
-  }
-
-  translateLanguage(): void {
-    this.translate.use(this.language);
-  }
-
   initTranslate(language) {
-    console.log('language is ' + language);
-    // Set the default language for translation strings, and the current language.
     this.translate.setDefaultLang('en');
     if (language) {
       this.language = language;
     } else {
-      // Set your language here
       this.language = 'en';
     }
-    this.translateLanguage();
+    this.translate.use(this.language);
   }
 
   getDeviceLanguage() {
@@ -180,21 +159,6 @@ export class HomePage implements OnInit {
 
   getTranslator() {
     return this.translate;
-  }
-
-  // todo: this doesn't actually do anything - can it be removed?
-  logScrollStart() {
-    console.log('home.page.ts:logScrollStart - in logScrollStart');
-  }
-
-  // todo: this doesn't actually do anything - can it be removed?
-  logScrolling() {
-    console.log('home.page.ts:logScrolling - in logScrolling');
-  }
-
-  // todo: this doesn't actually do anything - can it be removed?
-  logScrollEnd() {
-    console.log('home.page.ts:logScrollEnd - in logScrollEnd');
   }
 
   getEDFiles() {
@@ -216,18 +180,12 @@ export class HomePage implements OnInit {
           responseType: 'text',
         })
         .subscribe((jsonData) => {
-          console.log('data read is ' + jsonData);
           this.edFiles = jsonData.split('\n');
         });
     } catch (e) {
       // todo: under what circumstances would this fail? why are we ignoring any failures that would happen here?
       console.log('Error:', e);
     }
-  }
-
-  // todo: this variable is public, why does it need a getter?
-  getEDF() {
-    return this.xmlFile;
   }
 
   // todo: this isn't actually setting an EDF is it? it's opening some XML?
@@ -237,10 +195,7 @@ export class HomePage implements OnInit {
   }
 
   itemClicked(event: Event, candidate: Candidate) {
-    console.log('got to itemClicked... checking whether ' + candidate.getCandidateName() + ' is a writein');
     if (candidate.isWriteIn()) {
-      console.log('you clicked a write in');
-
       this.writeInPopup(candidate);
     }
   }
@@ -249,10 +204,10 @@ export class HomePage implements OnInit {
     const writeinPopupContent = {
       title: 'Write-In Candidate',
       body: 'write-in election review goes here',
-      writeinName: candidate.getCandidateName(),
+      writeinName: candidate.personName,
     };
 
-    const writeinPopupModal = await this.modal.create({
+    const writeinPopupModal = await this.modalController.create({
       component: WriteinPopupPage,
       componentProps: writeinPopupContent,
     });
@@ -260,14 +215,11 @@ export class HomePage implements OnInit {
     await writeinPopupModal.present();
 
     writeinPopupModal.onDidDismiss().then((data) => {
-      // todo: what is data? can we use a better variable name here?
-      console.log('got this data ' + data);
-      // todo: what is.... data.data? can we use a better variable name here?
-      // si'm not sure what any of this is
+      // todo: what is data? what is.... data.data? can we use better variable names here?
       if (data.data.trim().length > 0) {
-        candidate.setCandidateName(data.data);
+        candidate.personName = data.data;
       } else {
-        candidate.setCandidateName(candidate.writeInConst);
+        candidate.personName = candidate.writeInConst;
       }
     });
   }
