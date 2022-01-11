@@ -1,8 +1,6 @@
 {
-  "name": "ttvBMD2",
+  "name": "elroy",
   "version": "0.0.1",
-  "author": "Ionic Framework",
-  "homepage": "https://ionicframework.com/",
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
@@ -14,7 +12,10 @@
     "format:check": "prettier . --check",
     "resources": "cordova-res ios && cordova-res android && node scripts/resources.js"
   },
-  "private": true,
+  "engines": {
+    "node": "16.4.2",
+    "npm": "7.18.1"
+  },
   "dependencies": {
     "@angular/common": "~12.0.1",
     "@angular/core": "~12.0.1",
@@ -94,7 +95,7 @@
     "ts-node": "~8.3.0",
     "typescript": "~4.2.4"
   },
-  "description": "An Ionic project",
+  "description": "Ballot Markup Application",
   "browser": {
     "fs": false,
     "os": false,
