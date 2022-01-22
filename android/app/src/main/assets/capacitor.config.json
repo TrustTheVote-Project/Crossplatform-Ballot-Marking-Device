@@ -1,0 +1,6 @@
+{
+	"appId": "org.osetfoundation.ttvbmd",
+	"appName": "ttvBMD2",
+	"webDir": "www",
+	"bundledWebRuntime": false
+}

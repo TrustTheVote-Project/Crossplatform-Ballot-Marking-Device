@@ -1,0 +1,2055 @@
+{
+  "ElectionReport": {
+    "xmlns:xsi": ["http://www.w3.org/2001/XMLSchema-instance"],
+    "xmlns": ["NIST_V1_election_results.xsd"],
+    "xsi:schemaLocation": ["NIST_V1_election_results.xsd schemas/NIST_V1_election_resultsV50.xsd"],
+    "Election": [
+      {
+        "CandidateCollection": [
+          {
+            "Candidate": [
+              {
+                "objectId": ["can11431"],
+                "BallotName": [
+                  {
+                    "Text": [
+                      {
+                        "#": "JORGE A. MARQUEZ",
+                        "language": ["en"]
+                      }
+                    ]
+                  }
+                ],
+                "IsIncumbent": ["false"],
+                "PartyId": ["Party-0"],
+                "PersonId": ["per11431"]
+              },
+              {
+                "objectId": ["can11427"],
+                "BallotName": [
+                  {
+                    "Text": [
+                      {
+                        "#": "JOHN C. KING",
+                        "language": ["en"]
+                      }
+                    ]
+                  }
+                ],
+                "IsIncumbent": ["false"],
+                "PartyId": ["Party-0"],
+                "PersonId": ["per11427"]
+              },
+              {
+                "objectId": ["can11429"],
+                "BallotName": [
+                  {
+                    "Text": [
+                      {
+                        "#": "VICTOR LINARES",
+                        "language": ["en"]
+                      }
+                    ]
+                  }
+                ],
+                "IsIncumbent": ["false"],
+                "PartyId": ["Party-0"],
+                "PersonId": ["per11429"]
+              },
+              {
+                "objectId": ["can11432"],
+                "BallotName": [
+                  {
+                    "Text": [
+                      {
+                        "#": "NEIL L. POLZIN",
+                        "language": ["en"]
+                      }
+                    ]
+                  }
+                ],
+                "IsIncumbent": ["false"],
+                "PartyId": ["Party-0"],
+                "PersonId": ["per11432"]
+              },
+              {
+                "objectId": ["can11434"],
+                "BallotName": [
+                  {
+                    "Text": [
+                      {
+                        "#": "MARY LOU WALCZAK",
+                        "language": ["en"]
+                      }
+                    ]
+                  }
+                ],
+                "IsIncumbent": ["false"],
+                "PartyId": ["Party-0"],
+                "PersonId": ["per11434"]
+              },
+              {
+                "objectId": ["can11433"],
+                "BallotName": [
+                  {
+                    "Text": [
+                      {
+                        "#": "GEOFFREY COBBETT",
+                        "language": ["en"]
+                      }
+                    ]
+                  }
+                ],
+                "IsIncumbent": ["false"],
+                "PartyId": ["Party-0"],
+                "PersonId": ["per11433"]
+              }
+            ]
+          }
+        ],
+        "ContestCollection": [
+          {
+            "Contest": [
+              {
+                "objectId": ["cc4954"],
+                "xsi:type": ["CandidateContest"],
+                "BallotSelection": [
+                  {
+                    "objectId": ["cs11431"],
+                    "xsi:type": ["CandidateSelection"],
+                    "SequenceOrder": ["1"],
+                    "VoteCountsCollection": [
+                      {
+                        "VoteCounts": [
+                          {
+                            "Type": ["total"],
+                            "Count": ["2600"]
+                          },
+                          {
+                            "GpUnitId": ["pre_1500012A"],
+                            "Type": ["election-day"],
+                            "Count": ["99"]
+                          },
+                          {
+                            "GpUnitId": ["pre_1500012A"],
+                            "Type": ["absentee"],
+                            "Count": ["128"]
+                          },
+                          {
+                            "GpUnitId": ["pre_1500014A"],
+                            "Type": ["election-day"],
+                            "Count": ["134"]
+                          },
+                          {
+                            "GpUnitId": ["pre_1500014A"],
+                            "Type": ["absentee"],
+                            "Count": ["142"]
+                          },
+                          {
+                            "GpUnitId": ["pre_1500022A"],
+                            "Type": ["election-day"],
+                            "Count": ["120"]
+                          },
+                          {
+                            "GpUnitId": ["pre_1500022A"],
+                            "Type": ["absentee"],
+                            "Count": ["133"]
+                          },
+                          {
+                            "GpUnitId": ["pre_1500024A"],
+                            "Type": ["election-day"],
+                            "Count": ["95"]
+                          },
+                          {
+                            "GpUnitId": ["pre_1500024A"],
+                            "Type": ["absentee"],
+                            "Count": ["101"]
+                          },
+                          {
+                            "GpUnitId": ["pre_1500029A"],
+                            "Type": ["election-day"],
+                            "Count": ["130"]
+                          },
+                          {
+                            "GpUnitId": ["pre_1500029A"],
+                            "Type": ["absentee"],
+                            "Count": ["154"]
+                          },
+                          {
+                            "GpUnitId": ["pre_1500035A"],
+                            "Type": ["election-day"],
+                            "Count": ["118"]
+                          },
+                          {
+                            "GpUnitId": ["pre_1500035A"],
+                            "Type": ["absentee"],
+                            "Count": ["87"]
+                          },
+                          {
+                            "GpUnitId": ["pre_1500037A"],
+                            "Type": ["election-day"],
+                            "Count": ["157"]
+                          },
+                          {
+                            "GpUnitId": ["pre_1500037A"],
+                            "Type": ["absentee"],
+                            "Count": ["154"]
+                          },
+                          {
+                            "GpUnitId": ["pre_1500084A"],
+                            "Type": ["election-day"],
+                            "Count": ["66"]
+                          },
+                          {
+                            "GpUnitId": ["pre_1500084A"],
+                            "Type": ["absentee"],
+                            "Count": ["61"]
+                          },
+                          {
+                            "GpUnitId": ["pre_1500087A"],
+                            "Type": ["election-day"],
+                            "Count": ["126"]
+                          },
+                          {
+                            "GpUnitId": ["pre_1500087A"],
+                            "Type": ["absentee"],
+                            "Count": ["198"]
+                          },
+                          {
+                            "GpUnitId": ["pre_1500089A"],
+                            "Type": ["election-day"],
+                            "Count": ["80"]
+                          },
+                          {
+                            "GpUnitId": ["pre_1500089A"],
+                            "Type": ["absentee"],
+                            "Count": ["119"]
+                          },
+                          {
+                            "GpUnitId": ["pre_1500093A"],
+                            "Type": ["election-day"],
+                            "Count": ["93"]
+                          },
+                          {
+                            "GpUnitId": ["pre_1500093A"],
+                            "Type": ["absentee"],
+                            "Count": ["105"]
+                          }
+                        ]
+                      }
+                    ],
+                    "CandidateIds": ["can11431"]
+                  },
+                  {
+                    "objectId": ["cs11427"],
+                    "xsi:type": ["CandidateSelection"],
+                    "SequenceOrder": ["2"],
+                    "VoteCountsCollection": [
+                      {
+                        "VoteCounts": [
+                          {
+                            "Type": ["total"],
+                            "Count": ["2450"]
+                          },
+                          {
+                            "GpUnitId": ["pre_1500012A"],
+                            "Type": ["election-day"],
+                            "Count": ["104"]
+                          },
+                          {
+                            "GpUnitId": ["pre_1500012A"],
+                            "Type": ["absentee"],
+                            "Count": ["126"]
+                          },
+                          {
+                            "GpUnitId": ["pre_1500014A"],
+                            "Type": ["election-day"],
+                            "Count": ["105"]
+                          },
+                          {
+                            "GpUnitId": ["pre_1500014A"],
+                            "Type": ["absentee"],
+                            "Count": ["142"]
+                          },
+                          {
+                            "GpUnitId": ["pre_1500022A"],
+                            "Type": ["election-day"],
+                            "Count": ["104"]
+                          },
+                          {
+                            "GpUnitId": ["pre_1500022A"],
+                            "Type": ["absentee"],
+                            "Count": ["127"]
+                          },
+                          {
+                            "GpUnitId": ["pre_1500024A"],
+                            "Type": ["election-day"],
+                            "Count": ["71"]
+                          },
+                          {
+                            "GpUnitId": ["pre_1500024A"],
+                            "Type": ["absentee"],
+                            "Count": ["92"]
+                          },
+                          {
+                            "GpUnitId": ["pre_1500029A"],
+                            "Type": ["election-day"],
+                            "Count": ["109"]
+                          },
+                          {
+                            "GpUnitId": ["pre_1500029A"],
+                            "Type": ["absentee"],
+                            "Count": ["152"]
+                          },
+                          {
+                            "GpUnitId": ["pre_1500035A"],
+                            "Type": ["election-day"],
+                            "Count": ["115"]
+                          },
+                          {
+                            "GpUnitId": ["pre_1500035A"],
+                            "Type": ["absentee"],
+                            "Count": ["83"]
+                          },
+                          {
+                            "GpUnitId": ["pre_1500037A"],
+                            "Type": ["election-day"],
+                            "Count": ["136"]
+                          },
+                          {
+                            "GpUnitId": ["pre_1500037A"],
+                            "Type": ["absentee"],
+                            "Count": ["149"]
+                          },
+                          {
+                            "GpUnitId": ["pre_1500084A"],
+                            "Type": ["election-day"],
+                            "Count": ["74"]
+                          },
+                          {
+                            "GpUnitId": ["pre_1500084A"],
+                            "Type": ["absentee"],
+                            "Count": ["59"]
+                          },
+                          {
+                            "GpUnitId": ["pre_1500087A"],
+                            "Type": ["election-day"],
+                            "Count": ["114"]
+                          },
+                          {
+                            "GpUnitId": ["pre_1500087A"],
+                            "Type": ["absentee"],
+                            "Count": ["197"]
+                          },
+                          {
+                            "GpUnitId": ["pre_1500089A"],
+                            "Type": ["election-day"],
+                            "Count": ["76"]
+                          },
+                          {
+                            "GpUnitId": ["pre_1500089A"],
+                            "Type": ["absentee"],
+                            "Count": ["98"]
+                          },
+                          {
+                            "GpUnitId": ["pre_1500093A"],
+                            "Type": ["election-day"],
+                            "Count": ["96"]
+                          },
+                          {
+                            "GpUnitId": ["pre_1500093A"],
+                            "Type": ["absentee"],
+                            "Count": ["121"]
+                          }
+                        ]
+                      }
+                    ],
+                    "CandidateIds": ["can11427"]
+                  },
+                  {
+                    "objectId": ["cs11429"],
+                    "xsi:type": ["CandidateSelection"],
+                    "SequenceOrder": ["3"],
+                    "VoteCountsCollection": [
+                      {
+                        "VoteCounts": [
+                          {
+                            "Type": ["total"],
+                            "Count": ["2232"]
+                          },
+                          {
+                            "GpUnitId": ["pre_1500012A"],
+                            "Type": ["election-day"],
+                            "Count": ["89"]
+                          },
+                          {
+                            "GpUnitId": ["pre_1500012A"],
+                            "Type": ["absentee"],
+                            "Count": ["120"]
+                          },
+                          {
+                            "GpUnitId": ["pre_1500014A"],
+                            "Type": ["election-day"],
+                            "Count": ["95"]
+                          },
+                          {
+                            "GpUnitId": ["pre_1500014A"],
+                            "Type": ["absentee"],
+                            "Count": ["139"]
+                          },
+                          {
+                            "GpUnitId": ["pre_1500022A"],
+                            "Type": ["election-day"],
+                            "Count": ["93"]
+                          },
+                          {
+                            "GpUnitId": ["pre_1500022A"],
+                            "Type": ["absentee"],
+                            "Count": ["118"]
+                          },
+                          {
+                            "GpUnitId": ["pre_1500024A"],
+                            "Type": ["election-day"],
+                            "Count": ["68"]
+                          },
+                          {
+                            "GpUnitId": ["pre_1500024A"],
+                            "Type": ["absentee"],
+                            "Count": ["85"]
+                          },
+                          {
+                            "GpUnitId": ["pre_1500029A"],
+                            "Type": ["election-day"],
+                            "Count": ["99"]
+                          },
+                          {
+                            "GpUnitId": ["pre_1500029A"],
+                            "Type": ["absentee"],
+                            "Count": ["145"]
+                          },
+                          {
+                            "GpUnitId": ["pre_1500035A"],
+                            "Type": ["election-day"],
+                            "Count": ["104"]
+                          },
+                          {
+                            "GpUnitId": ["pre_1500035A"],
+                            "Type": ["absentee"],
+                            "Count": ["75"]
+                          },
+                          {
+                            "GpUnitId": ["pre_1500037A"],
+                            "Type": ["election-day"],
+                            "Count": ["131"]
+                          },
+                          {
+                            "GpUnitId": ["pre_1500037A"],
+                            "Type": ["absentee"],
+                            "Count": ["124"]
+                          },
+                          {
+                            "GpUnitId": ["pre_1500084A"],
+                            "Type": ["election-day"],
+                            "Count": ["64"]
+                          },
+                          {
+                            "GpUnitId": ["pre_1500084A"],
+                            "Type": ["absentee"],
+                            "Count": ["57"]
+                          },
+                          {
+                            "GpUnitId": ["pre_1500087A"],
+                            "Type": ["election-day"],
+                            "Count": ["105"]
+                          },
+                          {
+                            "GpUnitId": ["pre_1500087A"],
+                            "Type": ["absentee"],
+                            "Count": ["165"]
+                          },
+                          {
+                            "GpUnitId": ["pre_1500089A"],
+                            "Type": ["election-day"],
+                            "Count": ["63"]
+                          },
+                          {
+                            "GpUnitId": ["pre_1500089A"],
+                            "Type": ["absentee"],
+                            "Count": ["108"]
+                          },
+                          {
+                            "GpUnitId": ["pre_1500093A"],
+                            "Type": ["election-day"],
+                            "Count": ["87"]
+                          },
+                          {
+                            "GpUnitId": ["pre_1500093A"],
+                            "Type": ["absentee"],
+                            "Count": ["98"]
+                          }
+                        ]
+                      }
+                    ],
+                    "CandidateIds": ["can11429"]
+                  },
+                  {
+                    "objectId": ["cs11432"],
+                    "xsi:type": ["CandidateSelection"],
+                    "SequenceOrder": ["4"],
+                    "VoteCountsCollection": [
+                      {
+                        "VoteCounts": [
+                          {
+                            "Type": ["total"],
+                            "Count": ["1006"]
+                          },
+                          {
+                            "GpUnitId": ["pre_1500012A"],
+                            "Type": ["election-day"],
+                            "Count": ["46"]
+                          },
+                          {
+                            "GpUnitId": ["pre_1500012A"],
+                            "Type": ["absentee"],
+                            "Count": ["45"]
+                          },
+                          {
+                            "GpUnitId": ["pre_1500014A"],
+                            "Type": ["election-day"],
+                            "Count": ["56"]
+                          },
+                          {
+                            "GpUnitId": ["pre_1500014A"],
+                            "Type": ["absentee"],
+                            "Count": ["65"]
+                          },
+                          {
+                            "GpUnitId": ["pre_1500022A"],
+                            "Type": ["election-day"],
+                            "Count": ["54"]
+                          },
+                          {
+                            "GpUnitId": ["pre_1500022A"],
+                            "Type": ["absentee"],
+                            "Count": ["54"]
+                          },
+                          {
+                            "GpUnitId": ["pre_1500024A"],
+                            "Type": ["election-day"],
+                            "Count": ["29"]
+                          },
+                          {
+                            "GpUnitId": ["pre_1500024A"],
+                            "Type": ["absentee"],
+                            "Count": ["45"]
+                          },
+                          {
+                            "GpUnitId": ["pre_1500029A"],
+                            "Type": ["election-day"],
+                            "Count": ["33"]
+                          },
+                          {
+                            "GpUnitId": ["pre_1500029A"],
+                            "Type": ["absentee"],
+                            "Count": ["70"]
+                          },
+                          {
+                            "GpUnitId": ["pre_1500035A"],
+                            "Type": ["election-day"],
+                            "Count": ["50"]
+                          },
+                          {
+                            "GpUnitId": ["pre_1500035A"],
+                            "Type": ["absentee"],
+                            "Count": ["42"]
+                          },
+                          {
+                            "GpUnitId": ["pre_1500037A"],
+                            "Type": ["election-day"],
+                            "Count": ["52"]
+                          },
+                          {
+                            "GpUnitId": ["pre_1500037A"],
+                            "Type": ["absentee"],
+                            "Count": ["58"]
+                          },
+                          {
+                            "GpUnitId": ["pre_1500084A"],
+                            "Type": ["election-day"],
+                            "Count": ["24"]
+                          },
+                          {
+                            "GpUnitId": ["pre_1500084A"],
+                            "Type": ["absentee"],
+                            "Count": ["10"]
+                          },
+                          {
+                            "GpUnitId": ["pre_1500087A"],
+                            "Type": ["election-day"],
+                            "Count": ["46"]
+                          },
+                          {
+                            "GpUnitId": ["pre_1500087A"],
+                            "Type": ["absentee"],
+                            "Count": ["61"]
+                          },
+                          {
+                            "GpUnitId": ["pre_1500089A"],
+                            "Type": ["election-day"],
+                            "Count": ["30"]
+                          },
+                          {
+                            "GpUnitId": ["pre_1500089A"],
+                            "Type": ["absentee"],
+                            "Count": ["55"]
+                          },
+                          {
+                            "GpUnitId": ["pre_1500093A"],
+                            "Type": ["election-day"],
+                            "Count": ["38"]
+                          },
+                          {
+                            "GpUnitId": ["pre_1500093A"],
+                            "Type": ["absentee"],
+                            "Count": ["43"]
+                          }
+                        ]
+                      }
+                    ],
+                    "CandidateIds": ["can11432"]
+                  }
+                ],
+                "BallotTitle": [
+                  {
+                    "Text": [
+                      {
+                        "#": "COVINA CITY GENERAL MUNICIPAL ELECTION Member of the City Council",
+                        "language": ["en"]
+                      }
+                    ]
+                  }
+                ],
+                "ElectoralDistrictId": ["GpU08CQ0"],
+                "Name": ["COVINA CITY GENERAL MUNICIPAL ELECTION Member of the City Council"],
+                "SubUnitsReported": ["11"],
+                "SummaryCounts": [
+                  {
+                    "GpUnitId": ["GpU08CQ0"],
+                    "Type": ["total"],
+                    "BallotsCast": ["4025"]
+                  }
+                ],
+                "TotalSubUnits": ["11"],
+                "OfficeIds": ["off4954"],
+                "VotesAllowed": ["3"]
+              },
+              {
+                "objectId": ["cc4962"],
+                "xsi:type": ["CandidateContest"],
+                "BallotSelection": [
+                  {
+                    "objectId": ["cs11434"],
+                    "xsi:type": ["CandidateSelection"],
+                    "SequenceOrder": ["1"],
+                    "VoteCountsCollection": [
+                      {
+                        "VoteCounts": [
+                          {
+                            "Type": ["total"],
+                            "Count": ["2826"]
+                          },
+                          {
+                            "GpUnitId": ["pre_1500012A"],
+                            "Type": ["election-day"],
+                            "Count": ["121"]
+                          },
+                          {
+                            "GpUnitId": ["pre_1500012A"],
+                            "Type": ["absentee"],
+                            "Count": ["139"]
+                          },
+                          {
+                            "GpUnitId": ["pre_1500014A"],
+                            "Type": ["election-day"],
+                            "Count": ["134"]
+                          },
+                          {
+                            "GpUnitId": ["pre_1500014A"],
+                            "Type": ["absentee"],
+                            "Count": ["178"]
+                          },
+                          {
+                            "GpUnitId": ["pre_1500022A"],
+                            "Type": ["election-day"],
+                            "Count": ["125"]
+                          },
+                          {
+                            "GpUnitId": ["pre_1500022A"],
+                            "Type": ["absentee"],
+                            "Count": ["147"]
+                          },
+                          {
+                            "GpUnitId": ["pre_1500024A"],
+                            "Type": ["election-day"],
+                            "Count": ["89"]
+                          },
+                          {
+                            "GpUnitId": ["pre_1500024A"],
+                            "Type": ["absentee"],
+                            "Count": ["116"]
+                          },
+                          {
+                            "GpUnitId": ["pre_1500029A"],
+                            "Type": ["election-day"],
+                            "Count": ["107"]
+                          },
+                          {
+                            "GpUnitId": ["pre_1500029A"],
+                            "Type": ["absentee"],
+                            "Count": ["157"]
+                          },
+                          {
+                            "GpUnitId": ["pre_1500035A"],
+                            "Type": ["election-day"],
+                            "Count": ["146"]
+                          },
+                          {
+                            "GpUnitId": ["pre_1500035A"],
+                            "Type": ["absentee"],
+                            "Count": ["107"]
+                          },
+                          {
+                            "GpUnitId": ["pre_1500037A"],
+                            "Type": ["election-day"],
+                            "Count": ["144"]
+                          },
+                          {
+                            "GpUnitId": ["pre_1500037A"],
+                            "Type": ["absentee"],
+                            "Count": ["147"]
+                          },
+                          {
+                            "GpUnitId": ["pre_1500084A"],
+                            "Type": ["election-day"],
+                            "Count": ["64"]
+                          },
+                          {
+                            "GpUnitId": ["pre_1500084A"],
+                            "Type": ["absentee"],
+                            "Count": ["53"]
+                          },
+                          {
+                            "GpUnitId": ["pre_1500087A"],
+                            "Type": ["election-day"],
+                            "Count": ["141"]
+                          },
+                          {
+                            "GpUnitId": ["pre_1500087A"],
+                            "Type": ["absentee"],
+                            "Count": ["237"]
+                          },
+                          {
+                            "GpUnitId": ["pre_1500089A"],
+                            "Type": ["election-day"],
+                            "Count": ["96"]
+                          },
+                          {
+                            "GpUnitId": ["pre_1500089A"],
+                            "Type": ["absentee"],
+                            "Count": ["132"]
+                          },
+                          {
+                            "GpUnitId": ["pre_1500093A"],
+                            "Type": ["election-day"],
+                            "Count": ["111"]
+                          },
+                          {
+                            "GpUnitId": ["pre_1500093A"],
+                            "Type": ["absentee"],
+                            "Count": ["135"]
+                          }
+                        ]
+                      }
+                    ],
+                    "CandidateIds": ["can11434"]
+                  }
+                ],
+                "BallotTitle": [
+                  {
+                    "Text": [
+                      {
+                        "#": "COVINA CITY GENERAL MUNICIPAL ELECTION, City Clerk",
+                        "language": ["en"]
+                      }
+                    ]
+                  }
+                ],
+                "ElectoralDistrictId": ["GpU08CQ0"],
+                "Name": ["COVINA CITY GENERAL MUNICIPAL ELECTION, City Clerk"],
+                "SubUnitsReported": ["11"],
+                "SummaryCounts": [
+                  {
+                    "GpUnitId": ["GpU08CQ0"],
+                    "Type": ["total"],
+                    "BallotsCast": ["4025"]
+                  }
+                ],
+                "TotalSubUnits": ["11"],
+                "OfficeIds": ["off4962"],
+                "VotesAllowed": ["1"]
+              },
+              {
+                "objectId": ["cc4963"],
+                "xsi:type": ["CandidateContest"],
+                "BallotSelection": [
+                  {
+                    "objectId": ["cs11433"],
+                    "xsi:type": ["CandidateSelection"],
+                    "SequenceOrder": ["1"],
+                    "VoteCountsCollection": [
+                      {
+                        "VoteCounts": [
+                          {
+                            "Type": ["total"],
+                            "Count": ["2763"]
+                          },
+                          {
+                            "GpUnitId": ["pre_1500012A"],
+                            "Type": ["election-day"],
+                            "Count": ["117"]
+                          },
+                          {
+                            "GpUnitId": ["pre_1500012A"],
+                            "Type": ["absentee"],
+                            "Count": ["140"]
+                          },
+                          {
+                            "GpUnitId": ["pre_1500014A"],
+                            "Type": ["election-day"],
+                            "Count": ["136"]
+                          },
+                          {
+                            "GpUnitId": ["pre_1500014A"],
+                            "Type": ["absentee"],
+                            "Count": ["175"]
+                          },
+                          {
+                            "GpUnitId": ["pre_1500022A"],
+                            "Type": ["election-day"],
+                            "Count": ["124"]
+                          },
+                          {
+                            "GpUnitId": ["pre_1500022A"],
+                            "Type": ["absentee"],
+                            "Count": ["142"]
+                          },
+                          {
+                            "GpUnitId": ["pre_1500024A"],
+                            "Type": ["election-day"],
+                            "Count": ["87"]
+                          },
+                          {
+                            "GpUnitId": ["pre_1500024A"],
+                            "Type": ["absentee"],
+                            "Count": ["114"]
+                          },
+                          {
+                            "GpUnitId": ["pre_1500029A"],
+                            "Type": ["election-day"],
+                            "Count": ["107"]
+                          },
+                          {
+                            "GpUnitId": ["pre_1500029A"],
+                            "Type": ["absentee"],
+                            "Count": ["162"]
+                          },
+                          {
+                            "GpUnitId": ["pre_1500035A"],
+                            "Type": ["election-day"],
+                            "Count": ["133"]
+                          },
+                          {
+                            "GpUnitId": ["pre_1500035A"],
+                            "Type": ["absentee"],
+                            "Count": ["104"]
+                          },
+                          {
+                            "GpUnitId": ["pre_1500037A"],
+                            "Type": ["election-day"],
+                            "Count": ["138"]
+                          },
+                          {
+                            "GpUnitId": ["pre_1500037A"],
+                            "Type": ["absentee"],
+                            "Count": ["143"]
+                          },
+                          {
+                            "GpUnitId": ["pre_1500084A"],
+                            "Type": ["election-day"],
+                            "Count": ["59"]
+                          },
+                          {
+                            "GpUnitId": ["pre_1500084A"],
+                            "Type": ["absentee"],
+                            "Count": ["53"]
+                          },
+                          {
+                            "GpUnitId": ["pre_1500087A"],
+                            "Type": ["election-day"],
+                            "Count": ["137"]
+                          },
+                          {
+                            "GpUnitId": ["pre_1500087A"],
+                            "Type": ["absentee"],
+                            "Count": ["229"]
+                          },
+                          {
+                            "GpUnitId": ["pre_1500089A"],
+                            "Type": ["election-day"],
+                            "Count": ["95"]
+                          },
+                          {
+                            "GpUnitId": ["pre_1500089A"],
+                            "Type": ["absentee"],
+                            "Count": ["129"]
+                          },
+                          {
+                            "GpUnitId": ["pre_1500093A"],
+                            "Type": ["election-day"],
+                            "Count": ["109"]
+                          },
+                          {
+                            "GpUnitId": ["pre_1500093A"],
+                            "Type": ["absentee"],
+                            "Count": ["130"]
+                          }
+                        ]
+                      }
+                    ],
+                    "CandidateIds": ["can11433"]
+                  }
+                ],
+                "BallotTitle": [
+                  {
+                    "Text": [
+                      {
+                        "#": "COVINA CITY GENERAL MUNICIPAL ELECTION, City Treasurer",
+                        "language": ["en"]
+                      }
+                    ]
+                  }
+                ],
+                "ElectoralDistrictId": ["GpU08CQ0"],
+                "Name": ["COVINA CITY GENERAL MUNICIPAL ELECTION, City Treasurer"],
+                "SubUnitsReported": ["11"],
+                "SummaryCounts": [
+                  {
+                    "GpUnitId": ["GpU08CQ0"],
+                    "Type": ["total"],
+                    "BallotsCast": ["4025"]
+                  }
+                ],
+                "TotalSubUnits": ["11"],
+                "OfficeIds": ["off4963"],
+                "VotesAllowed": ["1"]
+              },
+              {
+                "objectId": ["bmc4953"],
+                "xsi:type": ["BallotMeasureContest"],
+                "BallotSelection": [
+                  {
+                    "objectId": ["bms4953a"],
+                    "xsi:type": ["BallotMeasureSelection"],
+                    "SequenceOrder": ["1"],
+                    "VoteCountsCollection": [
+                      {
+                        "VoteCounts": [
+                          {
+                            "Type": ["total"],
+                            "Count": ["2740"]
+                          },
+                          {
+                            "GpUnitId": ["pre_1500012A"],
+                            "Type": ["election-day"],
+                            "Count": ["101"]
+                          },
+                          {
+                            "GpUnitId": ["pre_1500012A"],
+                            "Type": ["absentee"],
+                            "Count": ["146"]
+                          },
+                          {
+                            "GpUnitId": ["pre_1500014A"],
+                            "Type": ["election-day"],
+                            "Count": ["132"]
+                          },
+                          {
+                            "GpUnitId": ["pre_1500014A"],
+                            "Type": ["absentee"],
+                            "Count": ["173"]
+                          },
+                          {
+                            "GpUnitId": ["pre_1500022A"],
+                            "Type": ["election-day"],
+                            "Count": ["110"]
+                          },
+                          {
+                            "GpUnitId": ["pre_1500022A"],
+                            "Type": ["absentee"],
+                            "Count": ["165"]
+                          },
+                          {
+                            "GpUnitId": ["pre_1500024A"],
+                            "Type": ["election-day"],
+                            "Count": ["83"]
+                          },
+                          {
+                            "GpUnitId": ["pre_1500024A"],
+                            "Type": ["absentee"],
+                            "Count": ["101"]
+                          },
+                          {
+                            "GpUnitId": ["pre_1500029A"],
+                            "Type": ["election-day"],
+                            "Count": ["113"]
+                          },
+                          {
+                            "GpUnitId": ["pre_1500029A"],
+                            "Type": ["absentee"],
+                            "Count": ["157"]
+                          },
+                          {
+                            "GpUnitId": ["pre_1500035A"],
+                            "Type": ["election-day"],
+                            "Count": ["121"]
+                          },
+                          {
+                            "GpUnitId": ["pre_1500035A"],
+                            "Type": ["absentee"],
+                            "Count": ["109"]
+                          },
+                          {
+                            "GpUnitId": ["pre_1500037A"],
+                            "Type": ["election-day"],
+                            "Count": ["138"]
+                          },
+                          {
+                            "GpUnitId": ["pre_1500037A"],
+                            "Type": ["absentee"],
+                            "Count": ["165"]
+                          },
+                          {
+                            "GpUnitId": ["pre_1500084A"],
+                            "Type": ["election-day"],
+                            "Count": ["55"]
+                          },
+                          {
+                            "GpUnitId": ["pre_1500084A"],
+                            "Type": ["absentee"],
+                            "Count": ["64"]
+                          },
+                          {
+                            "GpUnitId": ["pre_1500087A"],
+                            "Type": ["election-day"],
+                            "Count": ["122"]
+                          },
+                          {
+                            "GpUnitId": ["pre_1500087A"],
+                            "Type": ["absentee"],
+                            "Count": ["224"]
+                          },
+                          {
+                            "GpUnitId": ["pre_1500089A"],
+                            "Type": ["election-day"],
+                            "Count": ["89"]
+                          },
+                          {
+                            "GpUnitId": ["pre_1500089A"],
+                            "Type": ["absentee"],
+                            "Count": ["139"]
+                          },
+                          {
+                            "GpUnitId": ["pre_1500093A"],
+                            "Type": ["election-day"],
+                            "Count": ["96"]
+                          },
+                          {
+                            "GpUnitId": ["pre_1500093A"],
+                            "Type": ["absentee"],
+                            "Count": ["137"]
+                          }
+                        ]
+                      }
+                    ],
+                    "Selection": [
+                      {
+                        "label": ["bms4953at"],
+                        "Text": [
+                          {
+                            "#": "YES",
+                            "language": ["en"]
+                          }
+                        ]
+                      }
+                    ]
+                  },
+                  {
+                    "objectId": ["bms4953b"],
+                    "xsi:type": ["BallotMeasureSelection"],
+                    "SequenceOrder": ["2"],
+                    "VoteCountsCollection": [
+                      {
+                        "VoteCounts": [
+                          {
+                            "Type": ["total"],
+                            "Count": ["1098"]
+                          },
+                          {
+                            "GpUnitId": ["pre_1500012A"],
+                            "Type": ["election-day"],
+                            "Count": ["48"]
+                          },
+                          {
+                            "GpUnitId": ["pre_1500012A"],
+                            "Type": ["absentee"],
+                            "Count": ["50"]
+                          },
+                          {
+                            "GpUnitId": ["pre_1500014A"],
+                            "Type": ["election-day"],
+                            "Count": ["55"]
+                          },
+                          {
+                            "GpUnitId": ["pre_1500014A"],
+                            "Type": ["absentee"],
+                            "Count": ["58"]
+                          },
+                          {
+                            "GpUnitId": ["pre_1500022A"],
+                            "Type": ["election-day"],
+                            "Count": ["60"]
+                          },
+                          {
+                            "GpUnitId": ["pre_1500022A"],
+                            "Type": ["absentee"],
+                            "Count": ["38"]
+                          },
+                          {
+                            "GpUnitId": ["pre_1500024A"],
+                            "Type": ["election-day"],
+                            "Count": ["37"]
+                          },
+                          {
+                            "GpUnitId": ["pre_1500024A"],
+                            "Type": ["absentee"],
+                            "Count": ["53"]
+                          },
+                          {
+                            "GpUnitId": ["pre_1500029A"],
+                            "Type": ["election-day"],
+                            "Count": ["59"]
+                          },
+                          {
+                            "GpUnitId": ["pre_1500029A"],
+                            "Type": ["absentee"],
+                            "Count": ["74"]
+                          },
+                          {
+                            "GpUnitId": ["pre_1500035A"],
+                            "Type": ["election-day"],
+                            "Count": ["44"]
+                          },
+                          {
+                            "GpUnitId": ["pre_1500035A"],
+                            "Type": ["absentee"],
+                            "Count": ["31"]
+                          },
+                          {
+                            "GpUnitId": ["pre_1500037A"],
+                            "Type": ["election-day"],
+                            "Count": ["69"]
+                          },
+                          {
+                            "GpUnitId": ["pre_1500037A"],
+                            "Type": ["absentee"],
+                            "Count": ["65"]
+                          },
+                          {
+                            "GpUnitId": ["pre_1500084A"],
+                            "Type": ["election-day"],
+                            "Count": ["36"]
+                          },
+                          {
+                            "GpUnitId": ["pre_1500084A"],
+                            "Type": ["absentee"],
+                            "Count": ["27"]
+                          },
+                          {
+                            "GpUnitId": ["pre_1500087A"],
+                            "Type": ["election-day"],
+                            "Count": ["69"]
+                          },
+                          {
+                            "GpUnitId": ["pre_1500087A"],
+                            "Type": ["absentee"],
+                            "Count": ["65"]
+                          },
+                          {
+                            "GpUnitId": ["pre_1500089A"],
+                            "Type": ["election-day"],
+                            "Count": ["29"]
+                          },
+                          {
+                            "GpUnitId": ["pre_1500089A"],
+                            "Type": ["absentee"],
+                            "Count": ["47"]
+                          },
+                          {
+                            "GpUnitId": ["pre_1500093A"],
+                            "Type": ["election-day"],
+                            "Count": ["46"]
+                          },
+                          {
+                            "GpUnitId": ["pre_1500093A"],
+                            "Type": ["absentee"],
+                            "Count": ["38"]
+                          }
+                        ]
+                      }
+                    ],
+                    "Selection": [
+                      {
+                        "label": ["bms4953bt"],
+                        "Text": [
+                          {
+                            "#": "NO",
+                            "language": ["en"]
+                          }
+                        ]
+                      }
+                    ]
+                  }
+                ],
+                "BallotTitle": [
+                  {
+                    "Text": [
+                      {
+                        "#": "COVINA CITY SPECIAL MUNICIPAL ELECTION - MEASURE CC",
+                        "language": ["en"]
+                      }
+                    ]
+                  }
+                ],
+                "ElectoralDistrictId": ["GpU08CQ0"],
+                "Name": ["COVINA CITY SPECIAL MUNICIPAL ELECTION - MEASURE CC"],
+                "SubUnitsReported": ["11"],
+                "SummaryCounts": [
+                  {
+                    "GpUnitId": ["GpU08CQ0"],
+                    "Type": ["total"],
+                    "BallotsCast": ["4025"]
+                  }
+                ],
+                "TotalSubUnits": ["11"],
+                "PassageThreshold": [
+                  {
+                    "Text": [
+                      {
+                        "#": "MAJORITY OF VOTES CAST",
+                        "language": ["en"]
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+        ],
+        "ElectionScopeId": ["GpU08CQ0"],
+        "Name": [
+          {
+            "Text": [
+              {
+                "#": "CONSOLIDATED MUNICIPAL AND SPECIAL ELECTIONS",
+                "language": ["en"]
+              }
+            ]
+          }
+        ],
+        "StartDate": ["2017-03-07"],
+        "EndDate": ["2017-03-07"],
+        "Type": ["special"]
+      }
+    ],
+    "Format": ["precinct-level"],
+    "GeneratedDate": ["2017-03-21T10:45:22"],
+    "GpUnitCollection": [
+      {
+        "GpUnit": [
+          {
+            "xsi:type": ["ReportingUnit"],
+            "objectId": ["GpU08CQ0"],
+            "ComposingGpUnitIds": [
+              "pre_1500012A pre_1500014A pre_1500022A pre_1500024A pre_1500029A pre_1500035A pre_1500037A pre_1500084A pre_1500087A\r\n pre_1500089A pre_1500093A pre_9990048A"
+            ],
+            "ExternalIdentifiers": [
+              {
+                "ExternalIdentifier": [
+                  {
+                    "Type": ["ocd-id"],
+                    "Value": ["ocd-division/country:us/state:ca/place:covina"]
+                  }
+                ]
+              }
+            ],
+            "Name": ["CITY OF COVINA"],
+            "Type": ["city"]
+          },
+          {
+            "xsi:type": ["ReportingUnit"],
+            "objectId": ["pre_1500012A"],
+            "Name": ["0235 - COVINA"],
+            "Number": ["0235"],
+            "PartyRegistration": [
+              {
+                "Count": ["737"],
+                "PartyId": ["Party-0"]
+              },
+              {
+                "Count": ["1214"],
+                "PartyId": ["Party-1"]
+              },
+              {
+                "Count": ["671"],
+                "PartyId": ["Party-2"]
+              },
+              {
+                "Count": ["87"],
+                "PartyId": ["Party-3"]
+              },
+              {
+                "Count": ["8"],
+                "PartyId": ["Party-4"]
+              },
+              {
+                "Count": ["31"],
+                "PartyId": ["Party-5"]
+              },
+              {
+                "Count": ["20"],
+                "PartyId": ["Party-6"]
+              }
+            ],
+            "Type": ["precinct"]
+          },
+          {
+            "xsi:type": ["ReportingUnit"],
+            "objectId": ["pre_1500014A"],
+            "Name": ["0236 - COVINA"],
+            "Number": ["0236"],
+            "PartyRegistration": [
+              {
+                "Count": ["678"],
+                "PartyId": ["Party-0"]
+              },
+              {
+                "Count": ["1349"],
+                "PartyId": ["Party-1"]
+              },
+              {
+                "Count": ["848"],
+                "PartyId": ["Party-2"]
+              },
+              {
+                "Count": ["68"],
+                "PartyId": ["Party-3"]
+              },
+              {
+                "Count": ["10"],
+                "PartyId": ["Party-4"]
+              },
+              {
+                "Count": ["15"],
+                "PartyId": ["Party-5"]
+              },
+              {
+                "Count": ["19"],
+                "PartyId": ["Party-6"]
+              }
+            ],
+            "Type": ["precinct"]
+          },
+          {
+            "xsi:type": ["ReportingUnit"],
+            "objectId": ["pre_1500022A"],
+            "Name": ["0237 - COVINA"],
+            "Number": ["0237"],
+            "PartyRegistration": [
+              {
+                "Count": ["746"],
+                "PartyId": ["Party-0"]
+              },
+              {
+                "Count": ["1373"],
+                "PartyId": ["Party-1"]
+              },
+              {
+                "Count": ["771"],
+                "PartyId": ["Party-2"]
+              },
+              {
+                "Count": ["91"],
+                "PartyId": ["Party-3"]
+              },
+              {
+                "Count": ["5"],
+                "PartyId": ["Party-4"]
+              },
+              {
+                "Count": ["39"],
+                "PartyId": ["Party-5"]
+              },
+              {
+                "Count": ["20"],
+                "PartyId": ["Party-6"]
+              }
+            ],
+            "Type": ["precinct"]
+          },
+          {
+            "xsi:type": ["ReportingUnit"],
+            "objectId": ["pre_1500024A"],
+            "Name": ["0238 - COVINA"],
+            "Number": ["0238"],
+            "PartyRegistration": [
+              {
+                "Count": ["544"],
+                "PartyId": ["Party-0"]
+              },
+              {
+                "Count": ["917"],
+                "PartyId": ["Party-1"]
+              },
+              {
+                "Count": ["593"],
+                "PartyId": ["Party-2"]
+              },
+              {
+                "Count": ["74"],
+                "PartyId": ["Party-3"]
+              },
+              {
+                "Count": ["6"],
+                "PartyId": ["Party-4"]
+              },
+              {
+                "Count": ["25"],
+                "PartyId": ["Party-5"]
+              },
+              {
+                "Count": ["12"],
+                "PartyId": ["Party-6"]
+              }
+            ],
+            "Type": ["precinct"]
+          },
+          {
+            "xsi:type": ["ReportingUnit"],
+            "objectId": ["pre_1500029A"],
+            "Name": ["0239 - COVINA"],
+            "Number": ["0239"],
+            "PartyRegistration": [
+              {
+                "Count": ["581"],
+                "PartyId": ["Party-0"]
+              },
+              {
+                "Count": ["1043"],
+                "PartyId": ["Party-1"]
+              },
+              {
+                "Count": ["735"],
+                "PartyId": ["Party-2"]
+              },
+              {
+                "Count": ["71"],
+                "PartyId": ["Party-3"]
+              },
+              {
+                "Count": ["3"],
+                "PartyId": ["Party-4"]
+              },
+              {
+                "Count": ["20"],
+                "PartyId": ["Party-5"]
+              },
+              {
+                "Count": ["18"],
+                "PartyId": ["Party-6"]
+              }
+            ],
+            "Type": ["precinct"]
+          },
+          {
+            "xsi:type": ["ReportingUnit"],
+            "objectId": ["pre_1500035A"],
+            "Name": ["0240 - COVINA"],
+            "Number": ["0240"],
+            "PartyRegistration": [
+              {
+                "Count": ["584"],
+                "PartyId": ["Party-0"]
+              },
+              {
+                "Count": ["944"],
+                "PartyId": ["Party-1"]
+              },
+              {
+                "Count": ["633"],
+                "PartyId": ["Party-2"]
+              },
+              {
+                "Count": ["66"],
+                "PartyId": ["Party-3"]
+              },
+              {
+                "Count": ["4"],
+                "PartyId": ["Party-4"]
+              },
+              {
+                "Count": ["11"],
+                "PartyId": ["Party-5"]
+              },
+              {
+                "Count": ["16"],
+                "PartyId": ["Party-6"]
+              }
+            ],
+            "Type": ["precinct"]
+          },
+          {
+            "xsi:type": ["ReportingUnit"],
+            "objectId": ["pre_1500037A"],
+            "Name": ["0241 - COVINA"],
+            "Number": ["0241"],
+            "PartyRegistration": [
+              {
+                "Count": ["482"],
+                "PartyId": ["Party-0"]
+              },
+              {
+                "Count": ["870"],
+                "PartyId": ["Party-1"]
+              },
+              {
+                "Count": ["828"],
+                "PartyId": ["Party-2"]
+              },
+              {
+                "Count": ["47"],
+                "PartyId": ["Party-3"]
+              },
+              {
+                "Count": ["7"],
+                "PartyId": ["Party-4"]
+              },
+              {
+                "Count": ["13"],
+                "PartyId": ["Party-5"]
+              },
+              {
+                "Count": ["9"],
+                "PartyId": ["Party-6"]
+              }
+            ],
+            "Type": ["precinct"]
+          },
+          {
+            "xsi:type": ["ReportingUnit"],
+            "objectId": ["pre_1500084A"],
+            "Name": ["0242 - COVINA"],
+            "Number": ["0242"],
+            "PartyRegistration": [
+              {
+                "Count": ["196"],
+                "PartyId": ["Party-0"]
+              },
+              {
+                "Count": ["307"],
+                "PartyId": ["Party-1"]
+              },
+              {
+                "Count": ["342"],
+                "PartyId": ["Party-2"]
+              },
+              {
+                "Count": ["21"],
+                "PartyId": ["Party-3"]
+              },
+              {
+                "Count": ["2"],
+                "PartyId": ["Party-4"]
+              },
+              {
+                "Count": ["5"],
+                "PartyId": ["Party-5"]
+              },
+              {
+                "Count": ["9"],
+                "PartyId": ["Party-6"]
+              }
+            ],
+            "Type": ["precinct"]
+          },
+          {
+            "xsi:type": ["ReportingUnit"],
+            "objectId": ["pre_1500087A"],
+            "Name": ["0243 - COVINA"],
+            "Number": ["0243"],
+            "PartyRegistration": [
+              {
+                "Count": ["804"],
+                "PartyId": ["Party-0"]
+              },
+              {
+                "Count": ["1495"],
+                "PartyId": ["Party-1"]
+              },
+              {
+                "Count": ["814"],
+                "PartyId": ["Party-2"]
+              },
+              {
+                "Count": ["96"],
+                "PartyId": ["Party-3"]
+              },
+              {
+                "Count": ["10"],
+                "PartyId": ["Party-4"]
+              },
+              {
+                "Count": ["34"],
+                "PartyId": ["Party-5"]
+              },
+              {
+                "Count": ["21"],
+                "PartyId": ["Party-6"]
+              }
+            ],
+            "Type": ["precinct"]
+          },
+          {
+            "xsi:type": ["ReportingUnit"],
+            "objectId": ["pre_1500089A"],
+            "Name": ["0244 - COVINA"],
+            "Number": ["0244"],
+            "PartyRegistration": [
+              {
+                "Count": ["582"],
+                "PartyId": ["Party-0"]
+              },
+              {
+                "Count": ["1196"],
+                "PartyId": ["Party-1"]
+              },
+              {
+                "Count": ["561"],
+                "PartyId": ["Party-2"]
+              },
+              {
+                "Count": ["72"],
+                "PartyId": ["Party-3"]
+              },
+              {
+                "Count": ["6"],
+                "PartyId": ["Party-4"]
+              },
+              {
+                "Count": ["40"],
+                "PartyId": ["Party-5"]
+              },
+              {
+                "Count": ["16"],
+                "PartyId": ["Party-6"]
+              }
+            ],
+            "Type": ["precinct"]
+          },
+          {
+            "xsi:type": ["ReportingUnit"],
+            "objectId": ["pre_1500093A"],
+            "Name": ["0245 - COVINA"],
+            "Number": ["0245"],
+            "PartyRegistration": [
+              {
+                "Count": ["559"],
+                "PartyId": ["Party-0"]
+              },
+              {
+                "Count": ["1000"],
+                "PartyId": ["Party-1"]
+              },
+              {
+                "Count": ["564"],
+                "PartyId": ["Party-2"]
+              },
+              {
+                "Count": ["60"],
+                "PartyId": ["Party-3"]
+              },
+              {
+                "Count": ["3"],
+                "PartyId": ["Party-4"]
+              },
+              {
+                "Count": ["24"],
+                "PartyId": ["Party-5"]
+              },
+              {
+                "Count": ["20"],
+                "PartyId": ["Party-6"]
+              }
+            ],
+            "Type": ["precinct"]
+          },
+          {
+            "xsi:type": ["ReportingUnit"],
+            "objectId": ["pre_9990048A"],
+            "Name": ["8048 - Ballot Group 48"],
+            "Number": ["8048"],
+            "Type": ["ballot-batch"]
+          }
+        ]
+      }
+    ],
+    "Issuer": ["Los Angeles County Registrar-Recorder/County Clerk"],
+    "IssuerAbbreviation": ["LA RR/CC"],
+    "OfficeCollection": [
+      {
+        "Office": [
+          {
+            "objectId": ["off4954"],
+            "IsPartisan": ["false"],
+            "Name": [
+              {
+                "Text": [
+                  {
+                    "#": "COVINA CITY GENERAL MUNICIPAL ELECTION Member of the City Council",
+                    "language": ["en"]
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "objectId": ["off4962"],
+            "IsPartisan": ["false"],
+            "Name": [
+              {
+                "Text": [
+                  {
+                    "#": "COVINA CITY GENERAL MUNICIPAL ELECTION, City Clerk",
+                    "language": ["en"]
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "objectId": ["off4963"],
+            "IsPartisan": ["false"],
+            "Name": [
+              {
+                "Text": [
+                  {
+                    "#": "COVINA CITY GENERAL MUNICIPAL ELECTION, City Treasurer",
+                    "language": ["en"]
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "PartyCollection": [
+      {
+        "Party": [
+          {
+            "objectId": ["Party-0"],
+            "Abbreviation": ["NP"],
+            "Name": [
+              {
+                "Text": [
+                  {
+                    "#": "Non Partisan",
+                    "language": ["en"]
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "objectId": ["Party-1"],
+            "Abbreviation": ["DEM"],
+            "Name": [
+              {
+                "Text": [
+                  {
+                    "#": "Democratic",
+                    "language": ["en"]
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "objectId": ["Party-2"],
+            "Abbreviation": ["REP"],
+            "Name": [
+              {
+                "Text": [
+                  {
+                    "#": "Republican",
+                    "language": ["en"]
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "objectId": ["Party-3"],
+            "Abbreviation": ["AI"],
+            "Name": [
+              {
+                "Text": [
+                  {
+                    "#": "American Independent",
+                    "language": ["en"]
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "objectId": ["Party-4"],
+            "Abbreviation": ["GRN"],
+            "Name": [
+              {
+                "Text": [
+                  {
+                    "#": "Green",
+                    "language": ["en"]
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "objectId": ["Party-5"],
+            "Abbreviation": ["LIB"],
+            "Name": [
+              {
+                "Text": [
+                  {
+                    "#": "Libertarian",
+                    "language": ["en"]
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "objectId": ["Party-6"],
+            "Abbreviation": ["PF"],
+            "Name": [
+              {
+                "Text": [
+                  {
+                    "#": "Peace and Freedom",
+                    "language": ["en"]
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "PersonCollection": [
+      {
+        "Person": [
+          {
+            "objectId": ["per11431"],
+            "FirstName": ["JORGE"],
+            "FullName": [
+              {
+                "Text": [
+                  {
+                    "#": "JORGE A. MARQUEZ",
+                    "language": ["en"]
+                  }
+                ]
+              }
+            ],
+            "Gender": ["Male"],
+            "LastName": ["MARQUEZ"],
+            "MiddleName": ["A"],
+            "PartyId": ["Party-0"],
+            "Profession": [
+              {
+                "Text": [
+                  {
+                    "#": "Field Deputy/Councilmember",
+                    "language": ["en"]
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "objectId": ["per11427"],
+            "FirstName": ["JOHN"],
+            "FullName": [
+              {
+                "Text": [
+                  {
+                    "#": "JOHN C. KING",
+                    "language": ["en"]
+                  }
+                ]
+              }
+            ],
+            "Gender": ["Male"],
+            "LastName": ["KING"],
+            "MiddleName": ["C"],
+            "PartyId": ["Party-0"],
+            "Profession": [
+              {
+                "Text": [
+                  {
+                    "#": "Councilmember/Business Manager",
+                    "language": ["en"]
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "objectId": ["per11429"],
+            "FirstName": ["VICTOR"],
+            "FullName": [
+              {
+                "Text": [
+                  {
+                    "#": "VICTOR LINARES",
+                    "language": ["en"]
+                  }
+                ]
+              }
+            ],
+            "Gender": ["Male"],
+            "LastName": ["LINARES"],
+            "PartyId": ["Party-0"],
+            "Profession": [
+              {
+                "Text": [
+                  {
+                    "#": "Businessman",
+                    "language": ["en"]
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "objectId": ["per11432"],
+            "FirstName": ["NEIL"],
+            "FullName": [
+              {
+                "Text": [
+                  {
+                    "#": "NEIL L. POLZIN",
+                    "language": ["en"]
+                  }
+                ]
+              }
+            ],
+            "Gender": ["Male"],
+            "LastName": ["POLZIN"],
+            "MiddleName": ["L"],
+            "PartyId": ["Party-0"],
+            "Profession": [
+              {
+                "Text": [
+                  {
+                    "#": "Internet/Fleet Manager",
+                    "language": ["en"]
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "objectId": ["per11434"],
+            "FirstName": ["MARY LOU"],
+            "FullName": [
+              {
+                "Text": [
+                  {
+                    "#": "MARY LOU WALCZAK",
+                    "language": ["en"]
+                  }
+                ]
+              }
+            ],
+            "Gender": ["Female"],
+            "LastName": ["WALCZAK"],
+            "PartyId": ["Party-0"],
+            "Profession": [
+              {
+                "Text": [
+                  {
+                    "#": "Covina City Clerk",
+                    "language": ["en"]
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "objectId": ["per11433"],
+            "FirstName": ["GEOFFREY"],
+            "FullName": [
+              {
+                "Text": [
+                  {
+                    "#": "GEOFFREY COBBETT",
+                    "language": ["en"]
+                  }
+                ]
+              }
+            ],
+            "Gender": ["Male"],
+            "LastName": ["COBBETT"],
+            "PartyId": ["Party-0"],
+            "Profession": [
+              {
+                "Text": [
+                  {
+                    "#": "City Treasurer",
+                    "language": ["en"]
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ],
+    "SequenceStart": ["1"],
+    "SequenceEnd": ["1"],
+    "Status": ["certified"],
+    "VendorApplicationId": ["Auto-Generated v0.1"]
+  }
+}

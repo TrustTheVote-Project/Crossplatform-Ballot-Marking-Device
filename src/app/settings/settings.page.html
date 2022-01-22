@@ -1,0 +1,27 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>settings</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-item>
+    <ion-label>Data File: </ion-label>
+    <ion-select
+      (ionChange)="edfSelectionChange()"
+      [selectedText]="selectEDF"
+      [(ngModel)]="selectEDF"
+      value="results-06037-2017-03-07.xml"
+      [compareWith]="compareWith"
+      interface="popover"
+      placeholder="Select an EDF"
+    >
+      <ng-container *ngFor="let item of edFiles">
+        <ion-select-option *ngIf="item.trim().length > 0" value="{{item}}">{{item}}</ion-select-option>
+      </ng-container>
+    </ion-select>
+  </ion-item>
+  <div class="center-button">
+    <ion-button (click)="closeModal()" translate>CLOSE</ion-button>
+  </div>
+</ion-content>
