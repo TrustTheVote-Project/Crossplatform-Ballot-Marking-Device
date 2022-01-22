@@ -1,232 +1,130 @@
-import { Checkbox } from '@ionic/core/dist/types/components/checkbox/checkbox';
-import * as jsonQuery from 'json-query';
-
-import { Election } from './Election';
+import 'rxjs/add/operator/map';
 import { BallotSelection } from './BallotSelection';
-import { HomePage } from '../app/home/home.page';
+import { Election } from './Election';
+import { Checkbox } from 'ionic-angular/components/checkbox/checkbox';
+import { ModalController } from 'ionic-angular';
 
-const CANDIDATE_CONTEST_TYPE = 'cc';
-const CANDIDATE_CONTEST = 'CandiateContest';
-const BALLOT_MEASURE_TYPE = 'bm';
-const BALLOT_MEASURE_CONTEST = 'BallotMeasure';
 
 export class Contest {
-  readonly ballotSelectionQuery = '.BallotSelection[*]';
-  readonly nameQuery = '.Name[*]';
-  readonly votesAllowedQuery = '.VotesAllowed[0]';
-  readonly contestIdQuery = '.objectId';
-  readonly contestTypeQuery = '.[`xsi:type`][0]';
-  public contestType: string;
-  public contestId: string;
-  public contestName: string;
-  public ballotSelections: BallotSelection[] = new Array();
-  public popupTitle = '';
-  public statusMessage1 = '';
-  public statusMessage2 = '';
-  public statusMessage3 = '';
-  private parent: Election;
-  private votesAllowed = 0;
-  private currentlySelected = 0;
-  private contestIndex = 0;
-  // todo: given that this same private variable is defined in multiple places, it should be hoisted to a
-  // shared scope and used everywhere it's needed. maybe an enum would be better here?
-  private writeIn = 'writein';
+    readonly BALLOTSELECTIONQUERY = '.BallotSelection[*]';
+    readonly NAMEQUERY = '.Name[*]';
+    readonly VOTESALLOWEDQUERY = '.VotesAllowed[0]';
+    public contestType: String;
+    public constestId: String;
+    public contestName: string;
+    private parent: Election;
+    public ballotSelections: BallotSelection[] = new Array();
+    private jsonQuery = require('json-query');
+    private votesAllowed: number = 0;
+    private currentlySelected: number = 0;
+    public statusMessage: string = "";
+    private contestIndex: number = 0;
 
-  constructor(public home: HomePage, aString: string, parent: Election, contestIndex: number) {
-    console.log('aString is:' + JSON.stringify(aString));
-    this.parent = parent;
-    this.contestIndex = contestIndex;
-    if (null != aString) {
-      try {
-        const values = jsonQuery(this.nameQuery, { data: aString }).value;
-        values.forEach((element) => {
-          //e.g. "President and Vice President"
-          this.contestName = element;
-        });
-        this.setVotesAllowed(aString);
-        this.setContestId(aString);
-        this.setContestType();
-        this.setBallotSelections(aString);
-        console.log('contest info: ' + this.contestId + ', type:' + this.contestType);
-        this.home
-          .getTranslator()
-          .get('YOU_CAN_CHOOSE')
-          .subscribe((res: string) => {
-            this.statusMessage1 = res;
-          });
 
-        this.statusMessage2 = '' + (this.votesAllowed - this.currentlySelected);
-        this.home
-          .getTranslator()
-          .get('MORE')
-          .subscribe((res: string) => {
-            this.statusMessage3 = res;
-          });
-      } catch (e) {
-        console.log('Error:', e);
-      }
-    }
-  }
-
-  getContestName(): string {
-    return this.contestName;
-  }
-
-  setBallotSelections(aString: string) {
-    try {
-      const values = jsonQuery(this.ballotSelectionQuery, { data: aString }).value;
-      values.forEach((element) => {
-        this.ballotSelections.push(new BallotSelection(element, this));
-      });
-
-      //add a writein if not a BallotMeasure
-      console.log('add a write-in?  contest info: ' + this.contestId + ', type:' + this.contestType);
-      if (this.isCandidateContest()) {
-        const aBallotSelection = new BallotSelection(this.writeIn, this);
-        this.ballotSelections.push(aBallotSelection);
-      } else if (!this.isCandidateContest()) {
-        //add BallotMeasure Choices
-        const aBallotSelection = new BallotSelection(aString, this);
-        this.ballotSelections.push(aBallotSelection);
-      }
-    } catch (e) {
-      console.log('Error:', e);
-    }
-  }
-
-  isCandidateContest(): boolean {
-    // boolean rc = false;
-    return this.contestType === CANDIDATE_CONTEST ? true : false;
-  }
-  //    {
-  //    if (this.contestType === CANDIDATE_CONTEST) {
-  //
-  //       return(true);
-  //
-  //    }
-  //    return(rc);
-  // }
-
-  setContestType() {
-    if (this.contestId[0].startsWith(CANDIDATE_CONTEST_TYPE)) {
-      this.contestType = CANDIDATE_CONTEST;
-    } else if (this.contestId[0].startsWith(BALLOT_MEASURE_TYPE)) {
-      this.contestType = BALLOT_MEASURE_CONTEST;
-    } else {
-      this.contestType = 'unknown';
-    }
-  }
-
-  setContestId(aString: string) {
-    try {
-      this.contestId = jsonQuery(this.contestIdQuery, { data: aString }).value;
-    } catch (e) {
-      console.log('Error:', e);
-    }
-  }
-
-  setVotesAllowed(aString: string) {
-    try {
-      this.votesAllowed = jsonQuery(this.votesAllowedQuery, { data: aString }).value;
-    } catch (e) {
-      console.log('Error:', e);
-    }
-  }
-
-  getVotesAllowed(): number {
-    return this.votesAllowed;
-  }
-
-  getPage(): string {
-    return this.contestIndex + 1 + '/' + this.parent.getContestNamesCount();
-  }
-
-  getCurrentlySelected(): number {
-    return this.currentlySelected;
-  }
-
-  getVotesLeft(): number {
-    return this.votesAllowed - this.currentlySelected;
-  }
-
-  getBallotSelections(): BallotSelection[] {
-    return this.ballotSelections;
-  }
-
-  getParent(): Election {
-    return this.parent;
-  }
-
-  ionChangeIgnoreCheckbox(cbox: Checkbox) {
-    //always want true in the vote review page - don't allow deselection there!
-    console.log('Contest.ts: inside ionChangeIgnoreCheckbox, rechecking the checkbox');
-    cbox.checked = true;
-  }
-
-  ionChangeUpdateCheckboxAlt(cbox) {
-    console.log(
-      'Contest.ts: in updatecheckbox-ALT, cbox is:' + cbox.currentTarget.checked + ' currentlySelected is ' + this.currentlySelected
-    );
-  }
-
-  ionChangeUpdateCheckbox(cbox) {
-    if (cbox.currentTarget.checked) {
-      console.log('Contest.ts: cbox checked');
-      this.currentlySelected++;
-    } else {
-      console.log('Contest.ts: cbox was UNchecked');
-      this.currentlySelected--;
+    constructor(public modalCtrl: ModalController, aString: string, parent: Election, contestIndex: number) {
+        this.parent = parent;
+        this.contestIndex = contestIndex;
+        if (null != aString) {
+            try {
+                var values = this.jsonQuery(this.NAMEQUERY, { data: aString }).value;
+                values.forEach(element => {
+                    //e.g. "President and Vice President"
+                    this.contestName = element;
+                });
+                this.setBallotSelections(aString);
+                this.setVotesAllowed(aString);
+                this.statusMessage = "You can choose " + (this.votesAllowed - this.currentlySelected)
+                    + " more."
+            } catch (e) {
+                console.log("Error:", e);
+            }
+        }
     }
 
-    console.log('Contest.ts: currently selected: ' + this.currentlySelected + ', votesAllowed: ' + this.votesAllowed);
-
-    // eslint-disable-next-line
-    if (this.currentlySelected == this.votesAllowed) {
-      this.statusMessage1 = '';
-      this.statusMessage2 = '';
-      this.statusMessage3 = '';
-    } else if (this.votesAllowed > this.currentlySelected) {
-      console.log('Contest.ts - got here!!!!');
-      this.home
-        .getTranslator()
-        .get('YOU_CAN_CHOOSE')
-        .subscribe((res: string) => {
-          this.statusMessage1 = res;
-        });
-      this.statusMessage2 = '' + (this.votesAllowed - this.currentlySelected);
-      this.home
-        .getTranslator()
-        .get('MORE')
-        .subscribe((res: string) => {
-          this.statusMessage3 = res;
-        });
-    } else {
-      this.home
-        .getTranslator()
-        .get('SELECTED_TOO_MANY')
-        .subscribe((res: string) => {
-          this.statusMessage1 = res;
-        });
-
-      this.home
-        .getTranslator()
-        .get('TOO_MANY_TITLE')
-        .subscribe((res: string) => {
-          this.popupTitle = res;
-        });
-      const popupContent = { title: this.popupTitle, body: this.statusMessage1 };
-      //deselect what the user just did
-      cbox.currentTarget.checked = false;
-      //pop up modal dialog telling user to deselect something - they're already at max
-      this.home.openIonModal(popupContent);
+    getContestName(): string {
+        return this.contestName;
     }
-  }
 
-  canSelectMoreCandidates(): boolean {
-    return this.votesAllowed !== this.currentlySelected;
-  }
+    setBallotSelections(aString: string) {
+        try {
+            var values = this.jsonQuery(this.BALLOTSELECTIONQUERY, { data: aString }).value;
+            values.forEach(element => {
+                var aBallotSelection = new BallotSelection(element, this);
+                this.ballotSelections.push(aBallotSelection);
+            });
+        } catch (e) {
+            console.log("Error:", e);
+        }
+    }
 
-  oneVoteClicked() {
-    console.log('got here!');
-  }
+    setVotesAllowed(aString: string) {
+        try {
+            this.votesAllowed = this.jsonQuery(this.VOTESALLOWEDQUERY, { data: aString }).value;
+        } catch (e) {
+            console.log("Error:", e);
+        }
+    }
+
+    getVotesAllowed(): number {
+        return (this.votesAllowed);
+    }
+
+    getCurrentlySelected(): number {
+        return (this.currentlySelected);
+    }
+
+    getVotesLeft(): number {
+        return (this.votesAllowed - this.currentlySelected);
+    }
+
+    getBallotSelections(): BallotSelection[] {
+
+        return this.ballotSelections;
+    }
+
+    getParent(): Election {
+        return this.parent;
+
+    };
+
+    ionChangeIgnoreCheckbox(cbox: Checkbox) {
+        //always want true in the vote review page - don't allow deselection there!
+        cbox.checked = true;
+    }
+
+    ionChangeUpdateCheckbox(cbox: Checkbox) {
+        if (cbox.checked) {
+            this.currentlySelected++;
+        } else {
+            this.currentlySelected--;
+        }
+        if (this.currentlySelected == this.votesAllowed) {
+            this.statusMessage = "";
+        } else if (this.votesAllowed > this.currentlySelected) {
+            this.statusMessage = "You can choose " + (this.votesAllowed - this.currentlySelected)
+                + " more."
+        } else {
+            this.statusMessage = "You have selected too many candidates - please deselect "
+                + "the candidate you do not want, then select the candidate you do want."
+            let popupContent = { title: 'Too many selections', content: this.statusMessage };
+            //deselect what the user just did
+            cbox.checked = false;
+            //pop up modal dialog telling user to deselect something - they're already at max
+            var modal = this.modalCtrl.create('ModalPopupPage', popupContent);
+
+            modal.present();
+        }
+    }
+
+    canSelectMoreCandidates(): boolean {
+        if (this.votesAllowed == this.currentlySelected) {
+            return (false);
+        } else {
+            return (true);
+        }
+    }
+    oneVoteClicked(event: Event) {
+        console.log("got here!");
+
+    }
 }

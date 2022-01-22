@@ -1,8 +1,8 @@
 {
-  "name": "ttvBMD2",
+  "name": "ttvBMD",
   "integrations": {
-    "capacitor": {},
     "cordova": {}
   },
-  "type": "angular"
+  "type": "ionic-angular",
+  "id": "73acb891"
 }
