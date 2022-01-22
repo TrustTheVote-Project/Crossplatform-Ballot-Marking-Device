@@ -60,12 +60,8 @@ export class HomePage implements OnInit {
 
   openXML() {
     //alternate data files... need to be able to select which to use
-    this.election = new Election(this.http, this.xmlFile, this);
     //from the device... TO-DO...later
-    //this.election = new Election( this.http, '/assets/data/64K_1Contest.xml', this);
-    //                  this.election = new Election( this.http, '/assets/data/results-06037-2017-03-07.xml', this);
-    //this.election = new Election( this.http, '/assets/data/LA_County_Reference.xml', this);
-    ////this.election = new Election(this.http, '/assets/data/results-06037-2016-11-08.xml');
+    this.election = new Election(this.http, this.xmlFile, this);
   }
 
   async openIonModal(data: any) {

@@ -9,10 +9,12 @@ import { HomePage } from '../app/home/home.page';
 @Injectable()
 export class Election {
   readonly contestQuery = 'ElectionReport.Election.ContestCollection.Contest';
+  readonly edfFileVersionQuery = 'ElectionReport.xmlns[0]';
   public xml = '';
   public contests: Contest[] = new Array();
   public ready = false;
   public edfFile: string;
+  public edfVersion: string;
   private jsonObj = '';
   private contestNames: string[] = new Array();
   private candidateNames: string[] = new Array();
@@ -44,6 +46,9 @@ export class Election {
             xmlData = data.toString();
             myParser.parseString(xmlData, (err, jsonData) => {
               this.jsonObj = jsonData;
+              console.log('jsonData read is: ' + JSON.stringify(jsonData));
+              this.setEDFVersion(jsonQuery(this.edfFileVersionQuery, { data: this.jsonObj }).value);
+              console.log('EDF Version is: ' + this.edfVersion);
               this.setContests();
               //                  this.printContestNames();
               this.getContestNames();
@@ -54,6 +59,18 @@ export class Election {
         console.log('Error:', e);
       }
     }
+  }
+
+  setEDFVersion(edfFileVersion: string) {
+    if (edfFileVersion.includes('V1')) {
+      this.edfVersion = 'V1';
+    } else {
+      this.edfVersion = 'V2';
+    }
+  }
+
+  isV1(): boolean {
+    return this.edfVersion === 'V1';
   }
 
   getContestNamesCount(): number {

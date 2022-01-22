@@ -5,11 +5,17 @@ import { Election } from './Election';
 import { BallotSelection } from './BallotSelection';
 import { HomePage } from '../app/home/home.page';
 
+const CANDIDATE_CONTEST_TYPE = 'cc';
+const CANDIDATE_CONTEST = 'CandiateContest';
+const BALLOT_MEASURE_TYPE = 'bm';
+const BALLOT_MEASURE_CONTEST = 'BallotMeasure';
+
 export class Contest {
   readonly ballotSelectionQuery = '.BallotSelection[*]';
   readonly nameQuery = '.Name[*]';
   readonly votesAllowedQuery = '.VotesAllowed[0]';
   readonly contestIdQuery = '.objectId';
+  readonly contestTypeQuery = '.[`xsi:type`][0]';
   public contestType: string;
   public contestId: string;
   public contestName: string;
@@ -27,7 +33,7 @@ export class Contest {
   private writeIn = 'writein';
 
   constructor(public home: HomePage, aString: string, parent: Election, contestIndex: number) {
-    console.log('aString is:' + aString);
+    console.log('aString is:' + JSON.stringify(aString));
     this.parent = parent;
     this.contestIndex = contestIndex;
     if (null != aString) {
@@ -37,9 +43,11 @@ export class Contest {
           //e.g. "President and Vice President"
           this.contestName = element;
         });
-        this.setBallotSelections(aString);
         this.setVotesAllowed(aString);
         this.setContestId(aString);
+        this.setContestType();
+        this.setBallotSelections(aString);
+        console.log('contest info: ' + this.contestId + ', type:' + this.contestType);
         this.home
           .getTranslator()
           .get('YOU_CAN_CHOOSE')
@@ -70,11 +78,42 @@ export class Contest {
       values.forEach((element) => {
         this.ballotSelections.push(new BallotSelection(element, this));
       });
-      //add a writein
-      const aBallotSelection = new BallotSelection(this.writeIn, this);
-      this.ballotSelections.push(aBallotSelection);
+
+      //add a writein if not a BallotMeasure
+      console.log('add a write-in?  contest info: ' + this.contestId + ', type:' + this.contestType);
+      if (this.isCandidateContest()) {
+        const aBallotSelection = new BallotSelection(this.writeIn, this);
+        this.ballotSelections.push(aBallotSelection);
+      } else if (!this.isCandidateContest()) {
+        //add BallotMeasure Choices
+        const aBallotSelection = new BallotSelection(aString, this);
+        this.ballotSelections.push(aBallotSelection);
+      }
     } catch (e) {
       console.log('Error:', e);
+    }
+  }
+
+  isCandidateContest(): boolean {
+    // boolean rc = false;
+    return this.contestType === CANDIDATE_CONTEST ? true : false;
+  }
+  //    {
+  //    if (this.contestType === CANDIDATE_CONTEST) {
+  //
+  //       return(true);
+  //
+  //    }
+  //    return(rc);
+  // }
+
+  setContestType() {
+    if (this.contestId[0].startsWith(CANDIDATE_CONTEST_TYPE)) {
+      this.contestType = CANDIDATE_CONTEST;
+    } else if (this.contestId[0].startsWith(BALLOT_MEASURE_TYPE)) {
+      this.contestType = BALLOT_MEASURE_CONTEST;
+    } else {
+      this.contestType = 'unknown';
     }
   }
 

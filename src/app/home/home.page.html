@@ -2,10 +2,13 @@
   <ion-toolbar>
     <div class="center-button">
       <ion-button outline (click)="settings($event)" translate> <ion-icon name="cog-outline"></ion-icon>SETTINGS</ion-button>
-      <ion-button outline (click)="help($event)" translate>
-        <ion-icon name="help-outline"></ion-icon>
-        HELP
-      </ion-button>
+
+      <!-- BAS commented out on 01/11/22  for Anne because there's no help yet  -->
+      <!-- <ion&#45;button outline (click)="help($event)" translate> -->
+      <!--   <ion&#45;icon name="help&#45;outline"></ion&#45;icon> -->
+      <!--   HELP -->
+      <!-- </ion&#45;button> -->
+
       <ion-button outline (click)="voteReview($event)" translate>REVIEW_YOUR_VOTES</ion-button>
     </div>
   </ion-toolbar>
@@ -43,15 +46,50 @@
             </ion-item>
           </div>
           <ion-list no-line>
-            <div *ngFor="let ballotSelection of item.ballotSelections">
-              <div *ngFor="let candidateName of ballotSelection.candidates">
+            <ng-container *ngIf="item.isCandidateContest()">
+              <div *ngFor="let ballotSelection of item.ballotSelections">
+                <div *ngFor="let candidateName of ballotSelection.candidates">
+                  <ion-row no-line>
+                    <ion-item text-wrap no-line item-start (click)="itemClicked($event, candidateName)">
+                      <ion-checkbox
+                        [(ngModel)]="ballotSelection.selected"
+                        (ionChange)="item.ionChangeUpdateCheckbox($event)"
+                      ></ion-checkbox>
+                      <ion-label no-line>{{candidateName.personName}} {{candidateName.partyAbbreviation}}</ion-label>
+                    </ion-item>
+                  </ion-row>
+                </div>
+              </div>
+            </ng-container>
+
+            <div *ngIf="!item.isCandidateContest()">
+              <ion-radio-group (ionChange)="item.ionChangeUpdateCheckbox($event)">
                 <ion-row no-line>
                   <ion-item text-wrap no-line item-start (click)="itemClicked($event, candidateName)">
-                    <ion-checkbox [(ngModel)]="ballotSelection.selected" (ionChange)="item.ionChangeUpdateCheckbox($event)"></ion-checkbox>
-                    <ion-label no-line>{{candidateName.personName}} {{candidateName.partyAbbreviation}}</ion-label>
+                    <ion-radio value="YES"></ion-radio>
+                    <ion-label no-line>YES</ion-label>
                   </ion-item>
                 </ion-row>
-              </div>
+                <ion-row no-line>
+                  <ion-item text-wrap no-line item-start (click)="itemClicked($event, candidateName)">
+                    <ion-radio value="NO"></ion-radio>
+                    <ion-label no-line>NO</ion-label>
+                  </ion-item>
+                </ion-row>
+                <!-- <div *ngFor="let ballotSelection of -->
+                <!--    item.ballotSelections" [(ngModel)]="ballotSelection.selected"> -->
+                <!--    <div *ngFor="let candidateName of ballotSelection.candidates"> -->
+                <!--       <ion&#45;row no&#45;line> -->
+                <!--          <ion&#45;item text&#45;wrap no&#45;line item&#45;start (click)="itemClicked($event, candidateName)"> -->
+                <!--  -->
+                <!--             <ion&#45;radio -->
+                <!--                value={{candidateName.personName}}></ion&#45;radio>  -->
+                <!--             <ion&#45;label no&#45;line>{{candidateName.personName}}</ion&#45;label> -->
+                <!--          </ion&#45;item> -->
+                <!--       </ion&#45;row> -->
+                <!--    </div> -->
+                <!-- </div> -->
+              </ion-radio-group>
             </div>
           </ion-list>
           <div class="center-button">

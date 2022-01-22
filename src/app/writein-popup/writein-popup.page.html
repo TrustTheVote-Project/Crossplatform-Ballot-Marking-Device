@@ -8,11 +8,13 @@
   <ion-item>
     <ion-label position="stacked">Enter the write-in candidate's name below (max 50 characters)</ion-label>
     <ion-input
+      #writeInInputField
       [(ngModel)]="writeinName"
+      (ionChange)="gotChange(writeInInputField)"
       autocapitalize="words"
       placeholder="Enter a name"
       clearInput
-      pattern="[[0-9A-Za-z\'\.\,\- \ ]+"
+      pattern="^[0-9A-Za-z'.,\- ]+$"
       type="text"
       maxlength="50"
       size="50"

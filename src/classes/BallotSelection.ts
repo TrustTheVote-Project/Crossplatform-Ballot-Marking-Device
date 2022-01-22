@@ -5,6 +5,7 @@ import { Contest } from './Contest';
 
 export class BallotSelection {
   readonly candidateQuery = '.CandidateIds[*]';
+  readonly ballotMeasureQuery = '.BallotSelection[*].Selection[*]';
   readonly sequenceOrderQuery = '.SequenceOrder';
   public jsonObj = '';
   public sequenceOrder: number;
@@ -43,15 +44,11 @@ export class BallotSelection {
 
   getCandidateId(): string {
     let candidateId: string;
-    //const myCandArray: string[] = new Array();
     this.candidates.forEach((element) => {
-      //maybe array join("and") instead?
-      //myCandArray.push(element.candidateId);
       console.log('candidate ' + element.getCandidateName() + ' has id ' + element.candidateId + ' and personId ' + element.personId);
       candidateId = element.candidateId;
     });
-    //      return myCandArray.join(' and ') + ' ' ;
-    if (candidateId === undefined) {
+    if (candidateId === '') {
       candidateId = 'writeIn';
     }
     return candidateId;
@@ -63,14 +60,31 @@ export class BallotSelection {
 
   setCandidates(aString: string) {
     if (aString !== this.writeIn) {
-      const values = jsonQuery(this.candidateQuery, { data: this.jsonObj }).value;
-      values.forEach((element) => {
-        const myCandidateValue: string[] = element.split(' ');
-        myCandidateValue.forEach((candidateElement) => {
-          const candidate = new Candidate(candidateElement, this);
-          this.candidates.push(candidate);
+      if (!this.getParent().isCandidateContest()) {
+        console.log('BallotSelection is a BallotMeasure, jsonObj is ' + JSON.stringify(this.jsonObj));
+        console.log('BallotSelection is a BallotMeasure, aString is ' + JSON.stringify(aString));
+        const values = jsonQuery(this.ballotMeasureQuery, { data: aString }).value;
+
+        console.log('values are:' + JSON.stringify(values));
+
+        values.forEach((element) => {
+          element.forEach((ballotMeasureElement) => {
+            const ballotMeasure = new Candidate(ballotMeasureElement, this);
+            this.candidates.push(ballotMeasure);
+          });
         });
-      });
+      } else {
+        const values = jsonQuery(this.candidateQuery, { data: this.jsonObj }).value;
+        console.log('BallotSelection - candidate contest, values are: ' + values);
+        values.forEach((element) => {
+          console.log('BallotSelection - candidate contest, values to split are: ' + element);
+          const myCandidateValue: string[] = element.split(' ');
+          myCandidateValue.forEach((candidateElement) => {
+            const candidate = new Candidate(candidateElement, this);
+            this.candidates.push(candidate);
+          });
+        });
+      }
     } else {
       this.addWriteInCandidate();
     }
