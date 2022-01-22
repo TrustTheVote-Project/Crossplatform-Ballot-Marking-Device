@@ -6,6 +6,7 @@ export class Candidate {
   readonly personQuery = 'ElectionReport.PersonCollection[*].Person[*]';
   readonly fullNameQuery = 'ElectionReport.PersonCollection.Person[objectId=?].FullName[0].Text[0].#';
   readonly genderQuery = 'ElectionReport.PersonCollection.Person[objectId=?].Gender[0]';
+  readonly ballotMeasureChoiceQuery = 'Selection[0].Text.#';
   readonly isIncumbentQuery = 'ElectionReport.Election.CandidateCollection.Candidate[objectId=?].IsIncumbent[0]';
   readonly partyIdQuery = 'ElectionReport.Election.CandidateCollection.Candidate[objectId=?].PartyId[0]';
   readonly partyAbbreviationQuery = 'ElectionReport.PartyCollection.Party[objectId=?].Abbreviation[0]';
@@ -39,25 +40,28 @@ export class Candidate {
     }
   }
 
-  // todo: this doesn't appear to be used anywhere, can it be removed?
-  getAllNames(): string[] {
-    return jsonQuery(this.personQuery, { data: this.jsonObj }).value;
-  }
-
   getParent(): BallotSelection {
     return this.parent;
   }
 
   getCandidateInfo(aString: string) {
     if (aString !== this.writeIn) {
-      //find candidate info using the candidateId - grab the party name, candidate name, etc.
-      this.getPersonId(this.candidateId);
-      this.personName = jsonQuery([this.fullNameQuery, this.personId], { data: aString }).value;
-      this.gender = jsonQuery([this.genderQuery, this.personId], { data: aString }).value;
-      this.isIncumbent = jsonQuery([this.isIncumbentQuery, this.candidateId], { data: aString }).value;
-      const partyId = jsonQuery([this.partyIdQuery, this.candidateId], { data: aString }).value;
-      this.partyAbbreviation = jsonQuery([this.partyAbbreviationQuery, partyId], { data: aString }).value;
-      this.partyName = jsonQuery([this.partyNameQuery, partyId], { data: aString }).value;
+      if (this.getParent().getParent().isCandidateContest()) {
+        //find candidate info using the candidateId - grab the party name, candidate name, etc.
+        this.getPersonId(this.candidateId);
+        this.personName = jsonQuery([this.fullNameQuery, this.personId], { data: aString }).value;
+        this.gender = jsonQuery([this.genderQuery, this.personId], { data: aString }).value;
+        this.isIncumbent = jsonQuery([this.isIncumbentQuery, this.candidateId], { data: aString }).value;
+        const partyId = jsonQuery([this.partyIdQuery, this.candidateId], { data: aString }).value;
+        this.partyAbbreviation = jsonQuery([this.partyAbbreviationQuery, partyId], { data: aString }).value;
+        this.partyName = jsonQuery([this.partyNameQuery, partyId], { data: aString }).value;
+      } else {
+        //not terribly intuitive, but instead of a Person's name we will get
+        //the Ballot Measure values - probably just "YES" or "NO"
+        console.log('jsonObj is ' + JSON.stringify(this.jsonObj));
+        this.personName = jsonQuery(this.ballotMeasureChoiceQuery, { data: this.jsonObj }).value;
+        console.log('Candidate: ballot measure choice value is: ' + this.personName);
+      }
     } else {
       this.personName = this.writeIn;
     }

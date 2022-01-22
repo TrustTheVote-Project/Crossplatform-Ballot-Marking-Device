@@ -32,7 +32,7 @@ module.exports = function (config) {
         emitWarning: false,
         global: {
           statements: 10,
-          branches: 10,
+          branches: 5,
           functions: 10,
           lines: 10,
         },

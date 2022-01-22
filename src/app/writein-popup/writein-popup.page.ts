@@ -17,4 +17,9 @@ export class WriteinPopupPage implements OnInit {
   async closeModal() {
     await this.modal.dismiss(this.writeinName);
   }
+
+  gotChange(evt: any): boolean {
+    console.log('gotChange:  event is ' + evt);
+    return false;
+  }
 }

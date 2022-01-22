@@ -2,6 +2,8 @@ import { Component, OnInit, Input } from '@angular/core';
 import { ModalController } from '@ionic/angular';
 import { HomePage } from '../home/home.page';
 
+const EDF_LOC_CONST = '/assets/data/';
+
 @Component({
   selector: 'app-settings',
   templateUrl: './settings.page.html',
@@ -23,19 +25,14 @@ export class SettingsPage implements OnInit {
     const close = 'Modal Removed';
     await this.modalController.dismiss(close);
 
-    const filePath = `/assets/data/${this.selectEDF}`;
-    if (filePath !== this.home.getEDF()) {
-      console.log(this.home.getEDF() + ' does not equal ' + filePath);
-      this.home.setEDF(filePath);
+    if (`${this.selectEDF}` !== this.home.getEDF()) {
+      this.home.setEDF(`${this.selectEDF}`);
     }
   }
 
-  // todo: this doesn't actually do anything - can it be removed?
-  myChange() {
-    console.log('got to myChange');
-    console.log('selected EDF is ' + this.selectEDF);
-    if (this.selectEDF !== this.home.getEDF()) {
-      //         console.log(this.home.getEDF() + ' does not equal ' + this.selectEDF);
+  edfSelectionChange() {
+    if (!this.selectEDF.startsWith(EDF_LOC_CONST)) {
+      this.selectEDF = EDF_LOC_CONST + this.selectEDF;
     }
   }
 }
