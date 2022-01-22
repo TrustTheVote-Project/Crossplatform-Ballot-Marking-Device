@@ -1,0 +1,21 @@
+<ion-content padding>
+  <ion-card>
+    {{contest.contestName}}
+    <br>select: {{contest.getVotesAllowed()}}
+    <br> {{contest.statusMessage}}
+    <ion-list no-line>
+      <div *ngFor="let ballotSelection of contest.ballotSelections">
+        <div *ngFor="let candidateName of ballotSelection.candidates">
+          <ion-row no-line>
+            <ion-item text-wrap no-line item-start>
+              <ion-label no-line>{{candidateName.personName}} {{candidateName.partyAbbreviation}}</ion-label>
+              <ion-checkbox [(ngModel)]="ballotSelection.selected" (ionChange)="contest.ionChangeUpdateCheckbox($event)"></ion-checkbox>
+            </ion-item>
+          </ion-row>
+        </div>
+      </div>
+    </ion-list>
+  </ion-card>
+  <button ion-button small color=secondary (click)="closeModal()">Close</button>
+
+</ion-content>

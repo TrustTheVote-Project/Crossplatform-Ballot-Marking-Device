@@ -1,0 +1,11 @@
+<ion-content padding>
+    <!--
+    <ion-item text-wrap>
+        <button ion-button block outline (click)="openXML()">openXML</button>
+    </ion-item>
+-->
+
+    <ion-slides>
+        <ion-slide *ngFor="let item of electionContestNames">{{item}}</ion-slide>
+    </ion-slides>
+</ion-content>
