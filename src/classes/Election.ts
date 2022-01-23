@@ -152,7 +152,9 @@ export class Election {
       }
     });
     output += '}';
-    console.log(output);
+
+    // console.log(JSON.stringify(JSON.parse(output), null, 2));
+    return JSON.parse(output);
   }
 
   getContestByIndex(index: number): Contest {
@@ -160,7 +162,7 @@ export class Election {
   }
 
   castBallot() {
-    console.log(this.createCVR());
+    console.log(JSON.stringify(this.createCVR(), null, 4));
     return this.createCVR();
   }
   getEmptyWriteIns(contestants): number {
