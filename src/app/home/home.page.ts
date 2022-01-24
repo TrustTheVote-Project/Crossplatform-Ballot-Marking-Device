@@ -8,6 +8,7 @@ import { TranslateService } from '@ngx-translate/core';
 import { ModalPopupPage } from '../modal-popup/modal-popup.page';
 import { VoteReviewPage } from '../vote-review/vote-review.page';
 import { SettingsPage } from '../settings/settings.page';
+import { HelpModalPage } from '../help-modal/help-modal.page';
 import { Candidate } from '../../classes/Candidate';
 import { Election } from '../../classes/Election';
 import { WriteinPopupPage } from '../writein-popup/writein-popup.page';
@@ -26,7 +27,7 @@ export class HomePage implements OnInit {
   };
 
   public xml = '';
-  public xmlFile = '/assets/data/64K_1Contest.xml';
+  public xmlFile = '/assets/data/test_case_1.xml';
   public electionContestNames: string[];
   public currentContest: number;
   public title: string;
@@ -248,5 +249,17 @@ export class HomePage implements OnInit {
         candidate.setCandidateName(candidate.writeInConst);
       }
     });
+  }
+
+  async help(): Promise<void> {
+    console.log('You asked for help!');
+    const helpModal = await this.modalController.create({
+      component: HelpModalPage,
+      componentProps: {
+        title: 'Help',
+      },
+    });
+    return await helpModal.present();
+    helpModal.onDidDismiss();
   }
 }

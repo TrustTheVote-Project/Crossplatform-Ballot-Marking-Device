@@ -31,6 +31,10 @@ const routes: Routes = [
     path: 'writein-popup',
     loadChildren: () => import('./writein-popup/writein-popup.module').then((m) => m.WriteinPopupPageModule),
   },
+  {
+    path: 'help-modal',
+    loadChildren: () => import('./help-modal/help-modal.module').then((m) => m.HelpModalPageModule),
+  },
 ];
 
 @NgModule({

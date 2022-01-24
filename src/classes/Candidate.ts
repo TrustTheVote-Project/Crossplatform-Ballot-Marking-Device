@@ -19,7 +19,7 @@ export class Candidate {
   public partyAbbreviation: string;
   public personId: string;
   public gender: string;
-  public writeInConst = `Touch here to write in a candidate's name`;
+  public writeInConst = 'Touch here to write in a name.';
   private parent: BallotSelection;
   private writeInCandidate: boolean;
   // todo: given that this same private variable is defined in multiple places, it should be hoisted to a

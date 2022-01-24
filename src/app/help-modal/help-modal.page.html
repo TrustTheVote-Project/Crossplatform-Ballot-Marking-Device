@@ -1,0 +1,33 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>{{ title }}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-text>
+    <h1><b>How to vote</b></h1>
+  </ion-text>
+  <ion-text> <b>To vote for the candidate of your choice,</b> touch that person’s name. The circle will turn blue.<br /><br /></ion-text>
+
+  <ion-text>
+    <b>To write in a candidate:</b> To vote for a person who is not on the ballot touch “Touch here to write in a name.” You will get more
+    instructions on how to complete your write in.<br /><br />
+  </ion-text>
+  <ion-text>
+    <b>If you want to change your vote or if you make a mistake,</b> first touch the blue choice you no longer want. It turns white again.
+    Then touch the choice you do want.<br /><br />
+  </ion-text>
+
+  <ion-text>
+    <b>You do not have to vote in every race.</b> Your ballot will still be counted even if you do not vote in every race.<br /><br />
+  </ion-text>
+
+  <ion-row>
+    <ion-col text-center>
+      <div class="center-button">
+        <ion-button (click)="closeModal()" translate>CLOSE</ion-button>
+      </div>
+    </ion-col>
+  </ion-row>
+</ion-content>

@@ -4,6 +4,7 @@ import { ModalController, IonContent } from '@ionic/angular';
 import { Election } from '../../classes/Election';
 import { HomePage } from '../home/home.page';
 import { PresentOneContestPage } from '../present-one-contest/present-one-contest.page';
+import { CastBallotModalPage } from '../cast-ballot-modal/cast-ballot-modal.page';
 
 @Component({
   // eslint-disable-next-line @angular-eslint/component-selector
@@ -21,10 +22,13 @@ export class VoteReviewPage implements OnInit {
 
   public modal: ModalController;
   public oneVoteModal: ModalController;
+  public castBallotModal: ModalController;
 
   constructor(public modalController: ModalController) {
     this.modal = modalController;
     this.oneVoteModal = modalController;
+    this.castBallotModal = modalController;
+
     console.log('vote-review.page::ctor - should focus on contest ' + this.scrollToContest);
   }
 
@@ -72,7 +76,21 @@ export class VoteReviewPage implements OnInit {
   async closeModalCastBallot() {
     const close = 'Modal Removed';
     await this.modal.dismiss(close);
-    this.election.castBallot();
+    const cvr = this.election.castBallot();
+    const prettyCVR = JSON.stringify(cvr, null, 2);
+    this.postCastBallotModal(prettyCVR);
+  }
+
+  async postCastBallotModal(prettyCVR: string) {
+    console.log('opening the cast ballot modal');
+    const castBallotModal = await this.modalController.create({
+      component: CastBallotModalPage,
+      componentProps: {
+        title: 'Thank you for casting your ballot!',
+        body: prettyCVR,
+      },
+    });
+    return await castBallotModal.present();
   }
 
   // todo: I don't think this is actually used anywhere, can it be removed?

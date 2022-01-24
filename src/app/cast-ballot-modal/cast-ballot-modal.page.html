@@ -1,0 +1,27 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>{{ title }}</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-text>
+    <pre>
+{{ body }}
+      </pre
+    >
+  </ion-text>
+
+  <ion-row>
+    <div class="center-button">
+      <br />
+      <u> End Test Screen Text </u>
+    </div>
+  </ion-row>
+  <ion-row>
+    <div class="center-button">
+      <ion-button class="extra-padding" (click)="closeModal()" translate>CLOSE</ion-button>
+      <ion-button color="danger" (click)="closeModalCastBallot()" translate>RESET</ion-button>
+    </div>
+  </ion-row>
+</ion-content>
