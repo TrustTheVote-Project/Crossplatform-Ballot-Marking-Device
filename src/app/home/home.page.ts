@@ -27,7 +27,7 @@ export class HomePage implements OnInit {
   };
 
   public xml = '';
-  public xmlFile = '/assets/data/test_case_1.xml';
+  public xmlFile = '/assets/data/64K_1Contest_Jetsons.xml';
   public electionContestNames: string[];
   public currentContest: number;
   public title: string;

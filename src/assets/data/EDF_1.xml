@@ -1,0 +1,211 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ElectionReport xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+ xsi:schemaLocation="NIST_V1_election_results.xsd file:/Users/cwulfman/repos/github/trustthevote/NIST-1500-100-103-examples/NIST_1500-100/version_1/schemas/ElectionReport.xsd"
+ xmlns="NIST_V1_election_results.xsd">
+   <Election>
+      <CandidateCollection>
+         <Candidate objectId="can00001">
+            <BallotName>
+               <Text language="en">Cosmo Spacely</Text>
+            </BallotName>
+            <IsIncumbent>false</IsIncumbent>
+            <PartyId>Party-1</PartyId>
+            <PersonId>per00001</PersonId>
+         </Candidate>
+         <Candidate objectId="can00002">
+            <BallotName>
+               <Text language="en">Spencer Cogswell</Text>
+            </BallotName>
+            <IsIncumbent>false</IsIncumbent>
+            <PartyId>Party-2</PartyId>
+            <PersonId>per00002</PersonId>
+         </Candidate>
+         <Candidate objectId="can00003">
+            <BallotName>
+               <Text language="en">Jane Jetson</Text>
+            </BallotName>
+            <IsIncumbent>false</IsIncumbent>
+            <PartyId>Party-1</PartyId>
+            <PersonId>per00003</PersonId>
+         </Candidate>
+         <Candidate objectId="can00004">
+            <BallotName>
+               <Text language="en">Harlan Ellis</Text>
+            </BallotName>
+            <IsIncumbent>false</IsIncumbent>
+            <PartyId>Party-1</PartyId>
+            <PersonId>per00004</PersonId>
+         </Candidate>
+         <Candidate objectId="can00005">
+            <BallotName>
+               <Text language="en">Rudy Indexer</Text>
+            </BallotName>
+            <IsIncumbent>false</IsIncumbent>
+            <PartyId>Party-1</PartyId>
+            <PersonId>per00005</PersonId>
+         </Candidate>
+         
+
+      </CandidateCollection>
+      <ContestCollection>
+         
+         <Contest objectId="con00001" xsi:type="CandidateContest">   
+            <BallotSelection objectId="bs00001" xsi:type="CandidateSelection">
+               <SequenceOrder>1</SequenceOrder>
+               <CandidateIds>can00001</CandidateIds>
+            </BallotSelection>
+            <BallotSelection objectId="bs00002" xsi:type="CandidateSelection">
+               <SequenceOrder>2</SequenceOrder>
+               <CandidateIds>can00002</CandidateIds>
+            </BallotSelection>
+            <BallotTitle>
+               <Text language="en">Orbit City Mayor</Text>
+            </BallotTitle>
+            <ElectoralDistrictId>spacetown-precinct</ElectoralDistrictId>
+            <Name>Orbit City Mayor</Name>
+            <OfficeIds>off4962</OfficeIds>
+            <VotesAllowed>1</VotesAllowed>
+         </Contest>
+         
+         <Contest objectId="con00002" xsi:type="CandidateContest">   
+            <BallotSelection objectId="bs00003" xsi:type="CandidateSelection">
+               <SequenceOrder>1</SequenceOrder>
+               <CandidateIds>can00003</CandidateIds>
+            </BallotSelection>
+            <BallotSelection objectId="bs00004" xsi:type="CandidateSelection">
+               <SequenceOrder>2</SequenceOrder>
+               <CandidateIds>can00004</CandidateIds>
+            </BallotSelection>
+            <BallotSelection objectId="bs00005" xsi:type="CandidateSelection">
+               <SequenceOrder>3</SequenceOrder>
+               <CandidateIds>can00005</CandidateIds>
+            </BallotSelection>
+            <BallotTitle>
+               <Text language="en">Spaceport Control Board</Text>
+            </BallotTitle>
+            <ElectoralDistrictId>spacetown-precinct</ElectoralDistrictId>
+            <Name>Spaceport Control Board</Name>
+            <OfficeIds>off4962</OfficeIds>
+            <VotesAllowed>1</VotesAllowed>
+         </Contest>
+         
+         <Contest xsi:type="BallotMeasureContest"
+            objectId="contest-ballot-measure-gadget-county-1">
+            <BallotSelection xsi:type="BallotMeasureSelection" objectId="ballot-measure-yes">
+               <SequenceOrder>1</SequenceOrder>
+               <Selection>
+                  <Text language="en">yes</Text>
+               </Selection>
+               
+            </BallotSelection>
+            <BallotSelection xsi:type="BallotMeasureSelection" objectId="ballot-measure-no">
+               <SequenceOrder>2</SequenceOrder>
+               <Selection>
+                  <Text language="en">no</Text>
+               </Selection>
+            </BallotSelection>
+            <ElectoralDistrictId>gadget-county</ElectoralDistrictId>
+            <Name>Gadget County Sales Tax Increase</Name>
+            <VoteVariation>approval</VoteVariation>                
+            <FullText>
+               <Text language="en">Shall Gadget County increase its s
+                  ales tax from 1% to 1.1% for the purpose of raising 
+                  additional revenue to fund expanded air traffic 
+                  control operations?</Text>
+            </FullText>
+            <Type>ballot-measure</Type>
+         </Contest>
+         
+      </ContestCollection>
+      
+      <ElectionScopeId>gadget-county</ElectionScopeId>
+      <Name>
+         <Text language="en">Gadget County General Election</Text>
+      </Name>
+      <StartDate>2017-03-07</StartDate>
+      <EndDate>2017-03-07</EndDate>
+      <Type>special</Type>
+   </Election>
+   <Format>precinct-level</Format>
+   <GeneratedDate>2017-03-21T10:45:22</GeneratedDate>
+   <GpUnitCollection>
+      <GpUnit xsi:type="ReportingUnit" objectId="gadget-county">
+         <ComposingGpUnitIds> spacetown-precinct</ComposingGpUnitIds>
+         <Name>Gadget County</Name>
+         <Type>county</Type>
+      </GpUnit>
+      <GpUnit xsi:type="ReportingUnit" objectId="spacetown-precinct">
+         <Name>Spacetown Precinct</Name>
+          <Type>precinct</Type>
+      </GpUnit>
+   </GpUnitCollection>
+   <Issuer>Trust the Vote</Issuer>
+   <IssuerAbbreviation>TTV</IssuerAbbreviation>
+   <OfficeCollection>
+      <Office objectId="off4954">
+         <IsPartisan>true</IsPartisan>
+         <Name>
+            <Text language="en">Member of Spaceport Control Board</Text>
+         </Name>
+      </Office>
+      <Office objectId="off4962">
+         <Name>
+            <Text language="en">Orbit City Mayoer</Text>
+         </Name>
+      </Office>
+   </OfficeCollection>
+   
+   <PartyCollection>
+      <Party objectId="Party-1">
+         <Abbreviation>Lepton</Abbreviation>
+         <Name>
+            <Text language="en">Lepton Party</Text>
+         </Name>
+      </Party>
+      <Party objectId="Party-2">
+         <Abbreviation>Hadron</Abbreviation>
+         <Name>
+            <Text language="en">Hadron Party</Text>
+         </Name>
+      </Party>      
+   </PartyCollection>
+   
+   <PersonCollection>
+      <Person objectId="per00001">
+         <FullName>
+            <Text language="en">Cosmo Spacely</Text>
+         </FullName>
+         <PartyId>Party-1</PartyId>
+      </Person>
+      <Person objectId="per00002">
+         <FullName>
+            <Text language="en">Spencer Cogswell</Text>
+         </FullName>
+         <PartyId>Party-2</PartyId>
+      </Person>
+      <Person objectId="per00003">
+         <FullName>
+            <Text language="en">Jane Jetson</Text>
+         </FullName>
+         <PartyId>Party-1</PartyId>
+      </Person>
+      <Person objectId="per00004">
+         <FullName>
+            <Text language="en">Harlan Ellis</Text>
+         </FullName>
+         <PartyId>Party-1</PartyId>
+      </Person>
+      <Person objectId="per00005">
+         <FullName>
+            <Text language="en">Rudy Indexer</Text>
+         </FullName>
+         <PartyId>Party-2</PartyId>
+      </Person>
+      
+      
+   </PersonCollection>
+   <SequenceStart>1</SequenceStart>
+   <SequenceEnd>1</SequenceEnd>
+   <Status>certified</Status>
+   <VendorApplicationId>Auto-Generated v0.1</VendorApplicationId>
+</ElectionReport>

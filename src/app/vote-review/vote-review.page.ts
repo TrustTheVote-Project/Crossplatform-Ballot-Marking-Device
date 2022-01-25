@@ -86,6 +86,7 @@ export class VoteReviewPage implements OnInit {
     const castBallotModal = await this.modalController.create({
       component: CastBallotModalPage,
       componentProps: {
+        election: this.election,
         title: 'Thank you for casting your ballot!',
         body: prettyCVR,
       },

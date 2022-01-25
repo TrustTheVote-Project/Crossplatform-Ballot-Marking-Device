@@ -3,3 +3,5 @@ LA_County_Reference.xml
 results-06037-2017-03-07.xml
 GpU08AZ0.v2.cdf.xml
 test_case_1.xml
+EDF_1.xml
+64K_1Contest_Jetsons.xml

@@ -22,6 +22,8 @@ export class Candidate {
   public writeInConst = 'Touch here to write in a name.';
   private parent: BallotSelection;
   private writeInCandidate: boolean;
+  private ballotMeasure: boolean;
+
   // todo: given that this same private variable is defined in multiple places, it should be hoisted to a
   // shared scope and used everywhere it's needed. maybe an enum would be better here?
   private writeIn = 'writein';
@@ -60,6 +62,7 @@ export class Candidate {
         //the Ballot Measure values - probably just "YES" or "NO"
         console.log('jsonObj is ' + JSON.stringify(this.jsonObj));
         this.personName = jsonQuery(this.ballotMeasureChoiceQuery, { data: this.jsonObj }).value;
+        this.ballotMeasure = true;
         console.log('Candidate: ballot measure choice value is: ' + this.personName);
       }
     } else {
@@ -85,6 +88,10 @@ export class Candidate {
   // todo: this is a public variable, so it doesn't need a getter and setter
   getPartyAbbreviation(): string {
     return this.partyAbbreviation;
+  }
+
+  isBallotMeasure(): boolean {
+    return this.ballotMeasure;
   }
 
   isWriteIn(): boolean {

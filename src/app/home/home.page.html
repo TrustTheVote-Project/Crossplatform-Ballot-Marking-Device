@@ -27,12 +27,14 @@
         <div>
           <ion-label>{{item.contestName}}</ion-label>
           <br />
-          <ion-label float="left" slot="start" translate> VOTE_FOR</ion-label>
-          <ion-label>{{item.getVotesAllowed()}} </ion-label>
-          <br />
-          <ion-label float="right" slot="end">{{item.statusMessage1}}</ion-label>
-          <ion-label color="danger" slot="end">{{item.statusMessage2}}</ion-label>
-          <ion-label slot="end">{{item.statusMessage3}}</ion-label>
+          <ng-container *ngIf="item.isCandidateContest()">
+            <ion-label float="left" slot="start" translate> VOTE_FOR</ion-label>
+            <ion-label>{{item.getVotesAllowed()}} </ion-label>
+            <br />
+            <ion-label float="right" slot="end">{{item.statusMessage1}}</ion-label>
+            <ion-label color="danger" slot="end">{{item.statusMessage2}}</ion-label>
+            <ion-label slot="end">{{item.statusMessage3}}</ion-label>
+          </ng-container>
           <br />
           <br />
           <div class="center-button">
