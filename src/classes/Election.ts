@@ -24,40 +24,48 @@ export class Election {
   constructor(private readonly http: HttpClient, aString: string, parent: HomePage) {
     this.parent = parent;
     if (null != aString) {
-      this.edfFile = aString;
-      console.log('attempting to open ' + this.edfFile);
-      try {
-        let xmlData;
-        const myParser = new Parser({ attrkey: '@', charkey: '#', mergeAttrs: true });
+      this.readXML(aString);
+    }
+  }
 
-        this.http
-          .get(this.edfFile, {
-            headers: new HttpHeaders()
-              .set('Content-Type', 'text/xml')
-              .append('Access-Control-Allow-Methods', 'GET')
-              .append('Access-Control-Allow-Origin', '*')
-              .append(
-                'Access-Control-Allow-Headers',
-                'Access-Control-Allow-Headers, Access-Control-Allow-Origin, Access-Control-Request-Method'
-              ),
-            responseType: 'text',
-          })
-          .subscribe((data) => {
-            xmlData = data.toString();
-            myParser.parseString(xmlData, (err, jsonData) => {
-              this.jsonObj = jsonData;
-              console.log('jsonData read is: ' + JSON.stringify(jsonData));
-              this.setEDFVersion(jsonQuery(this.edfFileVersionQuery, { data: this.jsonObj }).value);
-              console.log('EDF Version is: ' + this.edfVersion);
-              this.setContests();
-              //                  this.printContestNames();
-              this.getContestNames();
-              this.setReady(true);
-            });
+  public readXML(aString) {
+    //if aString is empty (i.e. we're resetting UI after ballot submission,
+    //don't change the edfFile, just reread the existing edfFile)
+    if (aString.trim().length !== 0) {
+      this.edfFile = aString;
+    }
+    console.log('attempting to open ' + this.edfFile);
+    try {
+      let xmlData;
+      const myParser = new Parser({ attrkey: '@', charkey: '#', mergeAttrs: true });
+
+      this.http
+        .get(this.edfFile, {
+          headers: new HttpHeaders()
+            .set('Content-Type', 'text/xml')
+            .append('Access-Control-Allow-Methods', 'GET')
+            .append('Access-Control-Allow-Origin', '*')
+            .append(
+              'Access-Control-Allow-Headers',
+              'Access-Control-Allow-Headers, Access-Control-Allow-Origin, Access-Control-Request-Method'
+            ),
+          responseType: 'text',
+        })
+        .subscribe((data) => {
+          xmlData = data.toString();
+          myParser.parseString(xmlData, (err, jsonData) => {
+            this.jsonObj = jsonData;
+            console.log('jsonData read is: ' + JSON.stringify(jsonData));
+            this.setEDFVersion(jsonQuery(this.edfFileVersionQuery, { data: this.jsonObj }).value);
+            console.log('EDF Version is: ' + this.edfVersion);
+            this.setContests();
+            //                  this.printContestNames();
+            this.getContestNames();
+            this.setReady(true);
           });
-      } catch (e) {
-        console.log('Error:', e);
-      }
+        });
+    } catch (e) {
+      console.log('Error:', e);
     }
   }
 
@@ -120,6 +128,23 @@ export class Election {
     return this.contestNames;
   }
 
+  //clear all candidate selections as if we've just read the EDF anew
+  reset() {
+    this.contests.forEach((element) => {
+      //element is a Contest...
+      //for each Contest, get the BallotSelections...
+      element.getBallotSelections().forEach((ballotselection) => {
+        ballotselection.selected = false;
+        //look at each candidate
+        ballotselection.candidates.forEach((candidate) => {
+          if (candidate.isWriteIn()) {
+            candidate.personName = candidate.writeInConst;
+          }
+        });
+      });
+    });
+  }
+
   createCVR() {
     let output = '';
     output += '{ "election" : "big important election title here", "contests": [';
@@ -152,8 +177,6 @@ export class Election {
       }
     });
     output += '}';
-
-    // console.log(JSON.stringify(JSON.parse(output), null, 2));
     return JSON.parse(output);
   }
 
@@ -165,6 +188,7 @@ export class Election {
     console.log(JSON.stringify(this.createCVR(), null, 4));
     return this.createCVR();
   }
+
   getEmptyWriteIns(contestants): number {
     let emptyWriteIns = 0;
     contestants.forEach((contestant) => {

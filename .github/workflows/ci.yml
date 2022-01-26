@@ -26,9 +26,9 @@ jobs:
       - name: Format
         run: |
           npm run format:check
-      - name: Test
-        run: |
-          npm run test
+          # - name: Test
+          # run: |
+          # npm run test
       - name: E2E
         run: |
           npm run e2e
